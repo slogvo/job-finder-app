@@ -9,14 +9,14 @@ const Stack = createNativeStackNavigator();
 
 function App() {
   return (
-    <SafeAreaView style={GlobalStyles.droidSafeArea}>
+    // <SafeAreaView style={GlobalStyles.droidSafeArea}>
     <NavigationContainer>
       <Stack.Navigator initialRouteName='SignIn' screenOptions={{headerShown:false}}>
       <Stack.Screen name="SignIn" component={SignIn} />
       <Stack.Screen name="Home" component={Home} />
       </Stack.Navigator>
     </NavigationContainer>
- </SafeAreaView>
+//  </SafeAreaView>
   );
 }
 
