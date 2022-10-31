@@ -3,7 +3,7 @@ import {Image, StatusBar, Text, TextInput, TouchableOpacity, View } from "react-
 import colors from "../../assets/colors/colors";
 // const windowHeight = Dimensions.get('window').height;
 
-const SignIn = () => {
+const Signin = ({navigation}) => {
   const [activeEmail, setActiveEmail] = useState(false);
   const [activePassword, setActivePassword] = useState(false);
 
@@ -24,7 +24,7 @@ const SignIn = () => {
         fontWeight:'bold', 
         fontSize:20, 
         color:colors.primary, 
-        textAlign:'center'}}> Sign in
+        textAlign:'center'}}> Đăng Nhập
       </Text>
 
        <View style={{ 
@@ -34,22 +34,22 @@ const SignIn = () => {
         justifyContent: 'center', 
         alignItems: 'center'
         }}>
-        <Image 
-         source={require('../../assets/images/logo.png')} 
-         style={{
-          width:120,
-          height:120,
-          marginLeft:5}} 
-         resizeMode="cover" />
+       
+         <Text style ={{
+          fontSize:24, 
+          fontWeight:'bold', 
+          letterSpacing:0.5,
+          color: colors.secondary
+          }}>Welcome to <Text style ={{color: colors.orange}}>FoxinDob!</Text></Text> 
        </View>
           <Text style={{
             textAlign:'center', 
-            marginTop:15, 
+            marginTop:10, 
             fontSize:15, 
-            fontWeight:'500',
+            fontWeight:'400',
             lineHeight:22,
             color: colors.primary
-            }}>Search for jobs at any place. Save jobs you like. Apply easily at any timeeasily </Text>
+            }}>Tạo ra một tương lai tốt đẹp hơn cho chính bạn!</Text>
        <View style={{
         alignItems: "flex-start", 
         justifyContent: "flex-start", 
@@ -97,7 +97,10 @@ const SignIn = () => {
 
          />
        </View>
-       <View style={{flexDirection: 'row', justifyContent:'space-between', marginTop:20, }}>
+       <View style={{
+        flexDirection: 'row',
+        justifyContent:'space-between', 
+        marginTop:20, }}>
         <Text style={{
           color:colors.secondary, 
           fontSize:15, 
@@ -115,12 +118,19 @@ const SignIn = () => {
        <TouchableOpacity style={{
         width:'100%', 
         height:50, 
-        backgroundColor:colors.textOrange, 
+        backgroundColor:colors.orange, 
         borderRadius:50, 
         alignItems:'center', 
         justifyContent:'center', 
-        marginTop:25}}>
-         <Text style={{color: 'white', fontSize:18}}>Đăng Nhập</Text>
+        marginTop:25}}
+        onPress={()=>{
+          navigation.navigate("Home")
+        }}
+        >
+         <Text style={{
+          color: 'white', 
+          fontSize:18}}>
+          Đăng Nhập</Text>
        </TouchableOpacity>
 
        <View style={{
@@ -159,6 +169,7 @@ const SignIn = () => {
           }}
         resizeMode='cover'
        />
+      
        <Text style={{
         color: 'white', 
         fontSize:17, 
@@ -171,4 +182,4 @@ const SignIn = () => {
   )
 }
 
-export default SignIn
+export default Signin
