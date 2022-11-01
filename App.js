@@ -10,15 +10,13 @@ const Stack = createNativeStackNavigator();
 
 function App() {
   return (
-    // <SafeAreaView style={GlobalStyles.droidSafeArea}>
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName='GetStated' screenOptions={{headerShown:false}}>
-      <Stack.Screen name="GetStated" component={GetStated} />
-      <Stack.Screen name="Signin" component={Signin} />
-      <Stack.Screen name="Home" component={Home} />
-      </Stack.Navigator>
-    </NavigationContainer>
-//  </SafeAreaView>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName='GetStated' screenOptions={{headerShown:false}}>
+        <Stack.Screen name="GetStated" component={GetStated} />
+        <Stack.Screen name="Signin" component={Signin} />
+        <Stack.Screen name="Home" component={Home} />
+        </Stack.Navigator>
+      </NavigationContainer>
   );
 }
 

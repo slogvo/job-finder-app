@@ -1,6 +1,8 @@
 import { useState } from "react";
 import {Image, StatusBar, Text, TextInput, TouchableOpacity, View } from "react-native";
 import colors from "../../assets/colors/colors";
+import GlobalStyles from "../../GlobalStyles";
+
 // const windowHeight = Dimensions.get('window').height;
 
 const Signin = ({navigation}) => {
@@ -10,20 +12,21 @@ const Signin = ({navigation}) => {
   return (
     <View style={{
       flex:1, 
-      backgroundColor:'#fff'
+      backgroundColor:'#fff',
       }}>
      <StatusBar 
      backgroundColor="#fff" 
-     barStyle='dark-content' />
+     barStyle='dark-content' 
+     translucent={false} />
      
      <View style={{
       flexDirection:'column', 
-      paddingHorizontal: 35 
+      paddingHorizontal: 35,
       }}>
       <Text style={{
         fontWeight:'bold', 
-        fontSize:20, 
-        color:colors.primary, 
+        fontSize:18, 
+        color:colors.text, 
         textAlign:'center'}}> Đăng Nhập
       </Text>
 
@@ -39,8 +42,8 @@ const Signin = ({navigation}) => {
           fontSize:24, 
           fontWeight:'bold', 
           letterSpacing:0.5,
-          color: colors.secondary
-          }}>Welcome to <Text style ={{color: colors.orange}}>FoxinDob!</Text></Text> 
+          color: colors.text,
+          }}>Welcome to <Text style ={{color: colors.primary}}>CatinDob!</Text></Text> 
        </View>
           <Text style={{
             textAlign:'center', 
@@ -48,7 +51,7 @@ const Signin = ({navigation}) => {
             fontSize:15, 
             fontWeight:'400',
             lineHeight:22,
-            color: colors.primary
+            color: colors.text
             }}>Tạo ra một tương lai tốt đẹp hơn cho chính bạn!</Text>
        <View style={{
         alignItems: "flex-start", 
@@ -56,7 +59,8 @@ const Signin = ({navigation}) => {
         marginTop:30
         }}>
          <Text style={{
-          fontSize:15
+          fontSize:15,
+          color: colors.text,
           }}>Email</Text>
          <TextInput 
          style={{
@@ -65,7 +69,7 @@ const Signin = ({navigation}) => {
           width:'100%', 
           borderRadius:5, 
           height: 50, 
-          borderColor: activeEmail ? colors.secondary : '#ccc',
+          borderColor: activeEmail ? colors.lightGreen : colors.border,
           paddingLeft:15
           }}
           placeholder ="Nhập email"
@@ -88,7 +92,7 @@ const Signin = ({navigation}) => {
           width:'100%', 
           borderRadius:5, 
           height: 50,
-          borderColor: activePassword? colors.secondary : '#ccc',
+          borderColor: activePassword? colors.lightGreen : colors.border,
           paddingLeft:15}}
          placeholder ="Nhập password"
          secureTextEntry={true}
@@ -104,7 +108,7 @@ const Signin = ({navigation}) => {
         <Text style={{
           color:colors.secondary, 
           fontSize:15, 
-          fontWeight:'600', 
+          fontWeight:'500', 
           letterSpacing:0.2
           }}>Đăng Ký </Text>
         <Text style={{
@@ -118,10 +122,11 @@ const Signin = ({navigation}) => {
        <TouchableOpacity style={{
         width:'100%', 
         height:50, 
-        backgroundColor:colors.orange, 
+        backgroundColor:colors.primary, 
         borderRadius:50, 
         alignItems:'center', 
         justifyContent:'center', 
+        elevation: 2,
         marginTop:25}}
         onPress={()=>{
           navigation.navigate("Home")
