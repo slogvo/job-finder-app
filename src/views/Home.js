@@ -63,14 +63,6 @@ const Home = () => {
           width: '100%',
           alignItems:'center'
           }}>
-        <Image source={require('../../assets/images/banner-1.png')}
-        style={{
-          width: '100%',
-          height: 200,
-          borderRadius:16,
-          resizeMode: "cover",
-        }}
-       />
       </View>
       <View>
         <Text>Đề xuất cho bạn</Text>

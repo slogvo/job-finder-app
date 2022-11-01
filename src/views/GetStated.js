@@ -65,6 +65,7 @@ const GetStated = ({navigation}) => {
                   fontWeight:'600',
                 }}>Bắt đầu</Text>
                </TouchableOpacity>
+
            </View>
         </ImageBackground>
     </View>
