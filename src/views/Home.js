@@ -6,8 +6,7 @@ const Home = () => {
     <View style={{
       backgroundColor: "#fff",
       }}>
-      <ScrollView
-      showsVerticalScrollIndicator={true} persistentScrollbar={true}
+      <ScrollView showsVerticalScrollIndicator={true} persistentScrollbar={true}
        style={{
         backgroundColor: "#fff",
         position: "relative",
@@ -29,8 +28,8 @@ const Home = () => {
              <Image
             source={require('../../assets/images/menu.png')}
             style={{
-              width: 20,
-              height: 20,
+              width: 22,
+              height: 22,
               resizeMode: "contain",
             }}/>
             <Image
@@ -46,7 +45,7 @@ const Home = () => {
             }}/>
             <TextInput
              style={{
-              paddingVertical:8,
+              paddingVertical:10,
               paddingHorizontal:15,
               paddingLeft:40,
               borderRadius:8,
