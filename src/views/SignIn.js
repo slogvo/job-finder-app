@@ -13,6 +13,7 @@ const Signin = ({navigation}) => {
     <View style={{
       flex:1, 
       backgroundColor:'#fff',
+      paddingTop: 10,
       }}>
      <StatusBar 
      backgroundColor="#fff" 
@@ -22,6 +23,7 @@ const Signin = ({navigation}) => {
      <View style={{
       flexDirection:'column', 
       paddingHorizontal: 35,
+      marginTop:15
       }}>
       <Text style={{
         fontWeight:'bold', 

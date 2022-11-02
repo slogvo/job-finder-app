@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
     alignItems:'center', 
     justifyContent:'center',
     backgroundColor: colors.primary,
-    paddingVertical: 12,
+    paddingVertical: 15,
     elevation: 2,
   }
 })

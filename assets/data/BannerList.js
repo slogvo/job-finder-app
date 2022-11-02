@@ -1,52 +1,32 @@
-import { Dimensions, Image } from "react-native"
+import ImageBanner from "../../src/component/ImageBanner"
 import banner1 from "../images/banner/banner1.png"
 import banner2 from "../images/banner/banner2.png"
 import banner3 from "../images/banner/banner3.png"
 import banner4 from "../images/banner/banner4.png"
+import banner5 from "../images/banner/banner5.png"
+import banner6 from "../images/banner/banner6.png"
 
-const {width: screenWidth} = Dimensions.get("window");
 
 const BannerList = [
   {
     id: 1,
-    image: <Image source={banner1} 
-                  style={{
-                    width: screenWidth -50 , 
-                    height:200, 
-                    marginHorizontal: 25,
-                    marginLeft: 0,
-                    borderRadius:8
-                    }} resizeMode="cover"/>
+    image: <ImageBanner src={banner1}/>
   },
   {
     id: 2,
-    image: <Image source={banner2} 
-    style={{
-      width: screenWidth -50 , 
-      height:200, 
-      marginHorizontal: 25,
-      borderRadius:8
-      }} resizeMode="cover"/>
+    image: <ImageBanner src={banner2}/>
   },
   {
     id: 3,
-    image: <Image source={banner3} 
-    style={{
-      width: screenWidth -50 , 
-      height:200, 
-      marginHorizontal: 25,
-      borderRadius:8
-      }} resizeMode="cover"/>
+    image: <ImageBanner src={banner3}/>
   },
   {
     id: 4,
-    image: <Image source={banner4} 
-    style={{
-      width: screenWidth -50 , 
-      height:200, 
-      marginHorizontal: 25,
-      borderRadius:8
-      }} resizeMode="cover"/>
+    image: <ImageBanner src={banner4}/>
+  },
+  {
+    id: 5,
+    image: <ImageBanner src={banner5}/>
   },
 ]
 export default BannerList;
