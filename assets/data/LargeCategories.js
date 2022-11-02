@@ -1,5 +1,6 @@
 import { Image, View } from "react-native";
 import SGtechnology from "../images/logo/SGtechnology.png"
+import Carlsberg from "../images/logo/Carlsber.png"
 const LargeCategories = [
   {
     id: 1,
@@ -18,17 +19,15 @@ const LargeCategories = [
   },
   {
     id: 2,
-    companyLogo:<Image style={{width:50, height:50}} resizeMode="cover" source={SGtechnology}/>,
-    companyName: "Saigon Technology",
+    companyLogo:<Image style={{width:50, height:50}} resizeMode="cover" source={Carlsberg}/>,
+    companyName: "Carlsberg Việt Nam",
     companyLocation:"Hồ Chí Minh",
     companyDescription: "UI/UX Designer",
     update: "31/10/2022",
     salary: "$650 - $800",
     time_remaining: 21,
     skills:[
-      "UI Design",
-      "UX Design",
-      "Figma",
+     " SharePoint", "SQL", "ERP", "Project Management", "Business Analysis"
     ]
   },
   {

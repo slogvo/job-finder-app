@@ -3,10 +3,11 @@ import BannerCarousel from "../layout/BannerCarousel"
 import colors from "../../assets/colors/colors"
 import SearchLayout from "../layout/SearchLayout"
 import LargeCategories from "../../assets/data/LargeCategories"
+import SmallCategories from "../../assets/data/SmallCategories"
 import { useEffect, useState } from "react"
-import boxShadow from "../../assets/images/box-shadow.png"
 import RenderItem from "../layout/RenderItem"
 import Title from "../layout/Title"
+import CardCategory from "../layout/CardCategory"
 
 const {width: screenWidth} = Dimensions.get("window");
 
@@ -77,18 +78,29 @@ const Home = () => {
                     justifyContent: 'center',
                     alignItems: 'center',
                 }} >
-                    <View
+                   {SmallCategories?.map((item)=> 
+                   <View
+                    key = {item.id}
                     style = {{
+                        marginTop: 15,
                         width: '100%',
                         height: 90,
                         backgroundColor:'red',
                         borderRadius: 16,
                         backgroundColor: "#fafafa",
-                        padding: 15,
+                        padding: 10,
                         elevation: 2,
                      }}>
-
+                     <CardCategory 
+                        img={item.companyLogo} 
+                        companyName={item.companyName} 
+                        desc={item.companyDescription}
+                        salary = {item.salary}
+                        location = {item.companyLocation}
+                        >
+                    </CardCategory>
                     </View>
+                    )}
                 </View>
             </View>
         </ScrollView>

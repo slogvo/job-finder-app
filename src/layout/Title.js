@@ -18,7 +18,7 @@ const Title = ({title="Đề xuất cho bạn", viewAll ="Xem tất cả"}) => {
       </Text>
       <Text style={{
           color: colors.text,
-          fontSize: 14,
+          fontSize: 15,
           fontWeight: "500",
           color: colors.primary,
       }}>

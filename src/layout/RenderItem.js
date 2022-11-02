@@ -36,9 +36,8 @@ const RenderItem = ({item}) => {
                   {item.companyName}
                 </Text>
                 <Text style={{
-                  fontSize:15,
-                  color: "#a9a9a9",
-                  fontWeight:"500"
+                  fontSize:14,
+                  fontWeight:"400"
                   }}>
                   {item. companyLocation}
                 </Text>
@@ -53,8 +52,8 @@ const RenderItem = ({item}) => {
           ></Image>
         </View>
         <Text style={{
-          marginTop:8, 
-          fontSize:18, 
+          marginTop:10, 
+          fontSize:16, 
           color: colors.text, 
           fontWeight:"600"}}>
           {item.companyDescription}
@@ -79,7 +78,7 @@ const RenderItem = ({item}) => {
         </Text>
     </View>
     <View style={{flexDirection:'row', marginTop:10, marginTop:'auto'}}>
-      {item?.skills?.map((skill,index)=>
+      {item?.skills?.filter((value,index)=> index < 3 ).map((skill,index)=>
       <View
       key={index} 
       style={{
