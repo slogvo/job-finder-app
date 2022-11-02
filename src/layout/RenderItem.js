@@ -7,10 +7,8 @@ const RenderItem = ({item}) => {
       style ={{
         width: 290,
         height: 200,
-        borderColor:colors.lightGreen,
         borderRadius: 16,
         backgroundColor: "#fafafa",
-        backgroundOpacity: 0.5,
         padding: 15,
         elevation: 2,
         marginRight: 30,

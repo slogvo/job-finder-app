@@ -1,8 +1,5 @@
 import { Image, View } from "react-native";
-import amazon from "../images/logo/amazon.png"
-import metub from "../images/logo/metub.jpg"
 import SGtechnology from "../images/logo/SGtechnology.png"
-import linkedin from "../images/logo/Linkedin.png"
 const LargeCategories = [
   {
     id: 1,

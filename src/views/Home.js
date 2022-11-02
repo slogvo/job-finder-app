@@ -6,6 +6,7 @@ import LargeCategories from "../../assets/data/LargeCategories"
 import { useEffect, useState } from "react"
 import boxShadow from "../../assets/images/box-shadow.png"
 import RenderItem from "../layout/RenderItem"
+import Title from "../layout/Title"
 
 const {width: screenWidth} = Dimensions.get("window");
 
@@ -23,6 +24,7 @@ const Home = () => {
   return (
     <View style={{
         flex:1,
+        width:'100%',
         backgroundColor: "#fff",
         paddingTop: 10,
     }}>
@@ -35,55 +37,61 @@ const Home = () => {
             }}
             stickyHeaderIndices={[0]}
         >
-        <SearchLayout></SearchLayout>
-        <BannerCarousel></BannerCarousel>
-        <View style={{
-            marginTop: 20,
-            width: '100%',
-            }}>
+            <SearchLayout></SearchLayout>
+            <BannerCarousel></BannerCarousel>
             <View style={{
-                paddingHorizontal:25,
-                flexDirection:"row", 
-                justifyContent:"space-between", 
-                alignItems:"center"}}>
-                <Text style={{
-                    color: colors.text,
-                    fontSize:20,
-                    fontWeight: "500",
+                marginTop: 30,
+                width: '100%',
                 }}>
-                    Đề xuất cho bạn
-                </Text>
-                <Text style={{
-                    color: colors.text,
-                    fontSize: 14,
-                    fontWeight: "500",
-                    color: colors.primary,
-                }}>
-                    Xem tất cả
-                </Text>
+                <Title></Title>
+                <View style={{
+                    marginTop: 10,
+                    width: '100%',
+                    paddingLeft:25,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                }} >
+                    <FlatList
+                        style ={{
+                        height: 210,        
+                        }}
+                        contentContainerStyle={{flexGrow: 1, justifyContent: 'center', alignItems:'center', padding: 2}}
+                        showsHorizontalScrollIndicator={false}
+                        data={largeCategories}
+                        renderItem={renderItem}
+                        keyExtractor={item => item.id}
+                        horizontal ={true}
+                />
+                </View>
             </View>
 
             <View style={{
-                marginTop: 15,
+                marginTop: 30,
                 width: '100%',
-                paddingLeft:25,
-                justifyContent: 'center',
-                alignItems: 'center',
-            }} >
-                <FlatList
-                    style ={{
-                    height: 210,        
-                    }}
-                    contentContainerStyle={{flexGrow: 1, justifyContent: 'center', alignItems:'center', padding: 2}}
-                    showsHorizontalScrollIndicator={false}
-                    data={largeCategories}
-                    renderItem={renderItem}
-                    keyExtractor={item => item.id}
-                    horizontal ={true}
-            />
+                }}>
+            <Title title="Việc làm nổi bật"></Title>
+                <View style={{
+                    marginTop: 10,
+                    width: '100%',
+                    paddingHorizontal:25,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                }} >
+                    <View
+                    style = {{
+                        width: '100%',
+                        height: 90,
+                        backgroundColor:'red',
+                        borderRadius: 16,
+                        backgroundColor: "#fafafa",
+                        padding: 15,
+                        elevation: 2,
+                     }}>
+
+                    </View>
+                </View>
             </View>
-      </View>
-     </ScrollView>
+        </ScrollView>
     </View>
   )
 }
