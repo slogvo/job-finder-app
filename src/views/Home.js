@@ -5,6 +5,7 @@ import SearchLayout from "../layout/SearchLayout"
 import LargeCategories from "../../assets/data/LargeCategories"
 import { useEffect, useState } from "react"
 import boxShadow from "../../assets/images/box-shadow.png"
+import RenderItem from "../layout/RenderItem"
 
 const {width: screenWidth} = Dimensions.get("window");
 
@@ -16,24 +17,7 @@ const Home = () => {
   },[])
 
   const renderItem = ({ item }) => (
-    <ImageBackground source={boxShadow} 
-    resizeMode="cover"
-    style ={{
-      width: 250,
-      height: 180,
-      borderColor:colors.lightGreen,
-      borderRadius: 16,
-      padding: 15,
-      marginRight: 30,
-      }}>
-        <View>{item.companyLogo}</View>
-        <Text style={{marginTop:10, fontSize:20, color: colors.text, fontWeight:"600"}}>{item.companyDescription}</Text>
-        <View style={{flexDirection: "row", justifyContent:"space-between",marginTop:"auto"}}>
-          <Text style={{ fontSize:16, color: colors.text, fontWeight:"300"}}>{item.salary}</Text>
-          <Text style={{ fontSize:16, color: colors.text, fontWeight:"300"}}>{item. companyLocation}</Text>
-        </View>
-      </ImageBackground>
-
+    <RenderItem item={item}></RenderItem>
   );
 
   return (
@@ -48,7 +32,6 @@ const Home = () => {
             style={{
                 backgroundColor: "#fff",
                 position: "relative",
-                paddingHorizontal:25,
             }}
             stickyHeaderIndices={[0]}
         >
@@ -58,30 +41,40 @@ const Home = () => {
             marginTop: 20,
             width: '100%',
             }}>
-            <View>
+            <View style={{
+                paddingHorizontal:25,
+                flexDirection:"row", 
+                justifyContent:"space-between", 
+                alignItems:"center"}}>
                 <Text style={{
                     color: colors.text,
-                    fontSize:18,
+                    fontSize:20,
                     fontWeight: "500",
                 }}>
                     Đề xuất cho bạn
                 </Text>
                 <Text style={{
                     color: colors.text,
-                    fontSize:18,
+                    fontSize: 14,
                     fontWeight: "500",
+                    color: colors.primary,
                 }}>
-                    Nhiều hơn
+                    Xem tất cả
                 </Text>
             </View>
 
             <View style={{
                 marginTop: 15,
                 width: '100%',
+                paddingLeft:25,
                 justifyContent: 'center',
                 alignItems: 'center',
             }} >
                 <FlatList
+                    style ={{
+                    height: 210,        
+                    }}
+                    contentContainerStyle={{flexGrow: 1, justifyContent: 'center', alignItems:'center', padding: 2}}
                     showsHorizontalScrollIndicator={false}
                     data={largeCategories}
                     renderItem={renderItem}

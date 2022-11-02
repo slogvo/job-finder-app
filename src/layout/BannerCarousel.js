@@ -1,6 +1,6 @@
 import BannerList from "../../assets/data/BannerList";
 import React, { useEffect, useRef, useState } from 'react'
-import { Dimensions, Image, ScrollView, Text, View } from "react-native";
+import { Dimensions, ScrollView, View } from "react-native";
 import colors from "../../assets/colors/colors"
 
 const {width: screenWidth} = Dimensions.get("window");
@@ -46,8 +46,8 @@ const BannerCarousel = () => {
     }
   }
   return (
-    <View style={{borderRadius:8, marginTop:20}}>
-   {imageList?.length >0  &&
+    <View style={{borderRadius:8, paddingHorizontal:25, marginTop:20}}>
+      {imageList?.length >0  &&
       <ScrollView
       horizontal
       showsHorizontalScrollIndicator={false}
@@ -76,7 +76,7 @@ const BannerCarousel = () => {
               justifyContent:"center",
               marginHorizontal:3, 
               borderRadius: 3,
-              backgroundColor: colors.secondary}}
+              backgroundColor: colors.primary}}
             />:  
              <View 
              key={item.id}

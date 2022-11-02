@@ -3,7 +3,7 @@ import colors from "../../assets/colors/colors"
 
 const SearchLayout = () => {
   return (
-    <View style={{flex:1, backgroundColor:"#fff"}}>
+    <View style={{flex:1, backgroundColor:"#fff", paddingHorizontal:25,}}>
      <View style={{
       width: "100%",
       paddingBottom: 10,
