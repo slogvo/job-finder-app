@@ -1,7 +1,7 @@
-import { Image, TextInput, View } from 'react-native'
+import { Image, TextInput, TouchableOpacity, View } from 'react-native'
 import colors from "../../assets/colors/colors"
 
-const SearchLayout = () => {
+const SearchLayout = ({navigation}) => {
   return (
     <View style={{flex:1, backgroundColor:"#fff", paddingHorizontal:25,}}>
      <View style={{
@@ -14,13 +14,17 @@ const SearchLayout = () => {
       borderBottomWidth: 1,
       borderBottomColor: "#ededed",
       justifyContent:'space-between'}}>
-       <Image
-      source={require('../../assets/images/menu.png')}
-      style={{
-        width: 22,
-        height: 22,
-        resizeMode: "contain",
-      }}/>
+       <TouchableOpacity
+       onPress={()=> navigation.openDrawer()}
+       >
+         <Image
+               source={require('../../assets/images/menu.png')}
+               style={{
+          width: 22,
+          height: 22,
+          resizeMode: "contain",
+               }}/>
+       </TouchableOpacity>
       <Image
       source={require('../../assets/images/search-symbol.png')}
       style={{

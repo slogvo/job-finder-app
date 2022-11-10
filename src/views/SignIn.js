@@ -5,7 +5,7 @@ import GlobalStyles from "../../GlobalStyles";
 
 // const windowHeight = Dimensions.get('window').height;
 
-const Signin = ({navigation}) => {
+const SignIn = ({navigation}) => {
   const [activeEmail, setActiveEmail] = useState(false);
   const [activePassword, setActivePassword] = useState(false);
 
@@ -131,7 +131,7 @@ const Signin = ({navigation}) => {
         elevation: 2,
         marginTop:25}}
         onPress={()=>{
-          navigation.navigate("Home")
+          navigation.navigate("HomeDrawer")
         }}
         >
          <Text style={{
@@ -189,4 +189,4 @@ const Signin = ({navigation}) => {
   )
 }
 
-export default Signin
+export default SignIn

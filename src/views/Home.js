@@ -12,7 +12,7 @@ import CardCategory from "../layout/CardCategory"
 const {width: screenWidth} = Dimensions.get("window");
 
 
-const Home = () => {
+const Home = ({navigation}) => {
   const [largeCategories, setLargeCategories] = useState([]);
   useEffect(()=>{
     setLargeCategories(LargeCategories)
@@ -38,7 +38,7 @@ const Home = () => {
             }}
             stickyHeaderIndices={[0]}
         >
-            <SearchLayout></SearchLayout>
+            <SearchLayout navigation={navigation}></SearchLayout>
             <BannerCarousel></BannerCarousel>
             <View style={{
                 marginTop: 30,
