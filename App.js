@@ -6,18 +6,20 @@ import SignIn from './src/views/SignIn';
 import GlobalStyles from './GlobalStyles';
 import GetStarted from './src/views/GetStarted';
 import DrawerNavigation from './src/component/DrawerNavigation';
+import TabsNavigation from './src/component/TabsNavigation';
+
 const Stack = createNativeStackNavigator();
 
 
 function App() {
   return (
-      <NavigationContainer>
-        <Stack.Navigator initialRouteName='GetStated' screenOptions={{headerShown:false}}>
-          <Stack.Screen name="GetStarted" component={GetStarted} />
-          <Stack.Screen name="SignIn" component={SignIn} />
-          <Stack.Screen name="DrawerNavigation" component={DrawerNavigation} />
-        </Stack.Navigator>
-      </NavigationContainer>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName='GetStated' screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="GetStarted" component={GetStarted} />
+        <Stack.Screen name="SignIn" component={SignIn} />
+        <Stack.Screen name="DrawerNavigation" component={DrawerNavigation} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 

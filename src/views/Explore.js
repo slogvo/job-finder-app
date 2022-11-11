@@ -1,10 +1,10 @@
 import React from 'react'
 import { Text } from 'react-native'
 
-const ContactUs = () => {
+const Explore = () => {
   return (
-    <Text>ContactUs</Text>
+    <Text>Explore</Text>
   )
 }
 
-export default ContactUs
+export default Explore

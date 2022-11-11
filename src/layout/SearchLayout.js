@@ -20,8 +20,8 @@ const SearchLayout = ({navigation}) => {
          <Image
                source={require('../../assets/images/menu.png')}
                style={{
-          width: 22,
-          height: 22,
+          width: 25,
+          height: 25,
           resizeMode: "contain",
                }}/>
        </TouchableOpacity>
