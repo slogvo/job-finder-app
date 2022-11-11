@@ -2,10 +2,10 @@ import React from 'react'
 import { Image, ImageBackground, Text, TouchableOpacity, View } from 'react-native'
 import {
   DrawerContentScrollView,
-  DrawerItem,
   DrawerItemList,
 } from '@react-navigation/drawer';
 import colors from "../../assets/colors/colors"
+import AntDesign from "react-native-vector-icons/AntDesign"
 
 const CustomDrawer = ({...props}) => {
   return (
@@ -43,20 +43,25 @@ const CustomDrawer = ({...props}) => {
           </Text>
         </ImageBackground>
         <View style={{flex:1, backgroundColor:'#fff', paddingTop:10,
-        paddingHorizontal: 10,
+        paddingHorizontal: 3,
         }}>
           <DrawerItemList {...props} />
+          
         </View>
       </DrawerContentScrollView>
       <View style={{padding:20, borderTopWidth:1, borderTopColor:'#ccc'}}>
         <TouchableOpacity
+        style={{flexDirection: 'row'}}
         onPress={() =>{
           props.navigation.navigate("SignIn");
         }}
         >
+        <AntDesign name="logout" size={22} color={colors.secondary}/>
           <Text
           style={{
+            marginLeft: 20,
             color:colors.secondary,
+            fontWeight: '500',
             fontSize:16,
           }}>Đăng xuất</Text>
         </TouchableOpacity>

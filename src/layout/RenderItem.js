@@ -1,5 +1,6 @@
 import { Image, Text, View } from "react-native"
 import colors from "../../assets/colors/colors"
+import AntDesign from "react-native-vector-icons/AntDesign"
 
 const RenderItem = ({item}) => {
   return (
@@ -8,7 +9,7 @@ const RenderItem = ({item}) => {
         width: 290,
         height: 200,
         borderRadius: 16,
-        backgroundColor: "#fafafa",
+        backgroundColor: "#fff",
         padding: 15,
         elevation: 2,
         marginRight: 30,
@@ -43,13 +44,7 @@ const RenderItem = ({item}) => {
                 </Text>
             </View>
           </View>
-          <Image 
-          source={require("../../assets/images/heart.png")}
-          style={{
-            width:25,
-            height:25,
-          }}
-          ></Image>
+          <AntDesign name="heart" size={22} color={colors.primary}/>
         </View>
         <Text style={{
           marginTop:10, 

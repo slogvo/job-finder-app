@@ -71,7 +71,7 @@ const SignIn = ({navigation}) => {
           width:'100%', 
           borderRadius:5, 
           height: 50, 
-          borderColor: activeEmail ? colors.lightGreen : colors.border,
+          borderColor: activeEmail ? colors.focusColor : colors.border,
           paddingLeft:15
           }}
           placeholder ="Nhập email"
@@ -94,7 +94,7 @@ const SignIn = ({navigation}) => {
           width:'100%', 
           borderRadius:5, 
           height: 50,
-          borderColor: activePassword? colors.lightGreen : colors.border,
+          borderColor: activePassword? colors.focusColor : colors.border,
           paddingLeft:15}}
          placeholder ="Nhập password"
          secureTextEntry={true}

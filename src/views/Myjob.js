@@ -1,10 +1,10 @@
 import React from 'react'
 import { Text } from 'react-native'
 
-const Interview = () => {
+const MyJobs = () => {
   return (
-    <Text>Interview</Text>
+    <Text>MyJbos</Text>
   )
 }
 
-export default Interview
+export default MyJobs

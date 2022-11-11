@@ -1,6 +1,5 @@
-import {Image, ScrollView,Text,  FlatList, View, Dimensions, ImageBackground, } from "react-native"
+import {ScrollView,  FlatList, View, Dimensions } from "react-native"
 import BannerCarousel from "../layout/BannerCarousel"
-import colors from "../../assets/colors/colors"
 import SearchLayout from "../layout/SearchLayout"
 import LargeCategories from "../../assets/data/LargeCategories"
 import SmallCategories from "../../assets/data/SmallCategories"
@@ -87,7 +86,7 @@ const Home = ({navigation}) => {
                         height: 90,
                         backgroundColor:'red',
                         borderRadius: 16,
-                        backgroundColor: "#fafafa",
+                        backgroundColor: "#fff",
                         padding: 10,
                         elevation: 2,
                      }}>

@@ -1,6 +1,7 @@
 import React from 'react'
 import { Image, Text, View } from 'react-native'
 import colors from '../../assets/colors/colors'
+import AntDesign from "react-native-vector-icons/AntDesign"
 
 const CardCategory = ({img, companyName, desc, salary, location}) => {
   return (
