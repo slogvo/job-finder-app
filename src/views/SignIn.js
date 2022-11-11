@@ -131,7 +131,7 @@ const SignIn = ({navigation}) => {
         elevation: 2,
         marginTop:25}}
         onPress={()=>{
-          navigation.navigate("HomeDrawer")
+          navigation.navigate("DrawerNavigation")
         }}
         >
          <Text style={{

@@ -5,7 +5,7 @@ import Home from './src/views/Home';
 import SignIn from './src/views/SignIn';
 import GlobalStyles from './GlobalStyles';
 import GetStarted from './src/views/GetStarted';
-import HomeDrawer from './src/component/HomeDrawer';
+import DrawerNavigation from './src/component/DrawerNavigation';
 const Stack = createNativeStackNavigator();
 
 
@@ -15,7 +15,7 @@ function App() {
         <Stack.Navigator initialRouteName='GetStated' screenOptions={{headerShown:false}}>
           <Stack.Screen name="GetStarted" component={GetStarted} />
           <Stack.Screen name="SignIn" component={SignIn} />
-          <Stack.Screen name="HomeDrawer" component={HomeDrawer} />
+          <Stack.Screen name="DrawerNavigation" component={DrawerNavigation} />
         </Stack.Navigator>
       </NavigationContainer>
   );

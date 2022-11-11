@@ -13,7 +13,7 @@ import Home from '../views/Home';
 
 const Drawer = createDrawerNavigator();
 
-function HomeDrawer ({navigation}) {
+function DrawerNavigation ({navigation}) {
   const [isFocused, setIsFocused] = useState(false);
   return (
     <Drawer.Navigator 
@@ -85,4 +85,4 @@ function HomeDrawer ({navigation}) {
     </Drawer.Navigator>
     )  
 }
-export default HomeDrawer
+export default DrawerNavigation
