@@ -20,8 +20,7 @@ const TabsNavigation = () => {
       screenOptions={{
         tabBarActiveTintColor: colors.primary,
         tabBarInactiveTintColor: colors.darkGray,
-        tabBarLabelStyle:{
-
+        tabBarLabelStyle: {
         },
         headerShown: false,
         tabBarStyle: {
@@ -38,15 +37,15 @@ const TabsNavigation = () => {
         name="Home"
         component={Home}
         options={{
-          tabBarLabelStyle:{
-            fontSize:11,
-            marginTop:-15,
-            marginBottom:5,
+          tabBarLabelStyle: {
+            fontSize: 11,
+            marginTop: -15,
+            marginBottom: 5,
           },
           tabBarLabel: "Home",
           tabBarIcon: ({ color }) => (<Ionicons name="home" color={color}
             style={{
-              marginTop:-10,
+              marginTop: -10,
               fontSize: 22,
               width: 22,
             }} />)
@@ -56,10 +55,10 @@ const TabsNavigation = () => {
         name="Yêu thích"
         component={FindJobs}
         options={{
-          tabBarLabelStyle:{
-            fontSize:11,
-            marginTop:-10,
-            marginBottom:5,
+          tabBarLabelStyle: {
+            fontSize: 11,
+            marginTop: -10,
+            marginBottom: 5,
           },
           tabBarLabel: "Yêu thích",
           tabBarIcon: ({ color }) => (<FontAwesome name="bookmark" color={color}
@@ -73,10 +72,10 @@ const TabsNavigation = () => {
         name="Khám phá"
         component={Explore}
         options={{
-          tabBarLabelStyle:{
-            fontSize:11,
-            marginTop:-10,
-            marginBottom:5,
+          tabBarLabelStyle: {
+            fontSize: 11,
+            marginTop: -10,
+            marginBottom: 5,
           },
           tabBarLabel: "Khám phá",
           tabBarIcon: ({ color }) => (<MaterialIcons name="explore" color={color}
@@ -90,10 +89,10 @@ const TabsNavigation = () => {
         name="Tài khoản"
         component={Explore}
         options={{
-          tabBarLabelStyle:{
-            fontSize:11,
-            marginTop:-10,
-            marginBottom:5,
+          tabBarLabelStyle: {
+            fontSize: 11,
+            marginTop: -10,
+            marginBottom: 5,
           },
           tabBarLabel: "Tài khoản",
           tabBarIcon: ({ color }) => (<FontAwesome name="user" color={color}

@@ -16,7 +16,7 @@ const GetStarted = ({ navigation }) => {
           flex: 1,
           paddingHorizontal: 30
         }}>
-          <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 30, }}>
+          <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 20, }}>
             <Image
               source={require('../../assets/images/logo.png')}
               style={{
@@ -36,28 +36,31 @@ const GetStarted = ({ navigation }) => {
 
           </View>
           <Text style={{
-            marginTop: 150,
-            fontSize: 25,
+            marginTop: 430,
+            fontSize: 24,
             fontWeight: "bold",
-            color: 'white',
+            color: colors.text,
             lineHeight: 35,
+            textAlign:'center',
             letterSpacing: 0.5,
-          }}>Tìm Kiếm Công Việc{'\n'}Mà Bạn Hằng{'\n'}Mong Ước</Text>
+          }}>Tìm Kiếm Công Việc Mà Bạn Hằng Mong Ước</Text>
           <Text style={{
             marginTop: 20,
-            fontSize: 18,
+            fontSize: 16 ,
+            paddingHorizontal:20,
             fontWeight: "400",
-            lineHeight: 35,
-            color: 'white',
+            lineHeight: 25,
+            textAlign:'center',
+            color: colors.text,
           }}>Khám phá các công ty. Đọc và tìm hiểu về các công ty. Lưu các công việc mà bạn yêu thích với {""}
             <Text style={{
               fontWeight: '700',
-              fontSize: 20,
+              fontSize: 18,
               color: colors.primary,
               letterSpacing: 0.5,
             }}>CatinDob</Text></Text>
           <View style={{
-            marginTop: 200,
+            marginTop: 40,
             width: '100%',
             alignItems: 'center',
             justifyContent: 'center',
@@ -83,8 +86,8 @@ const GetStarted = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   button: {
-    borderRadius: 100,
-    width: '80%',
+    borderRadius: 12,
+    width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: colors.primary,

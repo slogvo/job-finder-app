@@ -128,7 +128,7 @@ const SignIn = ({ navigation }) => {
           width: '100%',
           height: 50,
           backgroundColor: colors.primary,
-          borderRadius: 50,
+          borderRadius: 12,
           alignItems: 'center',
           justifyContent: 'center',
           elevation: 2,
