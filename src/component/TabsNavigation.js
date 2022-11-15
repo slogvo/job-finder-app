@@ -1,14 +1,10 @@
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Home from '../views/Home';
-import FindJobs from '../views/FindJobs';
-import MyJobs from '../views/MyJobs';
-import Notifications from '../views/Notifications';
-import SalaryReport from '../views/SalaryReport';
+import FindJobs from '../views/Bookmark';
 import colors from '../../assets/colors/colors';
 import Ionicons from "react-native-vector-icons/Ionicons"
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Explore from '../views/Explore';
 

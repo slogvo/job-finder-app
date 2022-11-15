@@ -3,12 +3,10 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import colors from '../../assets/colors/colors'
-import SalaryReport from '../views/SalaryReport';
 import CustomDrawer from './CustomDrawer';
+import SalaryReport from '../views/SalaryReport';
 import MyJobs from '../views/MyJobs';
-import FindJobs from '../views/FindJobs';
 import Notifications from '../views/Notifications';
-import Home from '../views/Home';
 import TabsNavigation from './TabsNavigation';
 
 
@@ -37,7 +35,7 @@ function DrawerNavigation({ navigation }) {
       }}>
 
       <Drawer.Screen
-        name="Home"
+        name="MenuTab"
         component={TabsNavigation}
         options={{
           drawerIcon: ({ color }) => (<Ionicons name="home" color={color}
@@ -50,15 +48,7 @@ function DrawerNavigation({ navigation }) {
             }} />)
         }} />
 
-      <Drawer.Screen name="Việc làm" component={FindJobs} options={{
-        drawerIcon: ({ color }) => (<Ionicons name="search" color={color} style={{
-          fontSize: 22,
-          top: 2,
-          left: 0,
-          width: 22,
-          height: 30
-        }} />)
-      }} />
+  
       <Drawer.Screen name="Thông báo" component={Notifications} options={{
         drawerIcon: ({ color }) => (<Ionicons name="notifications" color={color} style={{
           fontSize: 22,

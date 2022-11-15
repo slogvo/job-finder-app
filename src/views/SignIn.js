@@ -12,11 +12,11 @@ const SignIn = ({ navigation }) => {
   return (
     <View style={{
       flex: 1,
-      backgroundColor: '#fff',
+      backgroundColor: '#f7f7f7',
       paddingTop: 10,
     }}>
       <StatusBar
-        backgroundColor="#fff"
+        backgroundColor="#f7f7f7"
         barStyle='dark-content'
         translucent={false} />
 

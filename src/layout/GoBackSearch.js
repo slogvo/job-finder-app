@@ -1,9 +1,8 @@
-import { useState } from 'react';
-import { Button, Image, Text, TextInput, TouchableOpacity, View } from 'react-native'
-import colors from "../../assets/colors/colors"
+import React from 'react'
+import { Image, TextInput, TouchableOpacity, View } from 'react-native'
+import colors from '../../assets/colors/colors'
 
-const SearchLayout = ({ navigation }) => {
-
+const GoBackFilter = ({ navigation }) => {
   return (
     <View style={{ flex: 1, backgroundColor: "#f7f7f7", paddingHorizontal: 25, }}>
       <View style={{
@@ -18,13 +17,13 @@ const SearchLayout = ({ navigation }) => {
         justifyContent: 'space-between'
       }}>
         <TouchableOpacity
-          onPress={() => navigation.openDrawer()}
+          onPress={() => navigation.goBack()}
         >
           <Image
-            source={require('../../assets/images/menu.png')}
+            source={require('../../assets/images/close.png')}
             style={{
-              width: 25,
-              height: 25,
+              width: 21,
+              height: 21,
               resizeMode: "contain",
             }} />
         </TouchableOpacity>
@@ -45,19 +44,33 @@ const SearchLayout = ({ navigation }) => {
             paddingLeft: 50,
             borderRadius: 8,
             marginLeft: 20,
-            width: '88%',
+            width: '70%',
             color: colors.text,
             backgroundColor: "#FFF",
             fontSize: 16,
           }}
-          placeholder="Tìm kiếm công việc, công ty,..."
-          onFocus={() => {
-            navigation.navigate("SearchFilter")
-          }}
+          placeholder="Nhập chức danh"
         />
+        <View style={{
+          backgroundColor: colors.primary, 
+          width: 40,
+          height: 40,
+          justifyContent:'center',
+          alignItems: 'center',
+          marginLeft: 20,
+          borderRadius: 8
+        }}>
+          <Image
+            source={require('../../assets/images/filter.png')}
+            style={{
+              width: 30,
+              height: 30,
+              zIndex: 100,
+            }} />
+        </View>
       </View>
     </View>
   )
 }
 
-export default SearchLayout
+export default GoBackFilter

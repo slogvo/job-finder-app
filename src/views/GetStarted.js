@@ -36,7 +36,7 @@ const GetStarted = ({ navigation }) => {
 
           </View>
           <Text style={{
-            marginTop: 430,
+            marginTop: 410,
             fontSize: 24,
             fontWeight: "bold",
             color: colors.text,
@@ -45,7 +45,7 @@ const GetStarted = ({ navigation }) => {
             letterSpacing: 0.5,
           }}>Tìm Kiếm Công Việc Mà Bạn Hằng Mong Ước</Text>
           <Text style={{
-            marginTop: 20,
+            marginTop: 30,
             fontSize: 16 ,
             paddingHorizontal:20,
             fontWeight: "400",

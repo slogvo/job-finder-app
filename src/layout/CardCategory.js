@@ -43,7 +43,6 @@ const CardCategory = ({img, companyName, desc, salary, location}) => {
         >
         {companyName}
         </Text>
-
         <View style={{
           marginTop:"auto",
           flexDirection:'row',

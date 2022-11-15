@@ -19,7 +19,7 @@ const CustomDrawer = ({ ...props }) => {
           style={{
             padding: 20,
           }}
-          source={require('../../assets/images/menu-background.jpg')}
+          source={require('../../assets/images/drawer-image.png')}
         >
           <View style={{ backgroundColor: colors.secondary, borderRadius: 100, alignItems: 'center', width: 70, height: 70, marginBottom: 10 }}>
             <Image source={require('../../assets/images/avatar.png')} resizeMode='cover'
@@ -35,12 +35,13 @@ const CustomDrawer = ({ ...props }) => {
             fontSize: 20,
             fontWeight: 'bold'
           }}>
-            Perpetio
+            Long Võ
           </Text>
           <Text style={{
             color: 'white',
             fontSize: 15,
-            fontWeight: "600"
+            fontWeight: "600",
+            marginTop: 5,
           }}>
             Hồ sơ
           </Text>
