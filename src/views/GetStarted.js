@@ -36,20 +36,21 @@ const GetStarted = ({ navigation }) => {
 
           </View>
           <Text style={{
-            marginTop: 410,
-            fontSize: 24,
+            marginTop:30,
+            fontSize: 28,
             fontWeight: "bold",
-            color: colors.text,
-            lineHeight: 35,
+            color: 'white',
+            lineHeight: 40,
             textAlign:'center',
-            letterSpacing: 0.5,
-          }}>Tìm Kiếm Công Việc Mà Bạn Hằng Mong Ước</Text>
+            letterSpacing: 0.2,
+            
+          }}>Tìm Kiếm Công {"\n"}Việc Mơ Ước</Text>
           <Text style={{
-            marginTop: 30,
-            fontSize: 16 ,
+            marginTop: 400,
+            fontSize: 18 ,
             paddingHorizontal:20,
             fontWeight: "400",
-            lineHeight: 25,
+            lineHeight: 27,
             textAlign:'center',
             color: colors.text,
           }}>Khám phá các công ty. Đọc và tìm hiểu về các công ty. Lưu các công việc mà bạn yêu thích với {""}

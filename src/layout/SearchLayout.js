@@ -48,7 +48,7 @@ const SearchLayout = ({ navigation }) => {
             width: '88%',
             color: colors.text,
             backgroundColor: "#FFF",
-            fontSize: 16,
+            fontSize: 15,
           }}
           placeholder="Tìm kiếm công việc, công ty,..."
           onFocus={() => {

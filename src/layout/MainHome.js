@@ -100,6 +100,7 @@ const MainHome = ({ navigation }) => {
             )}
           </View>
         </View>
+        <View style={{ marginBottom: 80 }}></View>
       </ScrollView>
     </View>
   )
