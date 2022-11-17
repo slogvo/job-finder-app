@@ -64,7 +64,7 @@ const CardCategory = ({img, companyName, desc, salary, location, navigation}) =>
           <Text
           numberOfLines = {2}
           style={{
-          fontWeight:'400',
+          fontFamily: 'SanFranciscoDisplay-Medium',
           marginRight: 10,
            }}
           >{location}

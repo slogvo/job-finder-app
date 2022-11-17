@@ -4,7 +4,6 @@ import colors from '../../assets/colors/colors'
 import FilterOptions from "../../assets/data/FilterOptions"
 
 const GoBackFilter = ({ navigation, onChange, currentType }) => {
-	const [active, setActive] = useState(false);
 	return (
 		<View style={{ flex: 1, backgroundColor: "#fff", paddingHorizontal: 25 }}>
 			<View style={{

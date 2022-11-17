@@ -34,16 +34,16 @@ const RenderItem = ({ item }) => {
               numberOfLines={1}
               style={{
                 width: 150,
-                fontSize: 14,
+                fontSize: 15,
                 color: colors.text,
                 marginBottom: 3,
-                fontWeight: "700"
+                fontFamily: 'SanFranciscoDisplay-Bold',
               }}>
               {item.companyName}
             </Text>
             <Text style={{
               fontSize: 14,
-              fontWeight: "400"
+              fontFamily: 'SanFranciscoDisplay-Medium',
             }}>
               {item.companyLocation}
             </Text>
@@ -75,8 +75,8 @@ const RenderItem = ({ item }) => {
         }}></View>
         <Text style={{
           fontSize: 14,
-          color: colors.text,
-          fontWeight: "300"
+          color: colors.darkGray,
+          fontFamily: 'SanFranciscoDisplay-Regular',
         }}>
           Hết hạn trong {item.time_remaining} ngày
         </Text>

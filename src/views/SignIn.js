@@ -118,12 +118,12 @@ const SignIn = ({ navigation }) => {
             color: colors.secondary,
             fontSize: 15,
             letterSpacing: 0.2,
-            fontFamily: 'SanFranciscoDisplay-Bold'
+            fontFamily: 'SanFranciscoDisplay-Medium'
           }}>Đăng Ký </Text>
           <Text style={{
             color: colors.secondary,
             fontSize: 15,
-            fontFamily: 'SanFranciscoDisplay-Bold',
+            fontFamily: 'SanFranciscoDisplay-Medium',
             letterSpacing: 0.2
           }}>Quên Mật Khẩu </Text>
         </View>
