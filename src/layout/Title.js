@@ -13,14 +13,14 @@ const Title = ({title="Đề xuất cho bạn", marginTopCustom, viewAll ="Xem t
       <Text style={{
           color: colors.text,
           fontSize:20,
-          fontWeight: "500",
+          fontFamily: 'SanFranciscoDisplay-Bold',
       }}>
          {title}
       </Text>
       <Text style={{
           color: colors.text,
-          fontSize: 15,
-          fontWeight: "500",
+          fontSize: 16,
+          fontFamily: 'SanFranciscoDisplay-Medium',
           color: colors.primary,
       }}>
          {viewAll}

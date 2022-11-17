@@ -6,7 +6,10 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 const SearchLayout = ({ navigation }) => {
 
   return (
-    <View style={{ flex: 1, backgroundColor: "#fff", paddingHorizontal: 25, }}>
+    <View style={{ 
+      flex: 1, 
+      backgroundColor: "#fff",
+      paddingHorizontal: 25, }}>
       <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 15, }}>
         <View style={{ marginBottom: 20 }}>
           <TouchableOpacity
@@ -21,20 +24,29 @@ const SearchLayout = ({ navigation }) => {
               }} />
           </TouchableOpacity>
         </View>
-        <View style={{width:35, height:35, justifyContent:"center", alignItems:'center',backgroundColor:colors.primary, borderRadius:50}}>
+        <View style={{ width: 35, height: 35, justifyContent: "center", alignItems: 'center', backgroundColor: colors.primary, borderRadius: 50 }}>
           <Ionicons name="notifications-outline" color={'white'} size={20} />
         </View>
       </View>
 
       <View style={{ flexDirection: 'row', marginBottom: 15 }}>
-            <Image
-              source={require("../../assets/images/avatar.png")}
-              style={{ width: 50, height: 50, borderRadius: 50, marginRight: 15 }} />
-            <View>
-              <Text style={{ fontSize: 20, fontWeight: 'bold', color: colors.text, marginBottom: 5,}}>Hi, Long Vo </Text>
-              <Text style={{ fontWeight: '400', color: colors.secondary }}>Bạn muốn tìm kiếm gì?</Text>
-            </View>
-          </View>
+        <Image
+          source={require("../../assets/images/avatar.png")}
+          style={{ width: 50, height: 50, borderRadius: 50, marginRight: 15 }} />
+        <View>
+          <Text style={{
+            fontSize: 21,
+            color: colors.text,
+            fontFamily: 'SanFranciscoDisplay-Bold',
+            marginBottom: 5,
+          }}>Hi, Long Vo </Text>
+          <Text style={{
+            fontSize: 15,
+            fontFamily: 'SanFranciscoDisplay-Regular',
+            color: colors.secondary
+          }}>Bạn muốn tìm kiếm gì?</Text>
+        </View>
+      </View>
       <View style={{
         width: "100%",
         paddingBottom: 10,

@@ -2,24 +2,32 @@
   "migIndex": 1,
   "data": [
     {
-      "path": "assets/fonts/Poppins-Bold.ttf",
-      "sha1": "875cf0cecd647bcf22e79d633d868c1b1ec98dfa"
+      "path": "assets/fonts/SanFranciscoDisplay-Black.otf",
+      "sha1": "fee27019aa35ef88b70d48bdf1e23e282d3d09ca"
     },
     {
-      "path": "assets/fonts/Poppins-Light.ttf",
-      "sha1": "e247a92158e112f8bf7b638c8d95381d66b00dbb"
+      "path": "assets/fonts/SanFranciscoDisplay-Bold.otf",
+      "sha1": "8df16f15a8d39f499fd9c1501a0fa9f52e2370bb"
     },
     {
-      "path": "assets/fonts/Poppins-Medium.ttf",
-      "sha1": "283f21b44efbdbf276ba802be2d949a36bbc4233"
+      "path": "assets/fonts/SanFranciscoDisplay-Light.otf",
+      "sha1": "412ae5aa0708bd84738c17a28bb012cad18d8120"
     },
     {
-      "path": "assets/fonts/Poppins-Regular.ttf",
-      "sha1": "fdd3002e7d814ee47c1c1b8487c72c6bbb3a2d00"
+      "path": "assets/fonts/SanFranciscoDisplay-Medium.otf",
+      "sha1": "0648995feb5b96d37654dcbd787137168d18531e"
     },
     {
-      "path": "assets/fonts/Poppins-SemiBold.ttf",
-      "sha1": "8a4ace9392d06bcb7f8ea2f5169b07e4c383a90d"
+      "path": "assets/fonts/SanFranciscoDisplay-Regular.otf",
+      "sha1": "e4bc5ef9e28b2f283113ed3fd363620c01de0d8d"
+    },
+    {
+      "path": "assets/fonts/SanFranciscoDisplay-Semibold.otf",
+      "sha1": "b48246e6346fb6fb97b7faa74418033bdcf0e4ec"
+    },
+    {
+      "path": "assets/fonts/SanFranciscoDisplay-Thin.otf",
+      "sha1": "369a1dc8cc01eec03b7ddd9cd06925508e6afc78"
     }
   ]
 }

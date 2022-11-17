@@ -26,10 +26,10 @@ const SignIn = ({ navigation }) => {
         marginTop: 15
       }}>
         <Text style={{
-          fontWeight: 'bold',
           fontSize: 18,
           color: colors.text,
-          textAlign: 'center'
+          textAlign: 'center',
+          fontFamily: 'SanFranciscoDisplay-Bold'
         }}> Đăng Nhập
         </Text>
 
@@ -43,7 +43,7 @@ const SignIn = ({ navigation }) => {
 
           <Text style={{
             fontSize: 24,
-            fontWeight: 'bold',
+            fontFamily: 'SanFranciscoDisplay-Bold',
             letterSpacing: 0.5,
             color: colors.text,
           }}>Welcome to <Text style={{ color: colors.primary }}>CatinDob!</Text></Text>
@@ -54,7 +54,8 @@ const SignIn = ({ navigation }) => {
           fontSize: 15,
           fontWeight: '400',
           lineHeight: 22,
-          color: colors.text
+          color: colors.text,
+          fontFamily: 'SanFranciscoDisplay-Medium'
         }}>Tạo ra một tương lai tốt đẹp hơn cho chính bạn!</Text>
         <View style={{
           alignItems: "flex-start",
@@ -64,6 +65,7 @@ const SignIn = ({ navigation }) => {
           <Text style={{
             fontSize: 15,
             color: colors.text,
+            fontFamily: 'SanFranciscoDisplay-Medium'
           }}>Email</Text>
           <TextInput
             style={{
@@ -86,7 +88,9 @@ const SignIn = ({ navigation }) => {
           marginTop: 20
         }}>
           <Text style={{
-            fontSize: 15
+            fontSize: 15,
+            color: colors.text,
+            fontFamily: 'SanFranciscoDisplay-Medium'
           }}>Mật khẩu</Text>
           <TextInput
             style={{
@@ -113,13 +117,13 @@ const SignIn = ({ navigation }) => {
           <Text style={{
             color: colors.secondary,
             fontSize: 15,
-            fontWeight: '500',
-            letterSpacing: 0.2
+            letterSpacing: 0.2,
+            fontFamily: 'SanFranciscoDisplay-Bold'
           }}>Đăng Ký </Text>
           <Text style={{
             color: colors.secondary,
             fontSize: 15,
-            fontWeight: '600',
+            fontFamily: 'SanFranciscoDisplay-Bold',
             letterSpacing: 0.2
           }}>Quên Mật Khẩu </Text>
         </View>
@@ -140,7 +144,8 @@ const SignIn = ({ navigation }) => {
         >
           <Text style={{
             color: 'white',
-            fontSize: 18
+            fontSize: 18,
+            fontFamily: 'SanFranciscoDisplay-Bold'
           }}>
             Đăng Nhập</Text>
         </TouchableOpacity>
@@ -187,7 +192,8 @@ const SignIn = ({ navigation }) => {
             color: 'white',
             fontSize: 17,
             color: '#292524',
-            marginLeft: 20
+            marginLeft: 20,
+            fontFamily: 'SanFranciscoDisplay-Regular',
           }}>Đăng nhập bằng Google</Text>
         </TouchableOpacity>
       </View>

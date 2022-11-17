@@ -96,7 +96,9 @@ const GoBackFilter = ({ navigation, onChange, currentType }) => {
 										marginRight: 10,
 
 									}}>
-									<Text style={{ color: currentType == item.id ? 'white' : colors.text, }}>{item.name}</Text>
+									<Text style={{ 
+										fontFamily: 'SanFranciscoDisplay-Medium',
+										color: currentType == item.id ? 'white' : colors.text, }}>{item.name}</Text>
 								</TouchableOpacity>)
 						})}
 				</ScrollView>

@@ -8,8 +8,8 @@ const GetStarted = ({ navigation }) => {
       flex: 1,
     }}>
       <StatusBar backgroundColor="transparent" translucent={true}></StatusBar>
-      <ImageBackground 
-      source={require("../../assets/images/background.png")}
+      <ImageBackground
+        source={require("../../assets/images/background.png")}
         resizeMode="cover"
         style={{ width: "100%", height: "100%" }}
       >
@@ -37,23 +37,25 @@ const GetStarted = ({ navigation }) => {
 
           </View>
           <Text style={{
-            marginTop:60,
-            fontSize: 26,
-            fontWeight: "bold",
+            marginTop: 70,
+            fontSize: 28,
+            // fontWeight: "bold",
             color: 'white',
             lineHeight: 35,
-            textAlign:'center',
+            textAlign: 'center',
             letterSpacing: 0.2,
-            
+            wordSpacing: 4,
+            fontFamily: 'SanFranciscoDisplay-Bold'
           }}>Tìm Kiếm Công Việc{"\n"}Bạn Hằng Mong Ước</Text>
           <Text style={{
             marginTop: 360,
-            fontSize: 18 ,
-            paddingHorizontal:20,
+            fontSize: 18,
+            paddingHorizontal: 20,
             fontWeight: "400",
             lineHeight: 27,
-            textAlign:'center',
+            textAlign: 'center',
             color: colors.darkGray,
+            fontFamily: 'SanFranciscoDisplay-Medium'
           }}>Khám phá các công ty. Đọc và tìm hiểu về các công ty. Lưu các công việc mà bạn yêu thích với {""}
             <Text style={{
               fontWeight: '700',
@@ -75,7 +77,7 @@ const GetStarted = ({ navigation }) => {
               <Text style={{
                 color: 'white',
                 fontSize: 20,
-                fontWeight: '600',
+                fontFamily: 'SanFranciscoDisplay-Bold'
               }}>Bắt đầu</Text>
             </TouchableOpacity>
           </View>
