@@ -24,7 +24,7 @@ const CardCategory = ({img, companyName, desc, salary, location, navigation}) =>
         justifyContent: 'center',
         marginRight: 10,
         }}>
-        {img}
+       <Image style={{ width: 60, height: 60 }} resizeMode="contain" source={img}/>
       </View>
       <View style={{height:'100%', width:'100%'}}>
         <Text

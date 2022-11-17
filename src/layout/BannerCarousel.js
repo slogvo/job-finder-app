@@ -95,7 +95,7 @@ const BannerCarousel = () => {
              key={item.id}
              style ={{
               width: 15, 
-              height:5, 
+              height:6, 
               alignItems: 'center',
               justifyContent:"center",
               marginHorizontal:3, 

@@ -21,8 +21,8 @@ const SearchLayout = ({ navigation }) => {
               }} />
           </TouchableOpacity>
         </View>
-        <View>
-          <Ionicons name="notifications" color={colors.darkGray} size={23} />
+        <View style={{width:35, height:35, justifyContent:"center", alignItems:'center',backgroundColor:colors.primary, borderRadius:50}}>
+          <Ionicons name="notifications-outline" color={'white'} size={20} />
         </View>
       </View>
 
@@ -31,7 +31,7 @@ const SearchLayout = ({ navigation }) => {
               source={require("../../assets/images/avatar.png")}
               style={{ width: 50, height: 50, borderRadius: 50, marginRight: 15 }} />
             <View>
-              <Text style={{ fontSize: 17, fontWeight: 'bold', color: colors.text, marginBottom: 5, }}>Hi, Long Võ </Text>
+              <Text style={{ fontSize: 20, fontWeight: 'bold', color: colors.text, marginBottom: 5,}}>Hi, Long Vo </Text>
               <Text style={{ fontWeight: '400', color: colors.secondary }}>Bạn muốn tìm kiếm gì?</Text>
             </View>
           </View>
@@ -62,7 +62,7 @@ const SearchLayout = ({ navigation }) => {
             paddingVertical: 10,
             paddingHorizontal: 15,
             paddingLeft: 50,
-            borderRadius: 8,
+            borderRadius: 80,
             width: '100%',
             color: colors.text,
             backgroundColor: "#f7f7f7",
@@ -70,7 +70,7 @@ const SearchLayout = ({ navigation }) => {
           }}
           placeholder="Tìm kiếm công việc, công ty,..."
           onFocus={() => {
-            navigation.navigate("SearchFilter")
+            navigation.navigate("SearchFilterView")
           }}
         />
       </View>

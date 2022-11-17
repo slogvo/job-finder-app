@@ -38,7 +38,7 @@ const CustomDrawer = ({ ...props }) => {
             fontWeight: 'bold',
             marginTop: -5
           }}>
-            Long Võ
+            Long Vo
           </Text>
           <Text style={{
             color: 'white',
@@ -46,7 +46,8 @@ const CustomDrawer = ({ ...props }) => {
             fontWeight: "600",
             // marginTop: 5,
           }}>
-            Hồ sơ
+            Hồ sơ {" "}
+            <AntDesign name="edit" size={15}/>
           </Text>
         </ImageBackground>
         <View style={{

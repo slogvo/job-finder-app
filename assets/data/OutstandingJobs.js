@@ -1,14 +1,7 @@
-import { Image } from "react-native";
-import Onew from "../images/outstanding-jobs/Onew.png"
-import vinamilk from "../images/outstanding-jobs/vinamilk.png"
-import Capgenmini from "../images/outstanding-jobs/Capgenmini.png"
-import Rakus from "../images/outstanding-jobs/Rakus.png"
-import AsiaPlus from "../images/outstanding-jobs/AsiaPlus.png"
-
 const OutstandingJobs = [
   {
     id: 1,
-    companyLogo: <Image style={{ width: 60, height: 60 }} resizeMode="contain" source={Onew} />,
+    companyLogo: require("../images/outstanding-jobs/Onew.png"),
     companyName: "Công Ty Cổ Phần Onew",
     companyLocation: "Ha Noi",
     address:"Tầng 7, 434 Trần Khát Chân, P. Phố Huế, Q.Hai Bà Trưng, Hà Nội",
@@ -24,7 +17,7 @@ const OutstandingJobs = [
   },
   {
     id: 2,
-    companyLogo: <Image style={{ width: 50, height: 50 }} resizeMode="contain" source={Capgenmini} />,
+    companyLogo: require("../images/outstanding-jobs/vinamilk.png"),
     companyName: "Asiafoods Corporation",
     companyLocation: "Hồ Chí Minh",
     address:"Ho Chi Minh City, Vietnam",
@@ -40,7 +33,7 @@ const OutstandingJobs = [
   },
   {
     id: 3,
-    companyLogo: <Image style={{ width: 50, height: 50 }} resizeMode="contain" source={vinamilk} />,
+    companyLogo: require("../images/outstanding-jobs/Capgenmini.png"),
     companyName: "Sabeco - Tổng Công Ty Cổ Phần Bia - Rượu - Nước Giải Khát Sài Gòn",
     companyLocation: "Hồ Chí Minh",
     address:"Số 10 Tân Trào, Phường Tân Phú, Quận 7",
@@ -57,7 +50,7 @@ const OutstandingJobs = [
 
   {
     id: 4,
-    companyLogo: <Image style={{ width: 50, height: 50 }} resizeMode="contain" source={Rakus} />,
+    companyLogo: require("../images/outstanding-jobs/Rakus.png"),
     companyName: "Rakus Vietnam Co., Ltd",
     companyLocation: "Hồ Chí Minh",
     companyDescription: "Java Developer (Spring, Sql)_Urgent!",
@@ -72,7 +65,7 @@ const OutstandingJobs = [
   },
   {
     id: 5,
-    companyLogo: <Image style={{ width: 50, height: 50 }} resizeMode="contain" source={AsiaPlus} />,
+    companyLogo:require("../images/outstanding-jobs/AsiaPlus.png"),
     companyName: "Asia Plus Inc.",
     companyLocation: "Hồ Chí Minh",
     address:"6F 506 Nguyen Dinh Chieu Street, Ward 4, District 3, Ho Chi Minh City",

@@ -1,13 +1,13 @@
 import { ScrollView, FlatList, View, Dimensions } from "react-native"
 import { useEffect, useState } from "react"
-import BannerCarousel from "./BannerCarousel"
-import SearchLayout from "./SearchLayout"
-import LargeCategories from "../../assets/data/SmallCategories"
+import BannerCarousel from "../layout/BannerCarousel"
+import SearchLayout from "../layout/SearchLayout"
+import LargeCategories from "../../assets/data/LargeCategories"
 import SmallCategories from "../../assets/data/SmallCategories"
 import OutstandingJobs from "../../assets/data/OutstandingJobs"
-import RenderItem from "./RenderItem"
-import Title from "./Title"
-import CardCategory from "./CardCategory"
+import RenderItem from "../../src/layout/RenderItem"
+import Title from "../../src/layout/Title"
+import CardCategory from "../../src/layout/CardCategory"
 
 
 const MainHome = ({ navigation }) => {

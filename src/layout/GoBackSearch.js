@@ -3,7 +3,7 @@ import { Image, ScrollView, Text, TextInput, TouchableOpacity, View } from 'reac
 import colors from '../../assets/colors/colors'
 import FilterOptions from "../../assets/data/FilterOptions"
 
-const GoBackFilter = ({ navigation }) => {
+const GoBackFilter = ({ navigation, onChange, currentType }) => {
 	const [active, setActive] = useState(false);
 	return (
 		<View style={{ flex: 1, backgroundColor: "#fff", paddingHorizontal: 25 }}>
@@ -42,7 +42,7 @@ const GoBackFilter = ({ navigation }) => {
 						paddingVertical: 12,
 						paddingHorizontal: 15,
 						paddingLeft: 50,
-						borderRadius: 8,
+						borderRadius: 80,
 						marginLeft: 20,
 						width: '88%',
 						color: colors.text,
@@ -57,7 +57,7 @@ const GoBackFilter = ({ navigation }) => {
 			<View style={{
 				flexDirection: 'row', marginTop: 10,
 				paddingBottom: 10, alignItems: 'center',
-				borderBottomWidth: 1, borderBottomColor: '#e2e2e2',
+				borderBottomWidth: 0.6, borderBottomColor: '#e2e2e2',
 				justifyContent: 'space-between'
 			}}>
 				<ScrollView
@@ -83,19 +83,21 @@ const GoBackFilter = ({ navigation }) => {
 					{FilterOptions?.length > 0 &&
 						FilterOptions.map((item) => {
 							return (
-								<View
-									key = {item.id}
+								<TouchableOpacity
+									key={item.id}
+									onPress={() => onChange(item.id)}
 									style={{
 										paddingHorizontal: 10,
 										height: 40,
-										backgroundColor: colors.lightGray,
+										backgroundColor: currentType == item.id ? colors.primary : colors.lightGray,
 										borderRadius: 6,
 										alignItems: "center",
 										justifyContent: 'center',
 										marginRight: 10,
+
 									}}>
-									<Text>{item.name}</Text>
-								</View>)
+									<Text style={{ color: currentType == item.id ? 'white' : colors.text, }}>{item.name}</Text>
+								</TouchableOpacity>)
 						})}
 				</ScrollView>
 			</View>
