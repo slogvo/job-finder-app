@@ -4,6 +4,7 @@ import BannerCarousel from "./BannerCarousel"
 import SearchLayout from "./SearchLayout"
 import LargeCategories from "../../assets/data/SmallCategories"
 import SmallCategories from "../../assets/data/SmallCategories"
+import OutstandingJobs from "../../assets/data/OutstandingJobs"
 import RenderItem from "./RenderItem"
 import Title from "./Title"
 import CardCategory from "./CardCategory"
@@ -23,14 +24,14 @@ const MainHome = ({ navigation }) => {
     <View style={{
       flex: 1,
       width: '100%',
-      backgroundColor: "#f7f7f7",
+      backgroundColor: "#fff",
       paddingTop: 10,
     }}>
       <ScrollView
         showsVerticalScrollIndicator={false}
         persistentScrollbar={true}
         style={{
-          backgroundColor: "#f7f7f7",
+          backgroundColor: "#fff",
           position: "relative",
         }}
         stickyHeaderIndices={[0]}
@@ -75,7 +76,7 @@ const MainHome = ({ navigation }) => {
             justifyContent: 'center',
             alignItems: 'center',
           }} >
-            {SmallCategories?.map((item) =>
+            {OutstandingJobs?.map((item) =>
               <View
                 key={item.id}
                 style={{

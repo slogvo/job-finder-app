@@ -1,15 +1,44 @@
 import { useState } from 'react';
 import { Button, Image, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import colors from "../../assets/colors/colors"
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const SearchLayout = ({ navigation }) => {
 
   return (
-    <View style={{ flex: 1, backgroundColor: "#f7f7f7", paddingHorizontal: 25, }}>
+    <View style={{ flex: 1, backgroundColor: "#fff", paddingHorizontal: 25, }}>
+      <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 15, }}>
+        <View style={{ marginBottom: 20 }}>
+          <TouchableOpacity
+            onPress={() => navigation.openDrawer()}
+          >
+            <Image
+              source={require('../../assets/images/menu.png')}
+              style={{
+                width: 28,
+                height: 28,
+                resizeMode: "contain",
+              }} />
+          </TouchableOpacity>
+        </View>
+        <View>
+          <Ionicons name="notifications" color={colors.darkGray} size={23} />
+        </View>
+      </View>
+
+      <View style={{ flexDirection: 'row', marginBottom: 15 }}>
+            <Image
+              source={require("../../assets/images/avatar.png")}
+              style={{ width: 50, height: 50, borderRadius: 50, marginRight: 15 }} />
+            <View>
+              <Text style={{ fontSize: 17, fontWeight: 'bold', color: colors.text, marginBottom: 5, }}>Hi, Long Võ </Text>
+              <Text style={{ fontWeight: '400', color: colors.secondary }}>Bạn muốn tìm kiếm gì?</Text>
+            </View>
+          </View>
       <View style={{
         width: "100%",
         paddingBottom: 10,
-        backgroundColor: "#f7f7f7",
+        backgroundColor: "#fff",
         position: "relative",
         flexDirection: 'row',
         alignItems: 'center',
@@ -17,37 +46,26 @@ const SearchLayout = ({ navigation }) => {
         borderBottomColor: "#e2e2e2",
         justifyContent: 'space-between'
       }}>
-        <TouchableOpacity
-          onPress={() => navigation.openDrawer()}
-        >
-          <Image
-            source={require('../../assets/images/menu.png')}
-            style={{
-              width: 25,
-              height: 25,
-              resizeMode: "contain",
-            }} />
-        </TouchableOpacity>
+
         <Image
           source={require('../../assets/images/search-symbol.png')}
           style={{
             position: "absolute",
             width: 20,
             height: 20,
-            left: 60,
+            left: 15,
             zIndex: 10,
-            top: 16,
+            top: 13,
           }} />
         <TextInput
           style={{
-            paddingVertical: 12,
+            paddingVertical: 10,
             paddingHorizontal: 15,
             paddingLeft: 50,
             borderRadius: 8,
-            marginLeft: 20,
-            width: '88%',
+            width: '100%',
             color: colors.text,
-            backgroundColor: "#FFF",
+            backgroundColor: "#f7f7f7",
             fontSize: 15,
           }}
           placeholder="Tìm kiếm công việc, công ty,..."

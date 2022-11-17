@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { CardStyleInterpolators, createStackNavigator } from '@react-navigation/stack';
 import MainHome from '../layout/MainHome';
 import SearchFilter from '../layout/SearchFilter';
+import JobDetail from '../layout/JobDetail';
 
 const Stack = createStackNavigator();
 
@@ -32,6 +33,7 @@ const Home = () => {
     >
       <Stack.Screen name="MainHome" component={MainHome} />
       <Stack.Screen name="SearchFilter" component={SearchFilter} />
+      <Stack.Screen name="JobDetail" component={JobDetail} />
     </Stack.Navigator>
   )
 }

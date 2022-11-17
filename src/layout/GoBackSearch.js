@@ -1,21 +1,20 @@
 import React, { useState } from 'react'
 import { Image, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import colors from '../../assets/colors/colors'
+import FilterOptions from "../../assets/data/FilterOptions"
 
 const GoBackFilter = ({ navigation }) => {
 	const [active, setActive] = useState(false);
 	return (
-		<View style={{ flex: 1, backgroundColor: "#f7f7f7", paddingHorizontal: 25, }}>
+		<View style={{ flex: 1, backgroundColor: "#fff", paddingHorizontal: 25 }}>
 			<View style={{
 				width: "100%",
 				paddingBottom: 10,
-				backgroundColor: "#f7f7f7",
+				backgroundColor: "#fff",
 				position: "relative",
 				flexDirection: 'row',
 				alignItems: 'center',
-				// borderBottomWidth: 1,
-				// borderBottomColor: "#e2e2e2",
-				justifyContent: 'space-between'
+				justifyContent: 'space-between',
 			}}>
 				<TouchableOpacity
 					onPress={() => navigation.goBack()}
@@ -23,8 +22,8 @@ const GoBackFilter = ({ navigation }) => {
 					<Image
 						source={require('../../assets/images/close.png')}
 						style={{
-							width: 21,
-							height: 21,
+							width: 20,
+							height: 20,
 							resizeMode: "contain",
 						}} />
 				</TouchableOpacity>
@@ -47,7 +46,7 @@ const GoBackFilter = ({ navigation }) => {
 						marginLeft: 20,
 						width: '88%',
 						color: colors.text,
-						backgroundColor: "#FFF",
+						backgroundColor: "#F7F7F7",
 						fontSize: 15,
 					}}
 					placeholder="Nhập từ khóa tìm kiếm"
@@ -55,8 +54,12 @@ const GoBackFilter = ({ navigation }) => {
 			</View>
 
 			{/* advanced filter */}
-
-			<View style={{ flexDirection: 'row', marginTop: 10, alignItems: 'center', justifyContent: 'space-between' }}>
+			<View style={{
+				flexDirection: 'row', marginTop: 10,
+				paddingBottom: 10, alignItems: 'center',
+				borderBottomWidth: 1, borderBottomColor: '#e2e2e2',
+				justifyContent: 'space-between'
+			}}>
 				<ScrollView
 					horizontal
 					showsHorizontalScrollIndicator={false}>
@@ -77,74 +80,23 @@ const GoBackFilter = ({ navigation }) => {
 								zIndex: 100,
 							}} />
 					</View>
-					<View style={{
-						paddingHorizontal: 10,
-						height: 40,
-						backgroundColor: colors.border,
-						borderRadius: 6,
-						alignItems: "center",
-						justifyContent: 'center',
-						marginRight: 10,
-					}}>
-						<Text style={{ color: colors.text }}>Full Time</Text>
-					</View>
-					<View style={{
-						paddingHorizontal: 10,
-						height: 40,
-						backgroundColor: colors.border,
-						borderRadius: 6,
-						alignItems: "center",
-						justifyContent: 'center',
-						marginRight: 10,
-					}}>
-						<Text style={{ color: colors.text }}>Part Time</Text>
-					</View>
-					<View style={{
-						paddingHorizontal: 10,
-						height: 40,
-						backgroundColor: colors.border,
-						borderRadius: 6,
-						alignItems: "center",
-						justifyContent: 'center',
-						marginRight: 10,
-					}}>
-						<Text style={{ color: colors.text }}>Design</Text>
-					</View>
-					<View style={{
-						paddingHorizontal: 10,
-						height: 40,
-						backgroundColor: colors.border,
-						borderRadius: 6,
-						alignItems: "center",
-						justifyContent: 'center',
-						marginRight: 10,
-					}}>
-						<Text style={{ color: colors.text }}>IT</Text>
-					</View>
-
-					<View style={{
-						paddingHorizontal: 10,
-						height: 40,
-						backgroundColor: colors.border,
-						borderRadius: 6,
-						alignItems: "center",
-						justifyContent: 'center',
-						marginRight: 10,
-					}}>
-						<Text style={{ color: colors.text }}>Business</Text>
-					</View>
-
-					<View style={{
-						paddingHorizontal: 10,
-						height: 40,
-						backgroundColor: colors.border,
-						borderRadius: 6,
-						alignItems: "center",
-						justifyContent: 'center',
-						marginRight: 10,
-					}}>
-						<Text style={{ color: colors.text }}>Remote</Text>
-					</View>
+					{FilterOptions?.length > 0 &&
+						FilterOptions.map((item) => {
+							return (
+								<View
+									key = {item.id}
+									style={{
+										paddingHorizontal: 10,
+										height: 40,
+										backgroundColor: colors.lightGray,
+										borderRadius: 6,
+										alignItems: "center",
+										justifyContent: 'center',
+										marginRight: 10,
+									}}>
+									<Text>{item.name}</Text>
+								</View>)
+						})}
 				</ScrollView>
 			</View>
 		</View>

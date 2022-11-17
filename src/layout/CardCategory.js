@@ -1,16 +1,20 @@
 import React from 'react'
-import { Image, Text, View } from 'react-native'
+import { Image, Text, TouchableOpacity, View } from 'react-native'
 import colors from '../../assets/colors/colors'
 import AntDesign from "react-native-vector-icons/AntDesign"
 
-const CardCategory = ({img, companyName, desc, salary, location}) => {
+
+const CardCategory = ({img, companyName, desc, salary, location, navigation}) => {
   return (
-    <View style={{
+    <View
+    onPress={() => navigation.navigate("JobDetail")}
+    style={{
       flex: 1,
       alignItems: 'flex-start',
       flexDirection: 'row'
     }}>
-      <View style={{
+      <View 
+      style={{
         width: 70,
         height: 70,
         borderRadius: 8,
@@ -28,16 +32,17 @@ const CardCategory = ({img, companyName, desc, salary, location}) => {
           fontSize: 14,
           color: colors.text,
           marginBottom: 5,
-          fontWeight:"700"
+          fontWeight:"700",
+          width: 220
         }}
-        numberOfLines = {2}
+        numberOfLines = {1}
         >{desc}</Text>
         <Text
           style={{
             marginTop:-4,
             fontWeight:"500",
             color: colors.text,
-            width: 220,
+            width: 220
          }}
           numberOfLines = {1}
         >

@@ -22,7 +22,9 @@ const CustomDrawer = ({ ...props }) => {
           source={require('../../assets/images/drawer-image.png')}
         >
           <View style={{ backgroundColor: colors.secondary, borderRadius: 100, alignItems: 'center', width: 70, height: 70, marginBottom: 10 }}>
-            <Image source={require('../../assets/images/avatar.png')} resizeMode='cover'
+            <Image 
+            source={require('../../assets/images/avatar.png')} 
+            resizeMode='cover'
               style={{
                 width: '100%',
                 height: '100%',
@@ -32,8 +34,9 @@ const CustomDrawer = ({ ...props }) => {
           </View>
           <Text style={{
             color: 'white',
-            fontSize: 20,
-            fontWeight: 'bold'
+            fontSize: 18,
+            fontWeight: 'bold',
+            marginTop: -5
           }}>
             Long Võ
           </Text>
@@ -41,7 +44,7 @@ const CustomDrawer = ({ ...props }) => {
             color: 'white',
             fontSize: 15,
             fontWeight: "600",
-            marginTop: 5,
+            // marginTop: 5,
           }}>
             Hồ sơ
           </Text>

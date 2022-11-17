@@ -49,7 +49,7 @@ const RenderItem = ({ item }) => {
             </Text>
           </View>
         </View>
-        <AntDesign name="heart" size={22} color={colors.primary} />
+        <AntDesign name="heart" size={20} color={colors.redColor} />
       </View>
       <Text style={{
         marginTop: 10,
@@ -91,7 +91,7 @@ const RenderItem = ({ item }) => {
               borderRadius: 5,
               alignItems: 'center',
               justifyContent: 'center',
-              backgroundColor: '#f1f1f1',
+              backgroundColor: colors.lightGray,
               marginRight: 8
             }}>
             <Text

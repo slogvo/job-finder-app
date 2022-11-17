@@ -12,11 +12,11 @@ const SignIn = ({ navigation }) => {
   return (
     <View style={{
       flex: 1,
-      backgroundColor: '#f7f7f7',
+      backgroundColor: '#fff',
       paddingTop: 10,
     }}>
       <StatusBar
-        backgroundColor="#f7f7f7"
+        backgroundColor="#fff"
         barStyle='dark-content'
         translucent={false} />
 
@@ -59,7 +59,7 @@ const SignIn = ({ navigation }) => {
         <View style={{
           alignItems: "flex-start",
           justifyContent: "flex-start",
-          marginTop: 30
+          marginTop: 30,
         }}>
           <Text style={{
             fontSize: 15,
