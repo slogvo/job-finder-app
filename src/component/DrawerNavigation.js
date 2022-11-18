@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import colors from '../../assets/colors/colors'
 import CustomDrawer from './CustomDrawer';
@@ -28,17 +29,17 @@ function DrawerNavigation({ navigation }) {
         drawerLabelStyle: {
           marginLeft: -15,
           fontSize: 16,
-          fontWeight: '400',
+          fontFamily:'Inter-Medium',
           alignItems: 'center',
           justifyContent: 'center',
         }
       }}>
 
       <Drawer.Screen
-        name="MenuTab"
+        name="Dashboard"
         component={TabsNavigation}
         options={{
-          drawerIcon: ({ color }) => (<Ionicons name="home" color={color}
+          drawerIcon: ({ color }) => (<FontAwesome name="dashboard" color={color}
             style={{
               fontSize: 22,
               top: 2,

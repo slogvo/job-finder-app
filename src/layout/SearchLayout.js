@@ -25,7 +25,7 @@ const SearchLayout = ({ navigation }) => {
           </TouchableOpacity>
         </View>
         <View style={{ width: 35, height: 35, justifyContent: "center", alignItems: 'center', backgroundColor: colors.primary, borderRadius: 50 }}>
-          <Ionicons name="notifications-outline" color={'white'} size={20} />
+          <Image source={require("../../assets/images/notification.png")} style={{width:22, height:22}}/>
         </View>
       </View>
 
@@ -37,12 +37,12 @@ const SearchLayout = ({ navigation }) => {
           <Text style={{
             fontSize: 21,
             color: colors.text,
-            fontFamily: 'SanFranciscoDisplay-Bold',
+            fontFamily: 'Inter-Bold',
             marginBottom: 5,
           }}>Hi, Long Vo </Text>
           <Text style={{
-            fontSize: 15,
-            fontFamily: 'SanFranciscoDisplay-Regular',
+            fontSize: 14,
+            fontFamily: 'Inter-Regular',
             color: colors.secondary
           }}>Bạn muốn tìm kiếm gì?</Text>
         </View>

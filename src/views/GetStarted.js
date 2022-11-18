@@ -30,7 +30,7 @@ const GetStarted = ({ navigation }) => {
             <Text style={{
               marginTop: 30,
               fontSize: 20,
-              fontWeight: 'bold',
+              fontFamily:'Poppins-Bold',
               letterSpacing: 0.5,
               color: "white",
             }}>CatinDob</Text>
@@ -38,27 +38,27 @@ const GetStarted = ({ navigation }) => {
           </View>
           <Text style={{
             marginTop: 70,
-            fontSize: 28,
+            fontSize: 32,
             // fontWeight: "bold",
             color: 'white',
-            lineHeight: 35,
+            lineHeight: 40,
             textAlign: 'center',
-            letterSpacing: 0.2,
+            letterSpacing: 0.5,
             wordSpacing: 4,
-            fontFamily: 'SanFranciscoDisplay-Bold'
-          }}>Tìm Kiếm Công Việc{"\n"}Bạn Hằng Mong Ước</Text>
+            fontFamily: 'Poppins-Bold'
+          }}>Let's Find Your Dream Jobs!</Text>
           <Text style={{
-            marginTop: 360,
-            fontSize: 18,
-            paddingHorizontal: 20,
+            marginTop: 340,
+            fontSize: 17,
+            paddingHorizontal: 10,
             fontWeight: "400",
             lineHeight: 27,
             textAlign: 'center',
             color: colors.darkGray,
-            fontFamily: 'SanFranciscoDisplay-Medium'
+            fontFamily: 'Inter-Regular'
           }}>Khám phá các công ty. Đọc và tìm hiểu về các công ty. Lưu các công việc mà bạn yêu thích với {""}
             <Text style={{
-              fontWeight: '700',
+              fontFamily:'Poppins-Bold',
               fontSize: 18,
               color: colors.primary,
               letterSpacing: 0.5,
@@ -77,7 +77,7 @@ const GetStarted = ({ navigation }) => {
               <Text style={{
                 color: 'white',
                 fontSize: 20,
-                fontFamily: 'SanFranciscoDisplay-Bold'
+                fontFamily: 'Inter-Bold'
               }}>Bắt đầu</Text>
             </TouchableOpacity>
           </View>
@@ -91,7 +91,7 @@ const GetStarted = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   button: {
-    borderRadius: 50,
+    borderRadius: 12,
     width: '100%',
     alignItems: 'center',
     justifyContent: 'center',

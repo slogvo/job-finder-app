@@ -29,7 +29,7 @@ const SignIn = ({ navigation }) => {
           fontSize: 18,
           color: colors.text,
           textAlign: 'center',
-          fontFamily: 'SanFranciscoDisplay-Bold'
+          fontFamily: 'Inter-Bold'
         }}> Đăng Nhập
         </Text>
 
@@ -42,20 +42,22 @@ const SignIn = ({ navigation }) => {
         }}>
 
           <Text style={{
-            fontSize: 24,
-            fontFamily: 'SanFranciscoDisplay-Bold',
-            letterSpacing: 0.5,
+            fontSize: 22,
+            fontFamily: 'Poppins-Medium',
             color: colors.text,
-          }}>Welcome to <Text style={{ color: colors.primary }}>CatinDob!</Text></Text>
+          }}>Welcome to <Text style={{ 
+            color: colors.primary,
+            fontFamily: 'Poppins-Bold',
+           }}>CatinDob!</Text></Text>
         </View>
         <Text style={{
           textAlign: 'center',
           marginTop: 10,
-          fontSize: 15,
+          fontSize: 14,
           fontWeight: '400',
           lineHeight: 22,
           color: colors.text,
-          fontFamily: 'SanFranciscoDisplay-Medium'
+          fontFamily: 'Inter-Regular'
         }}>Tạo ra một tương lai tốt đẹp hơn cho chính bạn!</Text>
         <View style={{
           alignItems: "flex-start",
@@ -63,9 +65,9 @@ const SignIn = ({ navigation }) => {
           marginTop: 30,
         }}>
           <Text style={{
-            fontSize: 15,
+            fontSize: 14,
             color: colors.text,
-            fontFamily: 'SanFranciscoDisplay-Medium'
+            fontFamily: 'Poppins-Medium'
           }}>Email</Text>
           <TextInput
             style={{
@@ -75,6 +77,7 @@ const SignIn = ({ navigation }) => {
               borderRadius: 5,
               height: 50,
               borderColor: activeEmail ? colors.focusColor : colors.border,
+              fontFamily: 'Inter-Regular',
               paddingLeft: 15
             }}
             placeholder="Nhập email"
@@ -88,9 +91,9 @@ const SignIn = ({ navigation }) => {
           marginTop: 20
         }}>
           <Text style={{
-            fontSize: 15,
+            fontSize: 14,
             color: colors.text,
-            fontFamily: 'SanFranciscoDisplay-Medium'
+            fontFamily: 'Poppins-Medium'
           }}>Mật khẩu</Text>
           <TextInput
             style={{
@@ -100,6 +103,7 @@ const SignIn = ({ navigation }) => {
               borderRadius: 5,
               height: 50,
               borderColor: activePassword ? colors.focusColor : colors.border,
+              fontFamily: 'Inter-Regular',
               paddingLeft: 15
             }}
             placeholder="Nhập password"
@@ -116,14 +120,14 @@ const SignIn = ({ navigation }) => {
         }}>
           <Text style={{
             color: colors.secondary,
-            fontSize: 15,
+            fontSize: 14,
             letterSpacing: 0.2,
-            fontFamily: 'SanFranciscoDisplay-Medium'
+            fontFamily: 'Poppins-Regular'
           }}>Đăng Ký </Text>
           <Text style={{
             color: colors.secondary,
-            fontSize: 15,
-            fontFamily: 'SanFranciscoDisplay-Medium',
+            fontSize: 14,
+            fontFamily: 'Poppins-Regular',
             letterSpacing: 0.2
           }}>Quên Mật Khẩu </Text>
         </View>
@@ -145,7 +149,7 @@ const SignIn = ({ navigation }) => {
           <Text style={{
             color: 'white',
             fontSize: 18,
-            fontFamily: 'SanFranciscoDisplay-Bold'
+            fontFamily: 'Inter-Bold'
           }}>
             Đăng Nhập</Text>
         </TouchableOpacity>
@@ -169,33 +173,66 @@ const SignIn = ({ navigation }) => {
             backgroundColor: colors.border
           }} />
         </View>
-        <TouchableOpacity style={{
-          borderWidth: 1,
-          borderColor: '#eee',
-          width: '100%',
-          height: 50,
-          borderRadius: 50,
-          alignItems: 'center',
-          flexDirection: 'row',
-          marginTop: 25,
-          paddingHorizontal: 30
-        }}>
-          <Image
-            source={require('../../assets/images/google.png')}
-            style={{
-              width: 22,
-              height: 22,
-            }}
-            resizeMode='cover'
-          />
-          <Text style={{
-            color: 'white',
-            fontSize: 17,
-            color: '#292524',
-            marginLeft: 20,
-            fontFamily: 'SanFranciscoDisplay-Regular',
-          }}>Đăng nhập bằng Google</Text>
-        </TouchableOpacity>
+        <View style={{flexDirection:'row', justifyContent:'space-between'}}>
+          <TouchableOpacity style={{
+            width: '45%',
+            height: 50,
+            borderRadius: 8,
+            justifyContent:'center',
+            alignItems: 'center',
+            flexDirection: 'row',
+            marginTop: 25,
+            paddingHorizontal: 30,
+            elevation: 1,
+            backgroundColor: "#fff",
+            // borderWidth: 1,
+          }}>
+            <Image
+              source={require('../../assets/images/google.png')}
+              style={{
+                width: 22,
+                height: 22,
+              }}
+              resizeMode='cover'
+            />
+            <Text style={{
+              color: 'white',
+              fontSize: 15,
+              color: '#292524',
+              marginLeft: 15,
+              fontFamily: 'Poppins-Medium',
+            }}>Google</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={{
+            width: '45%',
+            height: 50,
+            borderRadius: 8,
+            justifyContent:'center',
+            alignItems: 'center',
+            flexDirection: 'row',
+            marginTop: 25,
+            paddingHorizontal: 30,
+            elevation: 1,
+            backgroundColor: "#fff",
+            // borderWidth: 1,
+          }}>
+            <Image
+              source={require('../../assets/images/facebook.png')}
+              style={{
+                width: 22,
+                height: 22,
+              }}
+              resizeMode='cover'
+            />
+            <Text style={{
+              color: 'white',
+              fontSize: 15,
+              color: '#292524',
+              marginLeft: 15,
+              fontFamily: 'Poppins-Medium',
+            }}>Facebook</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   )

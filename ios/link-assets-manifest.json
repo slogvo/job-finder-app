@@ -2,32 +2,48 @@
   "migIndex": 1,
   "data": [
     {
-      "path": "assets/fonts/SanFranciscoDisplay-Black.otf",
-      "sha1": "fee27019aa35ef88b70d48bdf1e23e282d3d09ca"
+      "path": "assets/fonts/Inter-Bold.ttf",
+      "sha1": "48747b7a60086f97af0d373febcbd1f1bee87f17"
     },
     {
-      "path": "assets/fonts/SanFranciscoDisplay-Bold.otf",
-      "sha1": "8df16f15a8d39f499fd9c1501a0fa9f52e2370bb"
+      "path": "assets/fonts/Inter-Light.ttf",
+      "sha1": "dd9ec1ae67dd85143bacf7a3cb37e9f0ac979843"
     },
     {
-      "path": "assets/fonts/SanFranciscoDisplay-Light.otf",
-      "sha1": "412ae5aa0708bd84738c17a28bb012cad18d8120"
+      "path": "assets/fonts/Inter-Medium.ttf",
+      "sha1": "a418a8ba73bbcfa8c131c426ab836d78457afa9b"
     },
     {
-      "path": "assets/fonts/SanFranciscoDisplay-Medium.otf",
-      "sha1": "0648995feb5b96d37654dcbd787137168d18531e"
+      "path": "assets/fonts/Inter-Regular.ttf",
+      "sha1": "7237d9cf55f177702066a28a4dde1e4c7e8ab576"
     },
     {
-      "path": "assets/fonts/SanFranciscoDisplay-Regular.otf",
-      "sha1": "e4bc5ef9e28b2f283113ed3fd363620c01de0d8d"
+      "path": "assets/fonts/Poppins-Black.otf",
+      "sha1": "655fab6b19943846e5f0ffcd16db0db9c3f71388"
     },
     {
-      "path": "assets/fonts/SanFranciscoDisplay-Semibold.otf",
-      "sha1": "b48246e6346fb6fb97b7faa74418033bdcf0e4ec"
+      "path": "assets/fonts/Poppins-Bold.otf",
+      "sha1": "fc40855366c1f38478de1473bf483a4ad5d515ac"
     },
     {
-      "path": "assets/fonts/SanFranciscoDisplay-Thin.otf",
-      "sha1": "369a1dc8cc01eec03b7ddd9cd06925508e6afc78"
+      "path": "assets/fonts/Poppins-ExtraBold.otf",
+      "sha1": "d1c2b0934a312e45e8ac0e4ce40916909ce957de"
+    },
+    {
+      "path": "assets/fonts/Poppins-Light.otf",
+      "sha1": "37c17e7bee737afaa91b0880df6cbd1f43f1a270"
+    },
+    {
+      "path": "assets/fonts/Poppins-Medium.otf",
+      "sha1": "e566106c0be5bca5cb3dd0223953310774f7ca59"
+    },
+    {
+      "path": "assets/fonts/Poppins-Regular.otf",
+      "sha1": "e6fe7a5a39e5e9eabeceb3c853117827367d5c91"
+    },
+    {
+      "path": "assets/fonts/Poppins-Thin.otf",
+      "sha1": "f0ddc10ee6c9742e1dba2451fbccb2beaff8ee0f"
     }
   ]
 }

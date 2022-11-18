@@ -32,23 +32,25 @@ const CustomDrawer = ({ ...props }) => {
               }}
             />
           </View>
-          <Text style={{
-            color: 'white',
-            fontSize: 18,
-            fontWeight: 'bold',
-            marginTop: -5
-          }}>
-            Long Vo
-          </Text>
-          <Text style={{
-            color: 'white',
-            fontSize: 15,
-            fontWeight: "600",
-            // marginTop: 5,
-          }}>
-            Hồ sơ {" "}
-            <AntDesign name="edit" size={15}/>
-          </Text>
+          <View>
+            <Text style={{
+              color: 'white',
+              fontSize: 18,
+              fontWeight: 'bold',
+            marginTop: 3
+            }}>
+              Long Vo
+            </Text>
+            <Text style={{
+              color: 'white',
+              fontSize: 15,
+              fontWeight: "600",
+              marginTop: 10,
+            }}>
+              Hồ sơ {" "}
+              <AntDesign name="edit" size={15}/>
+            </Text>
+          </View>
         </ImageBackground>
         <View style={{
           flex: 1, backgroundColor: '#fff', paddingTop: 10,
