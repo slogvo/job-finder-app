@@ -23,7 +23,6 @@ function DrawerNavigation({ navigation }) {
           width: 320,
         },
         headerShown: false,
-        drawerActiveBackgroundColor: colors.lightGreen,
         drawerActiveTintColor: colors.primary,
         drawerInactiveTintColor: colors.darkGray,
         drawerLabelStyle: {

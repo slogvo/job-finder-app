@@ -29,7 +29,7 @@ const SignIn = ({ navigation }) => {
           fontSize: 18,
           color: colors.text,
           textAlign: 'center',
-          fontFamily: 'Inter-Bold'
+          fontWeight:'600',
         }}> Đăng Nhập
         </Text>
 
@@ -53,11 +53,11 @@ const SignIn = ({ navigation }) => {
         <Text style={{
           textAlign: 'center',
           marginTop: 10,
-          fontSize: 14,
+          fontSize: 15,
           fontWeight: '400',
           lineHeight: 22,
           color: colors.text,
-          fontFamily: 'Inter-Regular'
+          fontWeight:'400',
         }}>Tạo ra một tương lai tốt đẹp hơn cho chính bạn!</Text>
         <View style={{
           alignItems: "flex-start",
@@ -67,7 +67,7 @@ const SignIn = ({ navigation }) => {
           <Text style={{
             fontSize: 14,
             color: colors.text,
-            fontFamily: 'Poppins-Medium'
+            fontWeight:'500',
           }}>Email</Text>
           <TextInput
             style={{
@@ -77,7 +77,7 @@ const SignIn = ({ navigation }) => {
               borderRadius: 5,
               height: 50,
               borderColor: activeEmail ? colors.focusColor : colors.border,
-              fontFamily: 'Inter-Regular',
+              fontWeight:'400',
               paddingLeft: 15
             }}
             placeholder="Nhập email"
@@ -93,7 +93,7 @@ const SignIn = ({ navigation }) => {
           <Text style={{
             fontSize: 14,
             color: colors.text,
-            fontFamily: 'Poppins-Medium'
+            fontWeight:'500',
           }}>Mật khẩu</Text>
           <TextInput
             style={{
@@ -103,7 +103,7 @@ const SignIn = ({ navigation }) => {
               borderRadius: 5,
               height: 50,
               borderColor: activePassword ? colors.focusColor : colors.border,
-              fontFamily: 'Inter-Regular',
+              fontWeight:'400',
               paddingLeft: 15
             }}
             placeholder="Nhập password"
@@ -122,12 +122,12 @@ const SignIn = ({ navigation }) => {
             color: colors.secondary,
             fontSize: 14,
             letterSpacing: 0.2,
-            fontFamily: 'Poppins-Regular'
+            fontWeight:'600',
           }}>Đăng Ký </Text>
           <Text style={{
             color: colors.secondary,
             fontSize: 14,
-            fontFamily: 'Poppins-Regular',
+            fontWeight:'600',
             letterSpacing: 0.2
           }}>Quên Mật Khẩu </Text>
         </View>
@@ -148,8 +148,8 @@ const SignIn = ({ navigation }) => {
         >
           <Text style={{
             color: 'white',
-            fontSize: 18,
-            fontFamily: 'Inter-Bold'
+            fontSize: 17,
+            fontWeight: 'bold'
           }}>
             Đăng Nhập</Text>
         </TouchableOpacity>

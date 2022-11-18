@@ -39,12 +39,10 @@ const GetStarted = ({ navigation }) => {
           <Text style={{
             marginTop: 70,
             fontSize: 32,
-            // fontWeight: "bold",
             color: 'white',
             lineHeight: 40,
             textAlign: 'center',
-            letterSpacing: 0.5,
-            wordSpacing: 4,
+            letterSpacing: 0.2,
             fontFamily: 'Poppins-Bold'
           }}>Let's Find Your Dream Jobs!</Text>
           <Text style={{
@@ -55,7 +53,6 @@ const GetStarted = ({ navigation }) => {
             lineHeight: 27,
             textAlign: 'center',
             color: colors.darkGray,
-            fontFamily: 'Inter-Regular'
           }}>Khám phá các công ty. Đọc và tìm hiểu về các công ty. Lưu các công việc mà bạn yêu thích với {""}
             <Text style={{
               fontFamily:'Poppins-Bold',
@@ -76,8 +73,8 @@ const GetStarted = ({ navigation }) => {
               }}>
               <Text style={{
                 color: 'white',
-                fontSize: 20,
-                fontFamily: 'Inter-Bold'
+                fontSize: 19,
+                fontWeight: 'bold'
               }}>Bắt đầu</Text>
             </TouchableOpacity>
           </View>
