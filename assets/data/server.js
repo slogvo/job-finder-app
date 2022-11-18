@@ -223,8 +223,11 @@ window.server = createServer({
           return item.type == req.queryParams.type
         }
         return true;
-      })
-      // .filter(item => item.name.includes(req.queryParams.s || ''))
+      }).filter(item => 
+        item.companyName.toLowerCase().includes(req.queryParams.s.toLowerCase() || '') 
+        || item.companyDescription.toLowerCase().includes(req.queryParams.s.toLowerCase() || '')
+        || item.companyLocation.toLowerCase().includes(req.queryParams.s.toLowerCase() || '')
+        )
     })
     this.get('/api/category', () => {
       return listCategories
