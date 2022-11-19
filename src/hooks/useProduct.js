@@ -20,7 +20,7 @@ const useProduct = () => {
   }, []);
 
   const resetList = () => {
-    setListProducts([]);
+    setListProducts([""]);
   }
 
   return [listProducts, isLoading, fetchProducts, resetList];

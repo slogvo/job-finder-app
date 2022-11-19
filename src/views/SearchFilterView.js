@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { View, ScrollView, Text, ActivityIndicator } from 'react-native'
 import CardCategory from '../layout/CardCategory'
 import GoBackFilter from '../layout/GoBackSearch'
-import Title from "../layout/Title"
 import useProduct from '../hooks/useProduct'
 import colors from '../../assets/colors/colors'
 import useCategory from '../hooks/useCategory'
@@ -25,7 +24,7 @@ const SearchFilterView = ({ navigation }) => {
   }
 
   useEffect(() => {
-    fetchProducts(type);
+   fetchProducts(type)
   }, [type, fetchProducts])
   return (
     <View style={{
