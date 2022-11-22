@@ -21,7 +21,8 @@ const listProducts = [
       "Media",
       "Digital Media",
       "Media Planning",
-    ]
+    ],
+    isFavorite: false,
   },
   {
     id: 2,
@@ -39,7 +40,8 @@ const listProducts = [
       "Team Work",
       "Communication",
       "Digital Marketing",
-    ]
+    ],
+    isFavorite: false,
   },
   {
     id: 3,
@@ -57,7 +59,8 @@ const listProducts = [
       "Banking Solutions",
       "Banking Solutions",
       "Negotiation Abilities",
-    ]
+    ],
+    isFavorite: false,
   },
   {
     id: 4,
@@ -76,7 +79,8 @@ const listProducts = [
       "Phát Triển Sản Phẩm",
       "Tài Trợ Thương Mại",
       "Trade Finance",
-    ]
+    ],
+    isFavorite: false,
   },
   {
     id: 5,
@@ -94,7 +98,8 @@ const listProducts = [
       "Interpersonal Communication Skill",
       "Problem Analysis Skill",
       "English Skill",
-    ]
+    ],
+    isFavorite: false,
   },
   {
     id: 6,
@@ -112,7 +117,8 @@ const listProducts = [
       "Software Testing",
       "Automation Test",
       "Test Automation Tool",
-    ]
+    ],
+    isFavorite: false,
   },
   {
     id: 7,
@@ -131,7 +137,8 @@ const listProducts = [
       "QA",
       "Software Testing",
       "Software Engineering"
-    ]
+    ],
+    isFavorite: false,
   },
   {
     id: 8,
@@ -150,7 +157,8 @@ const listProducts = [
       "QA",
       "Software Testing",
       "Software Engineering"
-    ]
+    ],
+    isFavorite: false,
   },
   {
     id: 9,
@@ -169,7 +177,8 @@ const listProducts = [
       "QA",
       "Software Testing",
       "Software Engineering"
-    ]
+    ],
+    isFavorite: false,
   },
 ];
 

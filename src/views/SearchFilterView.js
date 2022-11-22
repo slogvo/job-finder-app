@@ -5,6 +5,7 @@ import GoBackFilter from '../layout/GoBackSearch'
 import useProduct from '../hooks/useProduct'
 import colors from '../../assets/colors/colors'
 import useCategory from '../hooks/useCategory'
+import { useGallery } from '../contexts/gallery-context'
 
 const SearchFilterView = ({ navigation }) => {
   const [products, isLoading, fetchProducts, resetList] = useProduct();
@@ -24,8 +25,14 @@ const SearchFilterView = ({ navigation }) => {
   }
 
   useEffect(() => {
-   fetchProducts(type)
+    fetchProducts(type)
   }, [type, fetchProducts])
+
+  const { catList, setCatList, toggleFavorite } = useGallery();
+  useEffect(() => {
+    setCatList(products);
+  }, [products])
+
   return (
     <View style={{
       flex: 1,
@@ -58,13 +65,14 @@ const SearchFilterView = ({ navigation }) => {
           <Text style={{
             color: colors.text,
             fontSize: 14,
-            // fontWeight:'400',
             fontFamily: "Inter-Medium"
-          }}>{type != 0 || searchTerm?.length > 0 ? `${products.length}+ kết quả tìm thấy` : "Tất cả kết quả"}</Text>
+          }}>
+            {type != 0 || searchTerm?.length > 0 ? `${products.length}+ kết quả tìm thấy` : "Tất cả kết quả"}
+          </Text>
         </View>
         {isLoading ?
           <View style={{ marginTop: 10 }}>
-            <ActivityIndicator size="large" color={colors.primary}></ActivityIndicator>
+            <ActivityIndicator size="large" color={colors.primary}/>
           </View> :
           <View style={{
             marginTop: 10,
@@ -73,29 +81,18 @@ const SearchFilterView = ({ navigation }) => {
             justifyContent: 'center',
             alignItems: 'center',
           }} >
-            {products?.map((item) =>
-              <View
+            {catList?.map((item) =>
+              <CardCategory
+                toggleFavorite={toggleFavorite}
                 key={item.id}
-                style={{
-                  marginTop: 15,
-                  width: '100%',
-                  height: 90,
-                  backgroundColor: 'red',
-                  borderRadius: 16,
-                  backgroundColor: "#fff",
-                  padding: 10,
-                  elevation: 2,
-                }}>
-                <CardCategory
-                  navigation={navigation}
-                  img={item.companyLogo}
-                  companyName={item.companyName}
-                  desc={item.companyDescription}
-                  salary={item.salary}
-                  location={item.companyLocation}
-                >
-                </CardCategory>
-              </View>
+                id={item.id}
+                isFavorite={item.isFavorite}
+                img={item.companyLogo}
+                companyName={item.companyName}
+                desc={item.companyDescription}
+                salary={item.salary}
+                location={item.companyLocation}
+              />
             )}
           </View>
         }

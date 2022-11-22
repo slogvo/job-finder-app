@@ -20,6 +20,7 @@ const config = {
 
 const Home = () => {
   return (
+
     <Stack.Navigator
       initialRouteName="MainHome"
       screenOptions={{
@@ -35,6 +36,7 @@ const Home = () => {
       <Stack.Screen name="SearchFilterView" component={SearchFilterView} />
       <Stack.Screen name="JobDetail" component={JobDetail} />
     </Stack.Navigator>
+
   )
 }
 

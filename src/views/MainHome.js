@@ -1,13 +1,15 @@
-import { ScrollView, FlatList, View, Dimensions } from "react-native"
+import { ScrollView, FlatList, View, Dimensions, ActivityIndicator } from "react-native"
 import { useEffect, useState } from "react"
 import BannerCarousel from "../layout/BannerCarousel"
 import SearchLayout from "../layout/SearchLayout"
 import LargeCategories from "../../assets/data/LargeCategories"
-import SmallCategories from "../../assets/data/SmallCategories"
-import OutstandingJobs from "../../assets/data/OutstandingJobs"
 import RenderItem from "../../src/layout/RenderItem"
 import Title from "../../src/layout/Title"
 import CardCategory from "../../src/layout/CardCategory"
+import useProduct from "../hooks/useProduct"
+import { useGallery } from "../contexts/gallery-context"
+import colors from "../../assets/colors/colors"
+import OutstandingJobs from "../../assets/data/OutstandingJobs"
 
 
 const MainHome = ({ navigation }) => {
@@ -17,7 +19,7 @@ const MainHome = ({ navigation }) => {
   }, [])
 
   const renderItem = ({ item }) => (
-    <RenderItem item={item}></RenderItem>
+    <RenderItem item={item} />
   );
 
   return (
@@ -69,39 +71,28 @@ const MainHome = ({ navigation }) => {
           width: '100%',
         }}>
           <Title title="Việc làm nổi bật"></Title>
-          <View style={{
-            marginTop: 10,
-            width: '100%',
-            paddingHorizontal: 25,
-            justifyContent: 'center',
-            alignItems: 'center',
-          }} >
-            {OutstandingJobs?.map((item) =>
-              <View
-                key={item.id}
-                style={{
-                  marginTop: 15,
-                  width: '100%',
-                  height: 90,
-                  backgroundColor: 'red',
-                  borderRadius: 16,
-                  backgroundColor: "#fff",
-                  padding: 10,
-                  elevation: 2,
-                }}>
+          
+            <View style={{
+              marginTop: 10,
+              width: '100%',
+              paddingHorizontal: 25,
+              justifyContent: 'center',
+              alignItems: 'center',
+            }} >
+              {OutstandingJobs?.length > 0 && OutstandingJobs.map((item) =>
                 <CardCategory
+                  key={item.id}
+                  id={item.id}
                   img={item.companyLogo}
                   companyName={item.companyName}
                   desc={item.companyDescription}
                   salary={item.salary}
                   location={item.companyLocation}
-                >
-                </CardCategory>
-              </View>
-            )}
-          </View>
+                />
+              )}
+            </View>
         </View>
-        <View style={{ marginBottom: 80 }}></View>
+        <View style={{ marginBottom: 80 }}/>
       </ScrollView>
     </View>
   )

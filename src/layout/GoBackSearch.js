@@ -22,7 +22,6 @@ const GoBackFilter = ({ categories = [], value,
 					onPress={() => navigation.goBack()}
 				>
 					<View style={{
-						// backgroundColor: colors.lightGray,
 						width: 40,
 						height: 40,
 						borderRadius: 40,

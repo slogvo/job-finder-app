@@ -29,7 +29,7 @@ const SignIn = ({ navigation }) => {
           fontSize: 18,
           color: colors.text,
           textAlign: 'center',
-          fontWeight:'600',
+          fontWeight: '600',
         }}> Đăng Nhập
         </Text>
 
@@ -45,10 +45,15 @@ const SignIn = ({ navigation }) => {
             fontSize: 22,
             fontFamily: 'Poppins-Medium',
             color: colors.text,
-          }}>Welcome to <Text style={{ 
-            color: colors.primary,
-            fontFamily: 'Poppins-Bold',
-           }}>CatinDob!</Text></Text>
+          }}>
+            Welcome to
+            <Text style={{
+              color: colors.primary,
+              fontFamily: 'Poppins-Bold',
+            }}>
+              CatinDob!
+            </Text>
+          </Text>
         </View>
         <Text style={{
           textAlign: 'center',
@@ -57,8 +62,10 @@ const SignIn = ({ navigation }) => {
           fontWeight: '400',
           lineHeight: 22,
           color: colors.text,
-          fontWeight:'400',
-        }}>Tạo ra một tương lai tốt đẹp hơn cho chính bạn!</Text>
+          fontWeight: '400',
+        }}>
+          Tạo ra một tương lai tốt đẹp hơn cho chính bạn!
+        </Text>
         <View style={{
           alignItems: "flex-start",
           justifyContent: "flex-start",
@@ -67,8 +74,10 @@ const SignIn = ({ navigation }) => {
           <Text style={{
             fontSize: 14,
             color: colors.text,
-            fontWeight:'500',
-          }}>Email</Text>
+            fontWeight: '500',
+          }}>
+            Email
+          </Text>
           <TextInput
             style={{
               marginTop: 8,
@@ -77,7 +86,7 @@ const SignIn = ({ navigation }) => {
               borderRadius: 5,
               height: 50,
               borderColor: activeEmail ? colors.focusColor : colors.border,
-              fontWeight:'400',
+              fontWeight: '400',
               paddingLeft: 15
             }}
             placeholder="Nhập email"
@@ -93,8 +102,10 @@ const SignIn = ({ navigation }) => {
           <Text style={{
             fontSize: 14,
             color: colors.text,
-            fontWeight:'500',
-          }}>Mật khẩu</Text>
+            fontWeight: '500',
+          }}>
+            Mật khẩu
+          </Text>
           <TextInput
             style={{
               marginTop: 8,
@@ -103,7 +114,7 @@ const SignIn = ({ navigation }) => {
               borderRadius: 5,
               height: 50,
               borderColor: activePassword ? colors.focusColor : colors.border,
-              fontWeight:'400',
+              fontWeight: '400',
               paddingLeft: 15
             }}
             placeholder="Nhập password"
@@ -122,14 +133,18 @@ const SignIn = ({ navigation }) => {
             color: colors.secondary,
             fontSize: 14,
             letterSpacing: 0.2,
-            fontWeight:'600',
-          }}>Đăng Ký </Text>
+            fontWeight: '600',
+          }}>
+            Đăng Ký
+          </Text>
           <Text style={{
             color: colors.secondary,
             fontSize: 14,
-            fontWeight:'600',
+            fontWeight: '600',
             letterSpacing: 0.2
-          }}>Quên Mật Khẩu </Text>
+          }}>
+            Quên Mật Khẩu
+          </Text>
         </View>
 
         <TouchableOpacity style={{
@@ -151,7 +166,8 @@ const SignIn = ({ navigation }) => {
             fontSize: 17,
             fontWeight: 'bold'
           }}>
-            Đăng Nhập</Text>
+            Đăng Nhập
+          </Text>
         </TouchableOpacity>
 
         <View style={{
@@ -173,19 +189,17 @@ const SignIn = ({ navigation }) => {
             backgroundColor: colors.border
           }} />
         </View>
-        <View style={{flexDirection:'row', justifyContent:'space-between'}}>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
           <TouchableOpacity style={{
             width: '45%',
             height: 50,
             borderRadius: 8,
-            justifyContent:'center',
+            justifyContent: 'center',
             alignItems: 'center',
             flexDirection: 'row',
             marginTop: 25,
             paddingHorizontal: 30,
-            elevation: 1,
             backgroundColor: "#fff",
-            // borderWidth: 1,
           }}>
             <Image
               source={require('../../assets/images/google.png')}
@@ -201,20 +215,20 @@ const SignIn = ({ navigation }) => {
               color: '#292524',
               marginLeft: 15,
               fontFamily: 'Poppins-Medium',
-            }}>Google</Text>
+            }}>
+              Google
+            </Text>
           </TouchableOpacity>
           <TouchableOpacity style={{
             width: '45%',
             height: 50,
             borderRadius: 8,
-            justifyContent:'center',
+            justifyContent: 'center',
             alignItems: 'center',
             flexDirection: 'row',
             marginTop: 25,
             paddingHorizontal: 30,
-            elevation: 1,
             backgroundColor: "#fff",
-            // borderWidth: 1,
           }}>
             <Image
               source={require('../../assets/images/facebook.png')}
@@ -230,7 +244,9 @@ const SignIn = ({ navigation }) => {
               color: '#292524',
               marginLeft: 15,
               fontFamily: 'Poppins-Medium',
-            }}>Facebook</Text>
+            }}>
+              Facebook
+            </Text>
           </TouchableOpacity>
         </View>
       </View>
