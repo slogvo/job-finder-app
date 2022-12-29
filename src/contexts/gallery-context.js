@@ -3,7 +3,6 @@ import OutstandingJobs from "../../assets/data/OutstandingJobs";
 
 const GalleryContext = createContext();
 
-
 const GalleryProvider = (props) => {
   const [catList, setCatList] = useState([]);
   const [favoriteList, setFavoriteList] = useState([]);
