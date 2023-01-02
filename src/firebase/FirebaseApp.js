@@ -25,6 +25,7 @@ const FirebaseApp = () => {
     firestore()
       .collection('users')
       .add({
+        createdAt: firestore.FieldValue.serverTimestamp(),
         name: 'Hoang Long 2k1',
         female: 'Male',
       })
