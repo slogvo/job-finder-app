@@ -9,7 +9,7 @@ import Ionicons from "react-native-vector-icons/Ionicons"
 
 const Bookmark = ({ navigation }) => {
   const { catList, toggleFavorite } = useGallery();
-  console.log(catList);
+  // console.log(catList);
 
   return (
     <View style={{
@@ -62,6 +62,7 @@ const Bookmark = ({ navigation }) => {
               Công việc yêu thích
             </Text>
             <Entypo name="dots-three-vertical" size={20} color={colors.text} />
+            
           </View>
         </View>
         <View style={{

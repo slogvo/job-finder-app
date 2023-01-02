@@ -1,10 +1,14 @@
-import React from 'react'
-import { Text } from 'react-native'
+import React from 'react';
+import { Text, View } from 'react-native';
+import FirebaseApp from '../firebase/FirebaseApp';
 
 const Explore = () => {
   return (
-    <Text>Explore</Text>
-  )
-}
+    <View>
+      <Text>Explore</Text>
+      <FirebaseApp />
+    </View>
+  );
+};
 
-export default Explore
+export default Explore;
