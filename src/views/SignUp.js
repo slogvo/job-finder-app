@@ -3,11 +3,13 @@ import { Image, StatusBar, Text, TextInput, TouchableOpacity, View } from 'react
 import colors from '../../assets/colors/colors';
 import auth from '@react-native-firebase/auth';
 import { useForm, Controller } from 'react-hook-form';
+import firestore from '@react-native-firebase/firestore';
 
-// const windowHeight = Dimensions.get('window').height;
-const SignIn = ({ navigation }) => {
+const SignUp = ({ navigation }) => {
+  const [activeUsername, setActiveUsername] = useState(false);
   const [activeEmail, setActiveEmail] = useState(false);
   const [activePassword, setActivePassword] = useState(false);
+  const [userInfo, setUserInfo] = useState('');
   const {
     setValue,
     handleSubmit,
@@ -15,16 +17,41 @@ const SignIn = ({ navigation }) => {
     reset,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => {
-    console.log('data: ', data);
-    auth()
-      .signInWithEmailAndPassword(data?.email, data?.password)
-      .then((user) => {})
-      .catch((err) => {
-        console.log('err : ', err);
+  const onSubmit = async (data) => {
+    console.log(data);
+    await auth()
+      .createUserWithEmailAndPassword(data?.email, data?.password)
+      .then(async (values) => {
+        firestore()
+          .collection('users')
+          .add({
+            id: values.user.uid,
+            email: data?.email,
+            password: data?.password,
+            createdAt: firestore.FieldValue.serverTimestamp(),
+          })
+          .then(() => {
+            console.log('User added!');
+          });
+        const update = {
+          displayName: data?.username,
+        };
+        console.log('update: ', update);
+        await auth().currentUser.updateProfile(update);
+        setUserInfo(values);
+        console.log('User account created & signed in!');
+      })
+      .catch((error) => {
+        if (error.code === 'auth/email-already-in-use') {
+          console.log('That email address is already in use!');
+        }
+
+        if (error.code === 'auth/invalid-email') {
+          console.log('That email address is invalid!');
+        }
+        console.error(error);
       });
   };
-
   return (
     <View
       style={{
@@ -51,7 +78,7 @@ const SignIn = ({ navigation }) => {
               fontWeight: '600',
             }}
           >
-            Đăng Nhập
+            Đăng Ký
           </Text>
           <View
             style={{
@@ -69,15 +96,8 @@ const SignIn = ({ navigation }) => {
                 color: colors.text,
               }}
             >
-              Welcome to{' '}
-              <Text
-                style={{
-                  color: colors.primary,
-                  fontFamily: 'Poppins-Bold',
-                }}
-              >
-                CatinDob!
-              </Text>
+              <Text style={{ fontFamily: 'Poppins-Bold', color: colors.primary }}>Create </Text>an
+              account
             </Text>
           </View>
           <Text
@@ -91,7 +111,7 @@ const SignIn = ({ navigation }) => {
               fontWeight: '400',
             }}
           >
-            Tạo ra một tương lai tốt đẹp hơn cho chính bạn!
+            Tạo và tìm kiếm việc làm ngay trong hôm nay!
           </Text>
         </View>
         {/* Form */}
@@ -101,6 +121,52 @@ const SignIn = ({ navigation }) => {
               alignItems: 'flex-start',
               justifyContent: 'flex-start',
               marginTop: 30,
+            }}
+          >
+            <Text
+              style={{
+                fontSize: 14,
+                color: colors.text,
+                fontWeight: '500',
+              }}
+            >
+              Tên
+            </Text>
+            <Controller
+              control={control}
+              rules={{
+                required: true,
+              }}
+              render={({ field: { onChange, onBlur, value } }) => (
+                <TextInput
+                  style={{
+                    marginTop: 8,
+                    borderWidth: 1,
+                    width: '100%',
+                    borderRadius: 5,
+                    height: 50,
+                    borderColor: activeUsername ? colors.focusColor : colors.border,
+                    fontWeight: '400',
+                    paddingLeft: 15,
+                  }}
+                  placeholder="Nhập tên của bạn"
+                  onFocus={() => setActiveUsername(true)}
+                  onBlur={() => {
+                    setActiveUsername(false);
+                    onBlur();
+                  }}
+                  onChangeText={onChange}
+                  value={value}
+                />
+              )}
+              name="username"
+            />
+          </View>
+          <View
+            style={{
+              alignItems: 'flex-start',
+              justifyContent: 'flex-start',
+              marginTop: 20,
             }}
           >
             <Text
@@ -192,9 +258,7 @@ const SignIn = ({ navigation }) => {
           <View
             style={{
               flexDirection: 'row',
-              // justifyContent: 'space-between',
               marginTop: 20,
-              alignItems: 'flex-start',
             }}
           >
             <Text
@@ -205,11 +269,11 @@ const SignIn = ({ navigation }) => {
                 fontWeight: '400',
               }}
             >
-              Chưa có tài khoản ?
+              Đã có tài khoản?
             </Text>
             <TouchableOpacity
               onPress={() => {
-                navigation.navigate('SignUp');
+                navigation.navigate('SignIn');
               }}
             >
               <Text
@@ -221,7 +285,7 @@ const SignIn = ({ navigation }) => {
                 }}
               >
                 {' '}
-                Đăng ký
+                Đăng nhập
               </Text>
             </TouchableOpacity>
           </View>
@@ -245,7 +309,7 @@ const SignIn = ({ navigation }) => {
                 fontWeight: 'bold',
               }}
             >
-              Đăng Nhập
+              Tạo tài khoản
             </Text>
           </TouchableOpacity>
         </View>
@@ -348,4 +412,4 @@ const SignIn = ({ navigation }) => {
   );
 };
 
-export default SignIn;
+export default SignUp;

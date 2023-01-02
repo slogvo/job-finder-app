@@ -6,9 +6,6 @@ import LargeCategories from '../../assets/data/LargeCategories';
 import RenderItem from '../../src/layout/RenderItem';
 import Title from '../../src/layout/Title';
 import CardCategory from '../../src/layout/CardCategory';
-import useProduct from '../hooks/useProduct';
-import { useGallery } from '../contexts/gallery-context';
-import colors from '../../assets/colors/colors';
 import OutstandingJobs from '../../assets/data/OutstandingJobs';
 
 const MainHome = ({ navigation }) => {

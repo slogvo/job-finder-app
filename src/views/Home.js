@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import { CardStyleInterpolators, createStackNavigator } from '@react-navigation/stack';
 import MainHome from './MainHome';
 import SearchFilterView from './SearchFilterView';
@@ -20,7 +20,6 @@ const config = {
 
 const Home = () => {
   return (
-
     <Stack.Navigator
       initialRouteName="MainHome"
       screenOptions={{
@@ -36,8 +35,7 @@ const Home = () => {
       <Stack.Screen name="SearchFilterView" component={SearchFilterView} />
       <Stack.Screen name="JobDetail" component={JobDetail} />
     </Stack.Navigator>
+  );
+};
 
-  )
-}
-
-export default Home
+export default Home;

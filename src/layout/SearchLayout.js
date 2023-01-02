@@ -1,9 +1,17 @@
-import { useState } from 'react';
-import { Button, Image, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { useEffect, useState } from 'react';
+import { Image, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import colors from '../../assets/colors/colors';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import auth from '@react-native-firebase/auth';
 
 const SearchLayout = ({ navigation }) => {
+  const [userNameDisplay, setUserNameDisplay] = useState(null);
+  auth().onAuthStateChanged((user) => {
+    if (user) {
+      setUserNameDisplay(user?.displayName);
+      console.log(user?.displayName);
+    } else setUserNameDisplay('Unknown');
+  });
+
   return (
     <View
       style={{
@@ -56,7 +64,7 @@ const SearchLayout = ({ navigation }) => {
               marginBottom: 5,
             }}
           >
-            Hi, Long Vo{' '}
+            Hi, {userNameDisplay}
           </Text>
           <Text
             style={{
