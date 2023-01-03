@@ -8,7 +8,6 @@ const SearchLayout = ({ navigation }) => {
   auth().onAuthStateChanged((user) => {
     if (user) {
       setUserNameDisplay(user?.displayName);
-      console.log(user?.displayName);
     } else setUserNameDisplay('Unknown');
   });
 
