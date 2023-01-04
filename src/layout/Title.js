@@ -27,7 +27,7 @@ const Title = ({
       >
         {title}
       </Text>
-      <Text
+      {/* <Text
         style={{
           color: colors.text,
           fontSize: 15,
@@ -36,7 +36,7 @@ const Title = ({
         }}
       >
         {viewAll}
-      </Text>
+      </Text> */}
     </View>
   );
 };

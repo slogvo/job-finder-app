@@ -1,4 +1,4 @@
-import { ScrollView, FlatList, View, Dimensions, ActivityIndicator } from 'react-native';
+import { ScrollView, FlatList, View } from 'react-native';
 import { useEffect, useState } from 'react';
 import BannerCarousel from '../layout/BannerCarousel';
 import SearchLayout from '../layout/SearchLayout';
@@ -7,14 +7,35 @@ import RenderItem from '../../src/layout/RenderItem';
 import Title from '../../src/layout/Title';
 import CardCategory from '../../src/layout/CardCategory';
 import OutstandingJobs from '../../assets/data/OutstandingJobs';
+import firestore from '@react-native-firebase/firestore';
 
 const MainHome = ({ navigation }) => {
-  const [largeCategories, setLargeCategories] = useState([]);
+  const [recommends, setRecommends] = useState([]);
   useEffect(() => {
-    setLargeCategories(LargeCategories);
+    firestore()
+      .collection('posts')
+      .onSnapshot((snapshot) => {
+        let posts = [];
+        snapshot.forEach((doc) => {
+          posts.push({
+            id: doc.id,
+            ...doc.data(),
+          });
+        });
+        setRecommends(posts);
+      });
   }, []);
 
-  const renderItem = ({ item }) => <RenderItem item={item} />;
+  const renderItem = ({ item }) => (
+    <RenderItem
+      companyLogo={item.image}
+      companyName={item.name_company}
+      companyAddress={item.address}
+      wage={item.wage}
+      career={item.career}
+      title={item.title}
+    />
+  );
 
   return (
     <View
@@ -54,7 +75,7 @@ const MainHome = ({ navigation }) => {
           >
             <FlatList
               style={{
-                height: 210,
+                height: 220,
               }}
               contentContainerStyle={{
                 flexGrow: 1,
@@ -63,7 +84,7 @@ const MainHome = ({ navigation }) => {
                 padding: 2,
               }}
               showsHorizontalScrollIndicator={false}
-              data={largeCategories}
+              data={recommends}
               renderItem={renderItem}
               keyExtractor={(item) => item.id}
               horizontal={true}
