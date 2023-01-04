@@ -26,6 +26,7 @@ const SignUp = ({ navigation }) => {
           .collection('users')
           .add({
             id: values.user.uid,
+            username: data?.username,
             email: data?.email,
             password: data?.password,
             createdAt: firestore.FieldValue.serverTimestamp(),
