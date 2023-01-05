@@ -16,10 +16,8 @@ import firestore from '@react-native-firebase/firestore';
 const windowWidth = Dimensions.get('window').width;
 
 const JobDetail = ({ route, navigation }) => {
-  const [defaultRating, setdefaultRating] = useState(2);
+  const [defaultRating, setDefaultRating] = useState(2);
   const [maxRating, setmaxRating] = useState([1, 2, 3, 4, 5]);
-  const starImgFilled = 'https://raw.githubusercontent.com/tranhonghan/images/main/star_filled.png';
-  const starImgCorner = 'https://raw.githubusercontent.com/tranhonghan/images/main/star_corner.png';
   const { itemId } = route.params;
   const [job, setJob] = useState();
   console.log('itemId: ', itemId);
@@ -293,36 +291,43 @@ const JobDetail = ({ route, navigation }) => {
             ></Image>
             <Text style={{ fontSize: 14, fontWeight: '500', lineHeight: 25 }}>{job?.address}</Text>
           </View>
-
-          <Text
-            style={{
-              textAlign: 'center',
-              marginTop: 20,
-              fontSize: 16,
-              color: colors.text,
-              fontWeight: '700',
-            }}
-          >
-            Đánh giá công việc này
-          </Text>
-          <View style={styles.customRatingBarStyle}>
-            {maxRating.map((item, key) => {
-              return (
-                <TouchableOpacity
-                  activeOpacity={0.7}
-                  key={item}
-                  onPress={() => setdefaultRating(item)}
-                >
-                  <Image
-                    style={styles.starImgStyle}
-                    source={item <= defaultRating ? { uri: starImgFilled } : { uri: starImgCorner }}
-                  />
-                </TouchableOpacity>
-              );
-            })}
+          {/* Vote */}
+          <View style={{ paddingHorizontal: 20 }}>
+            <Text
+              style={{
+                textAlign: 'center',
+                fontSize: 18,
+                color: colors.text,
+                fontWeight: '700',
+                marginTop: 30,
+              }}
+            >
+              Đánh giá công việc này
+            </Text>
+            <View style={styles.customRatingBarStyle}>
+              {maxRating.map((item, key) => {
+                return (
+                  <TouchableOpacity
+                    activeOpacity={0.7}
+                    key={item}
+                    onPress={() => setDefaultRating(item)}
+                  >
+                    {/* <Image
+                      style={styles.starImgStyle}
+                      source={item <= defaultRating ? { uri: starImgFilled } : { uri: starImgCorner }}
+                    /> */}
+                    {item <= defaultRating ? (
+                      <AntDesign name="star" size={35} color={colors.yellowStar} />
+                    ) : (
+                      <AntDesign name="staro" size={35} color={colors.yellowStar} />
+                    )}
+                  </TouchableOpacity>
+                );
+              })}
+            </View>
           </View>
         </View>
-        <View style={{ marginBottom: 120 }} />
+        <View style={{ marginBottom: 100 }} />
       </ScrollView>
     </View>
   );
@@ -345,7 +350,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-evenly',
     flexDirection: 'row',
-    marginTop: 10,
+    marginTop: 20,
   },
   starImgStyle: {
     width: 40,
