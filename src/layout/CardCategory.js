@@ -2,7 +2,6 @@ import React from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 import colors from '../../assets/colors/colors';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import { useGallery } from '../contexts/gallery-context';
 
 const CardCategory = ({
   id,

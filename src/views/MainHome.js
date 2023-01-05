@@ -5,7 +5,6 @@ import SearchLayout from '../layout/SearchLayout';
 import RenderItem from '../../src/layout/RenderItem';
 import Title from '../../src/layout/Title';
 import CardCategory from '../../src/layout/CardCategory';
-import OutstandingJobs from '../../assets/data/OutstandingJobs';
 import firestore from '@react-native-firebase/firestore';
 
 const MainHome = ({ navigation }) => {
@@ -33,6 +32,8 @@ const MainHome = ({ navigation }) => {
       wage={item.wage}
       career={item.career}
       title={item.title}
+      navigation={navigation}
+      id={item.id}
     />
   );
 

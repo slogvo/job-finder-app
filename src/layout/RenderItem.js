@@ -9,6 +9,8 @@ const RenderItem = ({
   wage,
   title,
   career,
+  navigation,
+  id,
   ...props
 }) => {
   const companyAddressArr = companyAddress?.split(',');
@@ -90,14 +92,6 @@ const RenderItem = ({
             justifyContent: 'space-between',
           }}
         >
-          {/* <View
-          style={{
-            width: 5,
-            height: 5,
-            borderRadius: 10,
-            backgroundColor: colors.primary,
-          }}
-        ></View> */}
           <Text
             style={{
               fontSize: 15,
@@ -131,7 +125,13 @@ const RenderItem = ({
               marginRight: 8,
             }}
           >
-            <Text style={{ color: '#fff' }}>Nộp đơn</Text>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate('JobDetail', { itemId: id });
+              }}
+            >
+              <Text style={{ color: '#fff' }}>Nộp đơn</Text>
+            </TouchableOpacity>
           </TouchableOpacity>
         </View>
       </View>
