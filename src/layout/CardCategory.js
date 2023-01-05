@@ -4,8 +4,18 @@ import colors from '../../assets/colors/colors';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import { useGallery } from '../contexts/gallery-context';
 
-const CardCategory = ({ id, img, companyName, desc, salary, location, navigation, isFavorite }) => {
-  const { toggleFavorite } = useGallery();
+const CardCategory = ({
+  id,
+  companyLogo,
+  companyName,
+  companyAddress,
+  wage,
+  title,
+  career,
+  isFavorite = false,
+}) => {
+  // const { toggleFavorite } = useGallery();
+  const companyAddressArr = companyAddress?.split(',');
   return (
     <View
       onPress={() => navigation.navigate('JobDetail')}
@@ -14,7 +24,7 @@ const CardCategory = ({ id, img, companyName, desc, salary, location, navigation
         alignItems: 'flex-start',
         flexDirection: 'row',
         width: '100%',
-        height: 90,
+        height: 100,
         borderRadius: 16,
         backgroundColor: '#fff',
         padding: 10,
@@ -24,8 +34,8 @@ const CardCategory = ({ id, img, companyName, desc, salary, location, navigation
     >
       <View
         style={{
-          width: 70,
-          height: 70,
+          width: 80,
+          height: 80,
           borderRadius: 8,
           elevation: 1,
           backgroundColor: 'white',
@@ -34,7 +44,10 @@ const CardCategory = ({ id, img, companyName, desc, salary, location, navigation
           marginRight: 10,
         }}
       >
-        <Image style={{ width: 60, height: 60 }} resizeMode="contain" source={img} />
+        <Image
+          source={{ uri: companyLogo }}
+          style={{ width: 58, height: 58, resizeMode: 'contain' }}
+        />
       </View>
       <View style={{ height: '100%', width: '100%' }}>
         <Text
@@ -47,7 +60,7 @@ const CardCategory = ({ id, img, companyName, desc, salary, location, navigation
           }}
           numberOfLines={1}
         >
-          {desc}
+          {title}
         </Text>
         <Text
           style={{
@@ -55,10 +68,14 @@ const CardCategory = ({ id, img, companyName, desc, salary, location, navigation
             fontWeight: '500',
             color: colors.text,
             width: 220,
+            fontSize: 13,
           }}
           numberOfLines={1}
         >
           {companyName}
+        </Text>
+        <Text style={{ marginTop: 4, width: 230, fontSize: 13 }} numberOfLines={1}>
+          {career}
         </Text>
         <View
           style={{
@@ -76,26 +93,31 @@ const CardCategory = ({ id, img, companyName, desc, salary, location, navigation
             }}
           ></Image>
           <Text
-            numberOfLines={2}
+            numberOfLines={1}
             style={{
               fontFamily: 'SanFranciscoDisplay-Medium',
               marginRight: 10,
+              fontSize: 13,
             }}
           >
-            {location}
+            {companyAddressArr && companyAddressArr[companyAddressArr?.length - 1]}
           </Text>
           <Text
-            numberOfLines={2}
+            numberOfLines={1}
             style={{
               color: colors.secondary,
               fontWeight: '500',
+              fontSize: 13,
             }}
           >
-            {salary}
+            {wage}
           </Text>
         </View>
       </View>
-      <TouchableOpacity style={{ marginLeft: 'auto' }} onPress={() => toggleFavorite(id)}>
+      <TouchableOpacity
+        style={{ marginLeft: 'auto' }}
+        // onPress={() => toggleFavorite(id)}
+      >
         <AntDesign
           name="heart"
           size={20}

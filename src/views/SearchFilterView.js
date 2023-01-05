@@ -2,35 +2,80 @@ import React, { useEffect, useState } from 'react';
 import { View, ScrollView, Text, ActivityIndicator } from 'react-native';
 import CardCategory from '../layout/CardCategory';
 import GoBackFilter from '../layout/GoBackSearch';
-import useProduct from '../hooks/useProduct';
 import colors from '../../assets/colors/colors';
-import useCategory from '../hooks/useCategory';
-import { useGallery } from '../contexts/gallery-context';
+import firestore from '@react-native-firebase/firestore';
+import useRemoveTones from '../hooks/useRemoveTones';
+
+function removeVNeTones(str) {
+  str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, 'a');
+  str = str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g, 'e');
+  str = str.replace(/ì|í|ị|ỉ|ĩ/g, 'i');
+  str = str.replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g, 'o');
+  str = str.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g, 'u');
+  str = str.replace(/ỳ|ý|ỵ|ỷ|ỹ/g, 'y');
+  str = str.replace(/đ/g, 'd');
+  str = str.replace(/À|Á|Ạ|Ả|Ã|Â|Ầ|Ấ|Ậ|Ẩ|Ẫ|Ă|Ằ|Ắ|Ặ|Ẳ|Ẵ/g, 'A');
+  str = str.replace(/È|É|Ẹ|Ẻ|Ẽ|Ê|Ề|Ế|Ệ|Ể|Ễ/g, 'E');
+  str = str.replace(/Ì|Í|Ị|Ỉ|Ĩ/g, 'I');
+  str = str.replace(/Ò|Ó|Ọ|Ỏ|Õ|Ô|Ồ|Ố|Ộ|Ổ|Ỗ|Ơ|Ờ|Ớ|Ợ|Ở|Ỡ/g, 'O');
+  str = str.replace(/Ù|Ú|Ụ|Ủ|Ũ|Ư|Ừ|Ứ|Ự|Ử|Ữ/g, 'U');
+  str = str.replace(/Ỳ|Ý|Ỵ|Ỷ|Ỹ/g, 'Y');
+  str = str.replace(/Đ/g, 'D');
+  // Some system encode vietnamese combining accent as individual utf-8 characters
+  // Một vài bộ encode coi các dấu mũ, dấu chữ như một kí tự riêng biệt nên thêm hai dòng này
+  str = str.replace(/\u0300|\u0301|\u0303|\u0309|\u0323/g, ''); // ̀ ́ ̃ ̉ ̣  huyền, sắc, ngã, hỏi, nặng
+  str = str.replace(/\u02C6|\u0306|\u031B/g, ''); // ˆ ̆ ̛  Â, Ê, Ă, Ơ, Ư
+  // Remove extra spaces
+  // Bỏ các khoảng trắng liền nhau
+  str = str.replace(/ + /g, ' ');
+  str = str.trim();
+  // Remove punctuations
+  // Bỏ dấu câu, kí tự đặc biệt
+  str = str.replace(
+    /!|@|%|\^|\*|\(|\)|\+|\=|\<|\>|\?|\/|,|\.|\:|\;|\'|\"|\&|\#|\[|\]|~|\$|_|`|-|{|}|\||\\/g,
+    ' '
+  );
+  return str;
+}
 
 const SearchFilterView = ({ navigation }) => {
-  const [products, isLoading, fetchProducts, resetList] = useProduct();
-  const [searchTerm, setSearchTerm] = useState('');
-  const categoryList = useCategory();
+  const [queryText, setQueryText] = useState('');
   const [type, setType] = useState(0);
-
+  const [categoriesList, setCategoriesList] = useState([]);
+  const [catsList, setCatsList] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const onChangeText = (text) => {
-    if (text.length === 0) {
-      setSearchTerm('');
-      resetList();
-    } else {
-      setSearchTerm(text);
-      fetchProducts(0, text);
-    }
+    setQueryText(text);
   };
-
   useEffect(() => {
-    fetchProducts(type);
-  }, [type, fetchProducts]);
-
-  const { catList, setCatList, toggleFavorite } = useGallery();
-  useEffect(() => {
-    setCatList(products);
-  }, [products]);
+    setIsLoading(true);
+    firestore()
+      .collection('posts')
+      .onSnapshot((snapshot) => {
+        let posts = [];
+        snapshot.forEach((doc) => {
+          posts.push({
+            id: doc.id,
+            ...doc.data(),
+          });
+        });
+        console.log('posts: ', posts);
+        const list = posts.filter((item) => {
+          const addressRef = removeVNeTones(item.address).toLowerCase();
+          const careerRef = removeVNeTones(item.career).toLowerCase();
+          const name_companyRef = removeVNeTones(item.name_company).toLowerCase();
+          const queryTextRef = removeVNeTones(queryText).toLowerCase();
+          if (
+            addressRef.includes(queryTextRef) ||
+            careerRef.includes(queryTextRef) ||
+            name_companyRef.includes(queryTextRef)
+          )
+            return item;
+        });
+        setCatsList(list);
+        setIsLoading(false);
+      });
+  }, [queryText]);
 
   return (
     <View
@@ -50,16 +95,15 @@ const SearchFilterView = ({ navigation }) => {
         }}
         stickyHeaderIndices={[0]}
       >
-        {categoryList.length > 0 && (
-          <GoBackFilter
-            categories={categoryList}
-            onChange={setType}
-            currentType={type}
-            value={searchTerm}
-            onChangeText={onChangeText}
-            navigation={navigation}
-          />
-        )}
+        <GoBackFilter
+          categories={categoriesList}
+          onChange={setType}
+          currentType={type}
+          value={queryText}
+          onChangeText={onChangeText}
+          navigation={navigation}
+        />
+
         <View
           style={{
             marginTop: 20,
@@ -73,9 +117,9 @@ const SearchFilterView = ({ navigation }) => {
               fontFamily: 'Inter-Medium',
             }}
           >
-            {type != 0 || searchTerm?.length > 0
+            {/* {type != 0 || query?.length > 0
               ? `${products.length}+ kết quả tìm thấy`
-              : 'Tất cả kết quả'}
+              : 'Tất cả kết quả'} */}
           </Text>
         </View>
         {isLoading ? (
@@ -92,21 +136,23 @@ const SearchFilterView = ({ navigation }) => {
               alignItems: 'center',
             }}
           >
-            {catList?.map((item) => (
+            {catsList?.map((item) => (
               <CardCategory
-                toggleFavorite={toggleFavorite}
+                // toggleFavorite={toggleFavorite}
+                // isFavorite={item.isFavorite}
                 key={item.id}
                 id={item.id}
-                isFavorite={item.isFavorite}
-                img={item.companyLogo}
-                companyName={item.companyName}
-                desc={item.companyDescription}
-                salary={item.salary}
-                location={item.companyLocation}
+                companyLogo={item.image}
+                companyName={item.name_company}
+                companyAddress={item.address}
+                wage={item.wage}
+                career={item.career}
+                title={item.title}
               />
             ))}
           </View>
         )}
+
         <View style={{ marginBottom: 80 }}></View>
       </ScrollView>
     </View>

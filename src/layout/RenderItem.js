@@ -11,7 +11,7 @@ const RenderItem = ({
   career,
   ...props
 }) => {
-  console.log(companyLogo);
+  const companyAddressArr = companyAddress?.split(',');
   return (
     <View
       style={{
@@ -62,7 +62,7 @@ const RenderItem = ({
                 fontFamily: 'SanFranciscoDisplay-Medium',
               }}
             >
-              {companyAddress.split(',')[companyAddress.split(',').length - 1]}
+              {companyAddressArr[companyAddressArr.length - 1]}
             </Text>
           </View>
         </View>

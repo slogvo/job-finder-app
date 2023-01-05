@@ -2,7 +2,6 @@ import { ScrollView, FlatList, View } from 'react-native';
 import { useEffect, useState } from 'react';
 import BannerCarousel from '../layout/BannerCarousel';
 import SearchLayout from '../layout/SearchLayout';
-import LargeCategories from '../../assets/data/LargeCategories';
 import RenderItem from '../../src/layout/RenderItem';
 import Title from '../../src/layout/Title';
 import CardCategory from '../../src/layout/CardCategory';
@@ -109,16 +108,17 @@ const MainHome = ({ navigation }) => {
               alignItems: 'center',
             }}
           >
-            {OutstandingJobs?.length > 0 &&
-              OutstandingJobs.map((item) => (
+            {recommends?.length > 0 &&
+              recommends.map((item) => (
                 <CardCategory
                   key={item.id}
                   id={item.id}
-                  img={item.companyLogo}
-                  companyName={item.companyName}
-                  desc={item.companyDescription}
-                  salary={item.salary}
-                  location={item.companyLocation}
+                  companyLogo={item.image}
+                  companyName={item.name_company}
+                  companyAddress={item.address}
+                  wage={item.wage}
+                  career={item.career}
+                  title={item.title}
                 />
               ))}
           </View>
