@@ -8,6 +8,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Explore from '../views/Explore';
 import { GalleryProvider } from '../contexts/gallery-context';
+import Account from '../views/Account';
 
 const Tab = createBottomTabNavigator();
 
@@ -102,7 +103,7 @@ const TabsNavigation = () => {
 
         <Tab.Screen
           name="Tài khoản"
-          component={Explore}
+          component={Account}
           options={{
             tabBarLabelStyle: {
               fontSize: 11,

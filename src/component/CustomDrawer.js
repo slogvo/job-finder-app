@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Image, ImageBackground, Text, TouchableOpacity, View } from 'react-native';
 import { DrawerContentScrollView, DrawerItemList } from '@react-navigation/drawer';
 import colors from '../../assets/colors/colors';
@@ -7,6 +7,12 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import auth from '@react-native-firebase/auth';
 
 const CustomDrawer = ({ ...props }) => {
+  const [userNameDisplay, setUserNameDisplay] = useState(null);
+  auth().onAuthStateChanged((user) => {
+    if (user) {
+      setUserNameDisplay(user?.displayName);
+    } else setUserNameDisplay('Unknown');
+  });
   const handleSignOut = () => {
     auth()
       .signOut()
@@ -56,7 +62,7 @@ const CustomDrawer = ({ ...props }) => {
                 marginTop: 3,
               }}
             >
-              Long Vo
+              {userNameDisplay}
             </Text>
             <Text
               style={{
