@@ -124,14 +124,11 @@ const RenderItem = ({
               backgroundColor: colors.primary,
               marginRight: 8,
             }}
+            onPress={() => {
+              navigation.navigate('JobDetail', { itemId: id });
+            }}
           >
-            <TouchableOpacity
-              onPress={() => {
-                navigation.navigate('JobDetail', { itemId: id });
-              }}
-            >
-              <Text style={{ color: '#fff' }}>Nộp đơn</Text>
-            </TouchableOpacity>
+            <Text style={{ color: '#fff' }}>Nộp đơn</Text>
           </TouchableOpacity>
         </View>
       </View>
