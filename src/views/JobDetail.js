@@ -224,6 +224,9 @@ const JobDetail = ({ route, navigation }) => {
                 backgroundColor: colors.primary,
                 height: 50,
               }}
+              onPress={() => {
+                navigation.navigate('Recruitment', { itemId: itemId });
+              }}
             >
               <Text
                 style={{
