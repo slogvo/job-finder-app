@@ -8,7 +8,6 @@ import { Controller, useForm } from 'react-hook-form';
 
 const Recruitment = ({ route, navigation }) => {
   const { itemId } = route.params;
-  console.log('itemId: ', itemId);
 
   const {
     setValue,

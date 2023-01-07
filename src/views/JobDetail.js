@@ -20,7 +20,7 @@ const JobDetail = ({ route, navigation }) => {
   const [maxRating, setmaxRating] = useState([1, 2, 3, 4, 5]);
   const { itemId } = route.params;
   const [job, setJob] = useState();
-  console.log('itemId: ', itemId);
+
   useEffect(() => {
     firestore()
       .collection('posts')
