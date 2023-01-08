@@ -5,10 +5,12 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import colors from '../../assets/colors/colors';
 import DocumentPicker from 'react-native-document-picker';
 import RNFetchBlob from 'rn-fetch-blob';
+import firebaseSetup from '../firebase/firebase-config';
 
 const Explore = () => {
   const [fileData, setFileData] = useState([]);
   //We can choose all types of files here
+  const { database, storage } = firebaseSetup();
   const handleFileUpload = async (props) => {
     //Pick a single file
     try {
@@ -18,10 +20,9 @@ const Explore = () => {
       });
       const file = res[0];
       const path = await normalizePath(file?.uri);
-      console.log('result: ', path);
       setFileData(file);
       const result = await RNFetchBlob.fs.readFile(path, 'base64');
-      console.log('path: ', result);
+      uploadFileToFirebaseStorage(result, file);
     } catch (error) {
       console.log('error: ', error);
     }
@@ -35,6 +36,44 @@ const Explore = () => {
     }
     return filename;
   }
+
+  async function uploadFileToFirebaseStorage(result, file) {
+    const uploadTask = storage()
+      .ref(`allFiles/${file.name}`)
+      .putString(result, 'base64', { contentType: file.type });
+    uploadTask.on(
+      'state_changed',
+      (snapshot) => {
+        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        console.log('Upload is ' + progress + '% done');
+        switch (snapshot.state) {
+          case 'paused':
+            console.log('Upload is paused');
+            break;
+          case 'running':
+            console.log('Upload is running');
+            break;
+        }
+      },
+      (error) => {
+        console.log('Error: ', error);
+      },
+      () => {
+        uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+          saveFileToRealtimeDatabase(downloadURL, file);
+          console.log('File available at', downloadURL);
+        });
+      }
+    );
+  }
+
+  function saveFileToRealtimeDatabase(downloadURL, file) {
+    const uniqueKey = database().ref().push().key;
+    database()
+      .ref(`allFiles/${uniqueKey}`)
+      .update({ fileName: file.name, fileType: file.type, fileURL: downloadURL });
+  }
+
   return (
     <View
       style={{
