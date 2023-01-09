@@ -4,6 +4,7 @@ import Pdf from 'react-native-pdf';
 
 const PDFViewAccount = ({ route }) => {
   const sourceURL = route?.params?.pdfFile;
+  console.log('sourceURL: ', sourceURL);
   const source = { uri: `${sourceURL}`, cache: true };
   return (
     <View style={styles.container}>
@@ -36,6 +37,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center',
     marginTop: 25,
+    backgroundColor: '#FFF',
   },
   pdf: {
     flex: 1,

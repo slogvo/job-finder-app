@@ -7,8 +7,14 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
+import NoCVModal from '../component/modal/NoCVModal';
 
 const MainViewAccount = ({ navigation }) => {
+  const [isNoCVModal, setNoCVModal] = useState(false);
+  const toggleNoCVModal = () => {
+    setNoCVModal(!isNoCVModal);
+  };
+
   const [userAuth, setUserAuth] = useState('');
   auth().onAuthStateChanged((user) => {
     if (user) {
@@ -186,12 +192,17 @@ const MainViewAccount = ({ navigation }) => {
                   paddingHorizontal: 15,
                 }}
                 onPress={() => {
-                  navigation.navigate('PDFViewAccount', { pdfFile: userInfo.file });
+                  console.log('userInfo.file: ', typeof userInfo.file);
+                  if (userInfo.file !== undefined) {
+                    console.log(true);
+                    return navigation.navigate('PDFViewAccount', { pdfFile: userInfo.file });
+                  }
+                  return toggleNoCVModal();
                 }}
               >
                 <Text style={{ color: '#fff', fontWeight: 'bold' }}>Xem hồ sơ hiện tại</Text>
               </TouchableOpacity>
-
+              <NoCVModal handleToggleNoCVModal={toggleNoCVModal} isNoCVModal={isNoCVModal} />
               <TouchableOpacity
                 style={{
                   width: '48%',

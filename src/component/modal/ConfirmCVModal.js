@@ -2,9 +2,29 @@ import { Button, Pressable, StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import Modal from 'react-native-modal';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import firestore from '@react-native-firebase/firestore';
 
-const ConfirmCVModal = ({ isConfirmCVModal, handleToggleConfirmCVModal = () => {} }) => {
+const ConfirmCVModal = ({
+  jobID,
+  userInfo,
+  isConfirmCVModal,
+  handleToggleConfirmCVModal = () => {},
+}) => {
+  const handleApply = () => {
+    firestore()
+      .collection('recruitment')
+      .add({
+        username: userInfo?.username,
+        email: userInfo?.email,
+        file: userInfo?.file,
+        userId: userInfo?.id,
+        jobId: jobID,
+      })
+      .then(() => {
+        console.log('Recruitment added!');
+      })
+      .catch((err) => console.log(err));
+  };
   return (
     <View>
       <Modal
@@ -59,9 +79,7 @@ const ConfirmCVModal = ({ isConfirmCVModal, handleToggleConfirmCVModal = () => {
                 paddingVertical: 10,
                 backgroundColor: '#ecf7ed',
               }}
-              onPress={() => {
-                console.log('Hello');
-              }}
+              onPress={handleApply}
             >
               <Text style={{ color: '#37833b', fontWeight: 'bold' }} o>
                 Tiếp tục và gửi

@@ -1,18 +1,43 @@
-import { Button, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import colors from '../../assets/colors/colors';
-import AntDesign from 'react-native-vector-icons/AntDesign';
 import { Controller, useForm } from 'react-hook-form';
 import ConfirmCVModal from '../component/modal/ConfirmCVModal';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import auth from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
 
 const Recruitment = ({ route, navigation }) => {
   const { itemId } = route.params;
   const [isConfirmCVModal, setConfirmCVModal] = useState(false);
-
   const toggleConfirmCVModal = () => {
     setConfirmCVModal(!isConfirmCVModal);
   };
+
+  const [userAuth, setUserAuth] = useState('');
+  auth().onAuthStateChanged((user) => {
+    if (user) {
+      setUserAuth(user);
+    } else setUserAuth('Unknown');
+  });
+
+  const [userInfo, setUserInfo] = useState();
+  useEffect(() => {
+    firestore()
+      .collection('users')
+      .where('id', '==', `${userAuth.uid}`)
+      .onSnapshot((snapshot) => {
+        let user = [];
+        snapshot.forEach((doc) => {
+          user.push({
+            id: doc.id,
+            ...doc.data(),
+          });
+        });
+        console.log('user: ', user[0]);
+        setUserInfo(user[0]);
+      });
+  }, [userAuth]);
 
   const {
     setValue,
@@ -209,7 +234,7 @@ const Recruitment = ({ route, navigation }) => {
               height: 1,
               borderTopWidth: 1,
               borderStyle: 'dashed',
-              borderColor: colors.primary,
+              borderColor: colors.secondary,
             }}
           />
           <TouchableOpacity
@@ -230,9 +255,11 @@ const Recruitment = ({ route, navigation }) => {
             </Text>
           </TouchableOpacity>
           <ConfirmCVModal
+            userInfo={userInfo}
+            jobID={itemId}
             handleToggleConfirmCVModal={toggleConfirmCVModal}
             isConfirmCVModal={isConfirmCVModal}
-          ></ConfirmCVModal>
+          />
         </View>
         <View style={{ marginBottom: 100 }} />
       </ScrollView>
