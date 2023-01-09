@@ -34,7 +34,6 @@ const Recruitment = ({ route, navigation }) => {
             ...doc.data(),
           });
         });
-        console.log('user: ', user[0]);
         setUserInfo(user[0]);
       });
   }, [userAuth]);
