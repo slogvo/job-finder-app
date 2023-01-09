@@ -1,13 +1,18 @@
-import { ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Button, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import colors from '../../assets/colors/colors';
-import Entypo from 'react-native-vector-icons/Entypo';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import firestore from '@react-native-firebase/firestore';
 import { Controller, useForm } from 'react-hook-form';
+import ConfirmCVModal from '../component/modal/ConfirmCVModal';
+import { useState } from 'react';
 
 const Recruitment = ({ route, navigation }) => {
   const { itemId } = route.params;
+  const [isConfirmCVModal, setConfirmCVModal] = useState(false);
+
+  const toggleConfirmCVModal = () => {
+    setConfirmCVModal(!isConfirmCVModal);
+  };
 
   const {
     setValue,
@@ -214,10 +219,15 @@ const Recruitment = ({ route, navigation }) => {
                   width: '48%',
                   paddingHorizontal: 15,
                 }}
-                onPress={() => {}}
+                onPress={toggleConfirmCVModal}
               >
                 <Text style={{ color: '#fff', fontWeight: 'bold' }}>Chọn CV có sẵn</Text>
               </TouchableOpacity>
+
+              <ConfirmCVModal
+                handleToggleConfirmCVModal={toggleConfirmCVModal}
+                isConfirmCVModal={isConfirmCVModal}
+              ></ConfirmCVModal>
 
               <TouchableOpacity
                 style={{
