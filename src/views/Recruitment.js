@@ -200,57 +200,6 @@ const Recruitment = ({ route, navigation }) => {
                 {'\n'} • Kinh nghiệm làm việc chưa sắp xếp từ gần nhất đến xa nhất.
               </Text>
             </View>
-            <View
-              style={{
-                marginTop: 20,
-                justifyContent: 'space-between',
-                flexDirection: 'row',
-                width: '100%',
-                alignItems: 'center',
-              }}
-            >
-              <TouchableOpacity
-                style={{
-                  height: 50,
-                  borderRadius: 5,
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  backgroundColor: colors.secondary,
-                  width: '48%',
-                  paddingHorizontal: 15,
-                }}
-                onPress={toggleConfirmCVModal}
-              >
-                <Text style={{ color: '#fff', fontWeight: 'bold' }}>Chọn CV có sẵn</Text>
-              </TouchableOpacity>
-
-              <ConfirmCVModal
-                handleToggleConfirmCVModal={toggleConfirmCVModal}
-                isConfirmCVModal={isConfirmCVModal}
-              ></ConfirmCVModal>
-
-              <TouchableOpacity
-                style={{
-                  width: '48%',
-                  height: 50,
-                  borderRadius: 5,
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  paddingHorizontal: 15,
-                  borderWidth: 1,
-                  borderStyle: 'dashed',
-                  borderColor: colors.secondary,
-                }}
-                onPress={() => {}}
-              >
-                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                  <AntDesign name="pluscircle" size={16} color={colors.secondary} />
-                  <Text style={{ marginLeft: 10, color: colors.secondary, fontWeight: 'bold' }}>
-                    Upload CV mới
-                  </Text>
-                </View>
-              </TouchableOpacity>
-            </View>
           </View>
           {/* Xác nhận ứng tuyển */}
           <View
@@ -270,16 +219,20 @@ const Recruitment = ({ route, navigation }) => {
               borderRadius: 5,
               alignItems: 'center',
               justifyContent: 'center',
-              backgroundColor: colors.primary,
+              backgroundColor: colors.secondary,
               width: '100%',
               paddingHorizontal: 15,
             }}
-            onPress={() => {}}
+            onPress={toggleConfirmCVModal}
           >
             <Text style={{ color: '#fff', fontWeight: 'bold', fontSize: 16 }}>
               Xác nhận ứng tuyển
             </Text>
           </TouchableOpacity>
+          <ConfirmCVModal
+            handleToggleConfirmCVModal={toggleConfirmCVModal}
+            isConfirmCVModal={isConfirmCVModal}
+          ></ConfirmCVModal>
         </View>
         <View style={{ marginBottom: 100 }} />
       </ScrollView>

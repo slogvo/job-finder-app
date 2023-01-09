@@ -20,6 +20,7 @@ const Explore = () => {
       });
       const file = res[0];
       const path = await normalizePath(file?.uri);
+      console.log('path: ', path);
       setFileData(file);
       const result = await RNFetchBlob.fs.readFile(path, 'base64');
       uploadFileToFirebaseStorage(result, file);

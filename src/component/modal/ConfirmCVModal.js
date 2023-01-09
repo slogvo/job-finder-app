@@ -25,14 +25,15 @@ const ConfirmCVModal = ({ isConfirmCVModal, handleToggleConfirmCVModal = () => {
           }}
         >
           <View style={{ flexDirection: 'row' }}>
-            <Ionicons name="alert-circle" size={20} color={'#faa9a3'}></Ionicons>
-            <Text style={{ marginLeft: 5, color: '#4d1f1b', fontSize: 16, fontWeight: 'bold' }}>
-              Lưu ý!
+            <Ionicons name="alert-circle" size={20} color={'#a9d3ab'}></Ionicons>
+            <Text style={{ marginLeft: 5, color: '#1d351e', fontSize: 16, fontWeight: 'bold' }}>
+              Gửi hồ sơ ứng tuyển!
             </Text>
           </View>
-          <Text style={{ marginTop: 15, lineHeight: 21, color: '#6B5250' }}>
-            Để gửi hồ sơ cho nhà tuyển dụng, vui lòng điền đầy đủ thông tin trong mục hồ sơ cá nhân
-            nếu chưa thực hiện!
+          <Text style={{ marginTop: 15, lineHeight: 22, color: '#2c422d' }}>
+            Khi gửi hồ sơ cho nhà tuyển dụng, vui lòng điền đầy đủ thông tin cần thiết trong mục{' '}
+            <Text style={{ fontWeight: 'bold' }}>Hồ sơ cá nhân</Text> để nhà tuyển dụng có thể nắm
+            bắt tốt đa về bản thân bạn
           </Text>
           <View
             style={{
@@ -46,7 +47,7 @@ const ConfirmCVModal = ({ isConfirmCVModal, handleToggleConfirmCVModal = () => {
               style={{ paddingHorizontal: 5, paddingVertical: 5 }}
               onPress={handleToggleConfirmCVModal}
             >
-              <Text style={{ color: '#ce4b43', fontWeight: 'bold' }} o>
+              <Text style={{ color: '#37833b', fontWeight: 'bold' }} o>
                 Đóng thông báo!
               </Text>
             </Pressable>
@@ -56,14 +57,14 @@ const ConfirmCVModal = ({ isConfirmCVModal, handleToggleConfirmCVModal = () => {
                 borderRadius: 8,
                 paddingHorizontal: 10,
                 paddingVertical: 10,
-                backgroundColor: '#fee8e7',
+                backgroundColor: '#ecf7ed',
               }}
               onPress={() => {
                 console.log('Hello');
               }}
             >
-              <Text style={{ color: '#ce4b43', fontWeight: 'bold' }} o>
-                Đã có, gửi ngay!
+              <Text style={{ color: '#37833b', fontWeight: 'bold' }} o>
+                Tiếp tục và gửi
               </Text>
             </Pressable>
           </View>
