@@ -5,8 +5,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import Candidate from '../layout/Candidate';
 
 const ReceivingDetailScreen = ({ route, navigation }) => {
-  const candidates = route?.params?.itemId;
-  console.log('candidates: ', candidates);
+  const candidates = route?.params?.recruitmentDetail;
   return (
     <View
       style={{
@@ -78,6 +77,7 @@ const ReceivingDetailScreen = ({ route, navigation }) => {
           {candidates.length > 0 &&
             candidates.map((item) => (
               <Candidate
+                key={item.id}
                 id={item.id}
                 username={item.username}
                 file={item.file}
@@ -85,6 +85,8 @@ const ReceivingDetailScreen = ({ route, navigation }) => {
                 userId={item.userId}
                 email={item.email}
                 navigation={navigation}
+                jobId={item.jobId}
+                status={item.status}
               />
             ))}
         </View>

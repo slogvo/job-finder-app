@@ -7,14 +7,15 @@ import firestore from '@react-native-firebase/firestore';
 import Toast from 'react-native-toast-message';
 
 const CandidateDetail = ({ route, navigation }) => {
-  const { itemId } = route.params;
+  const { itemId, recruitmentId } = route.params;
+  console.log('recruitmentId: ', recruitmentId);
   const [candidate, setCandidate] = useState('');
   const showToast = () => {
     Toast.show({
       type: 'success',
       text1: 'Chấp nhận ứng tuyển!',
       text2: 'Công việc đã được gửi đến ứng cử viên!',
-      topOffset: 60,
+      topOffset: 65,
       visibilityTime: 2500,
     });
   };
@@ -31,10 +32,23 @@ const CandidateDetail = ({ route, navigation }) => {
             ...doc.data(),
           });
         });
-        console.log('candidate: ', candidates[0]);
         setCandidate(candidates[0]);
       });
-  }, []);
+  }, [itemId]);
+
+  const handleApprove = () => {
+    firestore()
+      .collection('recruitment')
+      .doc(`${recruitmentId}`)
+      .update({
+        status: 1,
+        createdAt: firestore.FieldValue.serverTimestamp(),
+      })
+      .then(() => {
+        console.log('User updated!');
+      });
+  };
+
   return (
     <View
       style={{
@@ -129,6 +143,7 @@ const CandidateDetail = ({ route, navigation }) => {
             }}
             onPress={() => {
               showToast();
+              handleApprove();
             }}
           >
             <Text style={{ color: '#fff', fontWeight: 'bold' }}>Duyệt</Text>

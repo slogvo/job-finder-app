@@ -7,6 +7,7 @@ import Recruitment from './Recruitment';
 import ReceivingListScreen from './ReceivingListScreen';
 import ReceivingDetailScreen from './ReceivingDetailScreen';
 import CandidateDetail from './CandidateDetail';
+import PDFView from './PDFView';
 
 const Stack = createStackNavigator();
 
@@ -38,6 +39,7 @@ const ReceivingScreen = () => {
       <Stack.Screen name="ReceivingListScreen" component={ReceivingListScreen} />
       <Stack.Screen name="ReceivingDetailScreen" component={ReceivingDetailScreen} />
       <Stack.Screen name="CandidateDetail" component={CandidateDetail} />
+      <Stack.Screen name="PDFView" component={PDFView} />
     </Stack.Navigator>
   );
 };

@@ -12,7 +12,6 @@ const ReceivingListScreen = ({ navigation }) => {
   auth().onAuthStateChanged((user) => {
     if (user) {
       setUserUid(user.uid);
-      console.log('user.uid: ', user.uid);
     } else setUserUid('Unknown');
   });
 
@@ -28,7 +27,6 @@ const ReceivingListScreen = ({ navigation }) => {
             ...doc.data(),
           });
         });
-        console.log('posts: ', posts);
         setPosts(posts);
       });
   }, [userUid]);

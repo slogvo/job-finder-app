@@ -31,6 +31,8 @@ const ConfirmCVModal = ({
         userId: userInfo?.id,
         phoneNumber: phone,
         jobId: jobID,
+        status: 0,
+        createdAt: firestore.FieldValue.serverTimestamp(),
       })
       .then(() => {
         console.log('Recruitment added!');

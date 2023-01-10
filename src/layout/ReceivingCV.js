@@ -29,7 +29,6 @@ const ReceivingCV = ({
             ...doc.data(),
           });
         });
-        console.log('recruitmentDetail: ', recruitment);
         setRecruitmentDetail(recruitment);
       });
   }, [id]);
@@ -145,7 +144,9 @@ const ReceivingCV = ({
               marginRight: 8,
             }}
             onPress={() => {
-              navigation.navigate('ReceivingDetailScreen', { itemId: recruitmentDetail });
+              navigation.navigate('ReceivingDetailScreen', {
+                recruitmentDetail: recruitmentDetail,
+              });
             }}
           >
             <Text style={{ color: '#fff' }}>Chi tiết</Text>

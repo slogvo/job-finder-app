@@ -5,7 +5,18 @@ import { useEffect, useState } from 'react';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
-const Candidate = ({ id, username, file, phoneNumber, userId, email, navigation, ...props }) => {
+const Candidate = ({
+  id,
+  userId,
+  username,
+  email,
+  jobId,
+  phoneNumber,
+  file,
+  status,
+  navigation,
+  ...props
+}) => {
   const usernameArr = username?.split(' ');
   // useEffect(() => {
   //   firestore()
@@ -28,7 +39,7 @@ const Candidate = ({ id, username, file, phoneNumber, userId, email, navigation,
     <View
       style={{
         width: '100%',
-        height: 140,
+        height: 146,
         borderRadius: 16,
         backgroundColor: '#fff',
         padding: 15,
@@ -90,6 +101,30 @@ const Candidate = ({ id, username, file, phoneNumber, userId, email, navigation,
         ></View>
 
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          {status === 1 ? (
+            <View
+              style={{
+                paddingVertical: 5,
+                paddingHorizontal: 10,
+                backgroundColor: '#bfffda',
+                borderRadius: 4,
+              }}
+            >
+              <Text style={{ fontWeight: '500', color: '#0DDE65' }}>Đã duyệt</Text>
+            </View>
+          ) : (
+            <View
+              style={{
+                paddingVertical: 5,
+                paddingHorizontal: 10,
+                backgroundColor: '#fae3c9',
+                borderRadius: 4,
+              }}
+            >
+              <Text style={{ fontWeight: '500', color: '#ED8E29' }}>Chưa duyệt</Text>
+            </View>
+          )}
+
           <TouchableOpacity
             style={{
               marginLeft: 'auto',
@@ -102,7 +137,7 @@ const Candidate = ({ id, username, file, phoneNumber, userId, email, navigation,
               marginRight: 8,
             }}
             onPress={() => {
-              navigation.navigate('CandidateDetail', { itemId: userId });
+              navigation.navigate('CandidateDetail', { itemId: userId, recruitmentId: id });
             }}
           >
             <Text style={{ color: '#fff' }}>Xem</Text>
