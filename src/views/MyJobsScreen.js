@@ -1,11 +1,39 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import colors from '../../assets/colors/colors';
+import firestore from '@react-native-firebase/firestore';
+import Entypo from 'react-native-vector-icons/Entypo';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import Candidate from '../layout/Candidate';
+import auth from '@react-native-firebase/auth';
+import MyJob from '../layout/MyJob';
 
-const ReceivingDetailScreen = ({ route, navigation }) => {
-  const candidates = route?.params?.recruitmentDetail;
+const MyJobsScreen = ({ navigation }) => {
+  const [recruitmentDetail, setRecruitmentDetail] = useState();
+  const [userId, setUserId] = useState('');
+  auth().onAuthStateChanged((user) => {
+    if (user) {
+      setUserId(user.uid);
+    } else setUserId('Unknown');
+  });
+  useEffect(() => {
+    firestore()
+      .collection('recruitment')
+      .where('userId', '==', `${userId}`)
+      .onSnapshot((snapshot) => {
+        let recruitment = [];
+        snapshot.forEach((doc) => {
+          const { status, jobId } = doc.data();
+          recruitment.push({
+            id: doc.id,
+            jobId,
+            status,
+          });
+        });
+        console.log('recruitment: ', recruitment);
+        setRecruitmentDetail(recruitment);
+      });
+  }, [userId]);
+
   return (
     <View
       style={{
@@ -62,32 +90,20 @@ const ReceivingDetailScreen = ({ route, navigation }) => {
                 fontWeight: 'bold',
               }}
             >
-              Các ứng cử viên
+              Việc làm của tôi
             </Text>
-            {/* <Entypo name="dots-three-vertical" size={20} color={colors.text} /> */}
-            <Text style={{ width: 20 }}></Text>
+            <Entypo name="dots-three-vertical" size={20} color={colors.text} />
           </View>
         </View>
         <View
           style={{
             paddingHorizontal: 25,
-            marginTop: 10,
+            marginTop: 30,
           }}
         >
-          {candidates?.length > 0 &&
-            candidates.map((item) => (
-              <Candidate
-                key={item.id}
-                id={item.id}
-                username={item.username}
-                file={item.file}
-                phoneNumber={item.phoneNumber}
-                userId={item.userId}
-                email={item.email}
-                navigation={navigation}
-                jobId={item.jobId}
-                status={item.status}
-              />
+          {recruitmentDetail?.length > 0 &&
+            recruitmentDetail.map((item) => (
+              <MyJob status={item?.status} key={item?.id} jobId={item?.jobId} />
             ))}
         </View>
         <View style={{ marginBottom: 80 }} />
@@ -96,4 +112,4 @@ const ReceivingDetailScreen = ({ route, navigation }) => {
   );
 };
 
-export default ReceivingDetailScreen;
+export default MyJobsScreen;

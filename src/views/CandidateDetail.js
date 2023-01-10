@@ -142,8 +142,8 @@ const CandidateDetail = ({ route, navigation }) => {
               paddingHorizontal: 15,
             }}
             onPress={() => {
-              showToast();
               handleApprove();
+              showToast();
             }}
           >
             <Text style={{ color: '#fff', fontWeight: 'bold' }}>Duyệt</Text>

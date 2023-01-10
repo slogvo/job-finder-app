@@ -6,10 +6,10 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import colors from '../../assets/colors/colors';
 import CustomDrawer from './CustomDrawer';
-import MyJobs from '../views/MyJobs';
 import Notifications from '../views/Notifications';
 import TabsNavigation from './TabsNavigation';
 import ReceivingScreen from '../views/ReceivingScreen';
+import MyJobsScreen from '../views/MyJobsScreen';
 
 const Drawer = createDrawerNavigator();
 
@@ -95,7 +95,7 @@ function DrawerNavigation({ navigation }) {
 
       <Drawer.Screen
         name="Việc làm của tôi"
-        component={MyJobs}
+        component={MyJobsScreen}
         options={{
           drawerIcon: ({ color }) => (
             <FontAwesome5
@@ -115,7 +115,7 @@ function DrawerNavigation({ navigation }) {
 
       <Drawer.Screen
         name="Đăng tuyển dụng"
-        component={MyJobs}
+        component={MyJobsScreen}
         options={{
           drawerIcon: ({ color }) => (
             <MaterialIcons
