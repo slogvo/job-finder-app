@@ -1,8 +1,10 @@
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 import colors from '../../assets/colors/colors';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import firestore from '@react-native-firebase/firestore';
+import { useEffect, useState } from 'react';
 
-const RenderItem = ({
+const ReceivingCV = ({
   companyLogo,
   companyName,
   companyAddress,
@@ -14,11 +16,30 @@ const RenderItem = ({
   ...props
 }) => {
   const companyAddressArr = companyAddress?.split(',');
+  const [recruitmentDetail, setRecruitmentDetail] = useState();
+
+  useEffect(() => {
+    firestore()
+      .collection('recruitment')
+      .where('jobId', '==', `${id}`)
+      .onSnapshot((snapshot) => {
+        let recruitment = [];
+        snapshot.forEach((doc) => {
+          recruitment.push({
+            id: doc.id,
+            ...doc.data(),
+          });
+        });
+        console.log('recruitmentDetail: ', recruitment);
+        setRecruitmentDetail(recruitment);
+      });
+  }, [id]);
+
   return (
     <View
       style={{
-        width: 290,
-        height: 210,
+        width: '100%',
+        height: 195,
         borderRadius: 16,
         backgroundColor: '#fff',
         padding: 15,
@@ -49,11 +70,11 @@ const RenderItem = ({
             <Text
               numberOfLines={1}
               style={{
-                width: 150,
+                width: 240,
                 fontSize: 15,
                 color: colors.text,
                 marginBottom: 3,
-                fontWeight: '700',
+                fontFamily: 'SanFranciscoDisplay-Bold',
               }}
             >
               {companyName}
@@ -66,9 +87,18 @@ const RenderItem = ({
             >
               {companyAddressArr[companyAddressArr.length - 1]}
             </Text>
+            <Text
+              style={{
+                fontSize: 15,
+                color: colors.secondary,
+                fontWeight: '500',
+              }}
+            >
+              {wage}
+            </Text>
           </View>
         </View>
-        <AntDesign name="heart" size={20} color={colors.redColor} />
+        {/* <AntDesign name="heart" size={20} color={colors.redColor} /> */}
       </View>
       <Text
         numberOfLines={1}
@@ -91,27 +121,17 @@ const RenderItem = ({
             alignItems: 'center',
             justifyContent: 'space-between',
           }}
-        >
-          <Text
-            style={{
-              fontSize: 15,
-              color: colors.secondary,
-              fontWeight: '500',
-            }}
-          >
-            {wage}
-          </Text>
-        </View>
+        ></View>
 
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
           <Text
             style={{
               fontSize: 14,
               color: colors.darkGray,
-              fontFamily: 'SanFranciscoDisplay-Regular',
+              fontWeight: '700',
             }}
           >
-            Hết hạn trong 30 ngày
+            Ứng tuyển: {recruitmentDetail ? recruitmentDetail.length : '0'}
           </Text>
           <TouchableOpacity
             style={{
@@ -125,10 +145,10 @@ const RenderItem = ({
               marginRight: 8,
             }}
             onPress={() => {
-              navigation.navigate('JobDetail', { itemId: id });
+              navigation.navigate('ReceivingDetailScreen', { itemId: recruitmentDetail });
             }}
           >
-            <Text style={{ color: '#fff' }}>Nộp đơn</Text>
+            <Text style={{ color: '#fff' }}>Chi tiết</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -136,4 +156,4 @@ const RenderItem = ({
   );
 };
 
-export default RenderItem;
+export default ReceivingCV;

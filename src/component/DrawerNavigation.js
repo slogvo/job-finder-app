@@ -1,19 +1,19 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import colors from '../../assets/colors/colors';
 import CustomDrawer from './CustomDrawer';
-import SalaryReport from '../views/SalaryReport';
 import MyJobs from '../views/MyJobs';
 import Notifications from '../views/Notifications';
 import TabsNavigation from './TabsNavigation';
+import ReceivingScreen from '../views/ReceivingScreen';
 
 const Drawer = createDrawerNavigator();
 
 function DrawerNavigation({ navigation }) {
-  const [isFocused, setIsFocused] = useState(false);
   return (
     <Drawer.Navigator
       drawerContent={(props) => <CustomDrawer {...props} />}
@@ -74,12 +74,12 @@ function DrawerNavigation({ navigation }) {
       />
 
       <Drawer.Screen
-        name="Báo cáo lương"
-        component={SalaryReport}
+        name="Tiếp nhận hồ sơ"
+        component={ReceivingScreen}
         options={{
           drawerIcon: ({ color }) => (
-            <FontAwesome5
-              name="money-check"
+            <Ionicons
+              name="ios-document-text"
               color={color}
               style={{
                 fontSize: 22,
@@ -106,6 +106,26 @@ function DrawerNavigation({ navigation }) {
                 top: 2,
                 left: 0,
                 width: 22,
+                height: 30,
+              }}
+            />
+          ),
+        }}
+      />
+
+      <Drawer.Screen
+        name="Đăng tuyển dụng"
+        component={MyJobs}
+        options={{
+          drawerIcon: ({ color }) => (
+            <MaterialIcons
+              name="post-add"
+              color={color}
+              style={{
+                fontSize: 25,
+                top: 2,
+                left: 0,
+                width: 25,
                 height: 30,
               }}
             />
