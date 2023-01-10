@@ -162,6 +162,11 @@ const MainViewAccount = ({ navigation }) => {
             <MaterialIcons name="email" size={15} />
             <Text style={{ marginLeft: 5 }}>{userAuth?.email}</Text>
           </View>
+          <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 5 }}>
+            {/* <FontAwesome name="phone" size={15} /> */}
+            <AntDesign name="pluscircle" size={15} />
+            <Text style={{ marginLeft: 5 }}>Thêm số điện thoại</Text>
+          </View>
           <View style={{ marginTop: 20 }}>
             <Text
               style={{

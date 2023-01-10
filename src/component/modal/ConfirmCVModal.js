@@ -3,13 +3,24 @@ import React from 'react';
 import Modal from 'react-native-modal';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import firestore from '@react-native-firebase/firestore';
+import Toast from 'react-native-toast-message';
 
 const ConfirmCVModal = ({
   jobID,
+  phone,
   userInfo,
   isConfirmCVModal,
   handleToggleConfirmCVModal = () => {},
 }) => {
+  const showToast = () => {
+    Toast.show({
+      type: 'success',
+      text1: 'Gửi CV thành công!',
+      text2: 'Hồ sơ của bạn sẽ được xem xét!',
+      topOffset: 0,
+      visibilityTime: 2500,
+    });
+  };
   const handleApply = () => {
     firestore()
       .collection('recruitment')
@@ -18,6 +29,7 @@ const ConfirmCVModal = ({
         email: userInfo?.email,
         file: userInfo?.file,
         userId: userInfo?.id,
+        phoneNumber: phone,
         jobId: jobID,
       })
       .then(() => {
@@ -79,7 +91,13 @@ const ConfirmCVModal = ({
                 paddingVertical: 10,
                 backgroundColor: '#ecf7ed',
               }}
-              onPress={handleApply}
+              onPress={() => {
+                handleToggleConfirmCVModal();
+                handleApply();
+                setTimeout(() => {
+                  showToast();
+                }, 500);
+              }}
             >
               <Text style={{ color: '#37833b', fontWeight: 'bold' }} o>
                 Tiếp tục và gửi

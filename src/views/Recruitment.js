@@ -1,4 +1,4 @@
-import { ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Image, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import colors from '../../assets/colors/colors';
 import { Controller, useForm } from 'react-hook-form';
@@ -6,10 +6,12 @@ import ConfirmCVModal from '../component/modal/ConfirmCVModal';
 import { useEffect, useState } from 'react';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
+import Toast from 'react-native-toast-message';
 
 const Recruitment = ({ route, navigation }) => {
   const { itemId } = route.params;
   const [isConfirmCVModal, setConfirmCVModal] = useState(false);
+  const [phone, setPhone] = useState('');
   const toggleConfirmCVModal = () => {
     setConfirmCVModal(!isConfirmCVModal);
   };
@@ -38,14 +40,6 @@ const Recruitment = ({ route, navigation }) => {
       });
   }, [userAuth]);
 
-  const {
-    setValue,
-    handleSubmit,
-    control,
-    reset,
-    formState: { errors },
-  } = useForm();
-  const onSubmit = async (data) => {};
   return (
     <View
       style={{
@@ -110,46 +104,6 @@ const Recruitment = ({ route, navigation }) => {
         <View style={{ marginTop: 15, paddingHorizontal: 25 }}>
           <View
             style={{
-              alignItems: 'flex-start',
-              justifyContent: 'flex-start',
-            }}
-          >
-            <Text
-              style={{
-                fontSize: 16,
-                color: colors.text,
-                fontWeight: '500',
-              }}
-            >
-              Chức danh
-            </Text>
-            <Controller
-              control={control}
-              rules={{
-                required: true,
-              }}
-              render={({ field: { onChange, onBlur, value } }) => (
-                <TextInput
-                  style={{
-                    width: '100%',
-                    height: 50,
-                    borderWidth: 1,
-                    borderColor: 'white',
-                    borderBottomColor: colors.border,
-                    fontWeight: '400',
-                    paddingRight: 15,
-                  }}
-                  placeholder="Nhập chức danh"
-                  onBlur={onBlur}
-                  onChangeText={onChange}
-                  value={value}
-                />
-              )}
-              name="email"
-            />
-          </View>
-          <View
-            style={{
               marginTop: 20,
               alignItems: 'flex-start',
               justifyContent: 'flex-start',
@@ -164,30 +118,34 @@ const Recruitment = ({ route, navigation }) => {
             >
               Số điện thoại
             </Text>
-            <Controller
-              control={control}
-              rules={{
-                required: true,
-              }}
-              render={({ field: { onChange, onBlur, value } }) => (
-                <TextInput
-                  style={{
-                    borderWidth: 1,
-                    width: '100%',
-                    height: 50,
-                    borderColor: 'white',
-                    borderBottomColor: colors.border,
-                    fontWeight: '400',
-                    paddingRight: 15,
-                  }}
-                  placeholder="Nhập số điện thoại"
-                  onBlur={onBlur}
-                  onChangeText={onChange}
-                  value={value}
-                />
-              )}
-              name="email"
-            />
+            <View style={{ flexDirection: 'row', position: 'relative' }}>
+              <Image
+                source={require('../../assets/images/vietnam.png')}
+                style={{
+                  width: 25,
+                  height: 25,
+                  resizeMode: 'cover',
+                  position: 'absolute',
+                  top: '50%',
+                  transform: [{ translateY: -12.5 }],
+                }}
+              />
+
+              <TextInput
+                style={{
+                  borderWidth: 1,
+                  width: '100%',
+                  height: 50,
+                  borderColor: 'white',
+                  borderBottomColor: colors.border,
+                  fontWeight: '400',
+                  paddingRight: 15,
+                  paddingLeft: 35,
+                }}
+                placeholder="Nhập số điện thoại"
+                onChangeText={(e) => setPhone(e)}
+              />
+            </View>
           </View>
           <View style={{ marginTop: 25 }}>
             <View>
@@ -255,10 +213,12 @@ const Recruitment = ({ route, navigation }) => {
           </TouchableOpacity>
           <ConfirmCVModal
             userInfo={userInfo}
+            phone={phone}
             jobID={itemId}
             handleToggleConfirmCVModal={toggleConfirmCVModal}
             isConfirmCVModal={isConfirmCVModal}
           />
+          <Toast />
         </View>
         <View style={{ marginBottom: 100 }} />
       </ScrollView>

@@ -32,7 +32,7 @@ const SearchLayout = ({ navigation }) => {
             />
           </TouchableOpacity>
         </View>
-        <View
+        {/* <TouchableOpacity
           style={{
             width: 35,
             height: 35,
@@ -41,12 +41,13 @@ const SearchLayout = ({ navigation }) => {
             backgroundColor: colors.primary,
             borderRadius: 50,
           }}
+          onPress={() => navigation.navigate('Notifications')}
         >
           <Image
             source={require('../../assets/images/notification.png')}
             style={{ width: 22, height: 22 }}
           />
-        </View>
+        </TouchableOpacity> */}
       </View>
 
       <View style={{ flexDirection: 'row', marginBottom: 15 }}>
