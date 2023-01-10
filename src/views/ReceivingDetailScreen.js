@@ -1,8 +1,8 @@
 import React from 'react';
 import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import colors from '../../assets/colors/colors';
-import Entypo from 'react-native-vector-icons/Entypo';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import Candidate from '../layout/Candidate';
 
 const ReceivingDetailScreen = ({ route, navigation }) => {
   const candidates = route?.params?.itemId;
@@ -72,9 +72,22 @@ const ReceivingDetailScreen = ({ route, navigation }) => {
         <View
           style={{
             paddingHorizontal: 25,
-            marginTop: 30,
+            marginTop: 10,
           }}
-        ></View>
+        >
+          {candidates.length > 0 &&
+            candidates.map((item) => (
+              <Candidate
+                id={item.id}
+                username={item.username}
+                file={item.file}
+                phoneNumber={item.phoneNumber}
+                userId={item.userId}
+                email={item.email}
+                navigation={navigation}
+              />
+            ))}
+        </View>
         <View style={{ marginBottom: 80 }} />
       </ScrollView>
     </View>

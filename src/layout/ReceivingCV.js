@@ -73,7 +73,7 @@ const ReceivingCV = ({
                 fontSize: 15,
                 color: colors.text,
                 marginBottom: 3,
-                fontFamily: 'SanFranciscoDisplay-Bold',
+                fontWeight: '500',
               }}
             >
               {companyName}
@@ -88,7 +88,8 @@ const ReceivingCV = ({
             </Text>
             <Text
               style={{
-                fontSize: 15,
+                marginTop: 2,
+                fontSize: 14,
                 color: colors.secondary,
                 fontWeight: '500',
               }}

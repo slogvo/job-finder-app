@@ -29,6 +29,7 @@ const JobDetail = ({ route, navigation }) => {
         setJob(snapshot.data());
       });
   }, []);
+
   return (
     <View
       style={{

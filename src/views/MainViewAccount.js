@@ -200,7 +200,7 @@ const MainViewAccount = ({ navigation }) => {
                   console.log('userInfo.file: ', typeof userInfo.file);
                   if (userInfo.file !== undefined) {
                     console.log(true);
-                    return navigation.navigate('PDFViewAccount', { pdfFile: userInfo.file });
+                    return navigation.navigate('PDFView', { pdfFile: userInfo.file });
                   }
                   return toggleNoCVModal();
                 }}

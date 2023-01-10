@@ -1,7 +1,7 @@
 import React from 'react';
 import { CardStyleInterpolators, createStackNavigator } from '@react-navigation/stack';
 import MainViewAccount from './MainViewAccount';
-import PDFViewAccount from './PDFViewAccount';
+import PDFView from './PDFView';
 
 const Stack = createStackNavigator();
 
@@ -31,7 +31,7 @@ const Account = () => {
       }}
     >
       <Stack.Screen name="MainViewAccount" component={MainViewAccount} />
-      <Stack.Screen name="PDFViewAccount" component={PDFViewAccount} />
+      <Stack.Screen name="PDFView" component={PDFView} />
     </Stack.Navigator>
   );
 };
