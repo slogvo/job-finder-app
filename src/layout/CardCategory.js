@@ -94,7 +94,7 @@ const CardCategory = ({
           <Text
             numberOfLines={1}
             style={{
-              fontFamily: 'SanFranciscoDisplay-Medium',
+              fontWeight: '500',
               marginRight: 10,
               fontSize: 13,
             }}

@@ -4,7 +4,7 @@ import colors from '../../assets/colors/colors';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
-import Candidate from '../layout/Candidate';
+import ReceivingCV from '../layout/ReceivingCV';
 
 const ReceivingListScreen = ({ navigation }) => {
   const [userUid, setUserUid] = useState('');
@@ -106,7 +106,7 @@ const ReceivingListScreen = ({ navigation }) => {
           {posts.length > 0 &&
             posts.map((post) => (
               <View key={post.id} style={{ marginBottom: 25 }}>
-                <Candidate
+                <ReceivingCV
                   companyLogo={post.image}
                   companyName={post.name_company}
                   companyAddress={post.address}
@@ -115,7 +115,7 @@ const ReceivingListScreen = ({ navigation }) => {
                   title={post.title}
                   navigation={navigation}
                   id={post.id}
-                ></Candidate>
+                />
               </View>
             ))}
         </View>

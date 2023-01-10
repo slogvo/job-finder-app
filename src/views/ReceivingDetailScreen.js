@@ -65,7 +65,8 @@ const ReceivingDetailScreen = ({ route, navigation }) => {
             >
               Các ứng cử viên
             </Text>
-            <Entypo name="dots-three-vertical" size={20} color={colors.text} />
+            {/* <Entypo name="dots-three-vertical" size={20} color={colors.text} /> */}
+            <Text style={{ width: 20 }}></Text>
           </View>
         </View>
         <View

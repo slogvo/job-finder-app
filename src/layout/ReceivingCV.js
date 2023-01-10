@@ -1,6 +1,5 @@
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 import colors from '../../assets/colors/colors';
-import AntDesign from 'react-native-vector-icons/AntDesign';
 import firestore from '@react-native-firebase/firestore';
 import { useEffect, useState } from 'react';
 
