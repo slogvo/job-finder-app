@@ -4,41 +4,17 @@ import colors from '../../assets/colors/colors';
 import { Controller, useForm } from 'react-hook-form';
 import ConfirmCVModal from '../component/modal/ConfirmCVModal';
 import { useEffect, useState } from 'react';
-import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import Toast from 'react-native-toast-message';
 
 const Recruitment = ({ route, navigation }) => {
-  const { itemId } = route.params;
+  const { itemId, userInfo } = route.params;
+  console.log('itemId, userInfo: ', itemId, userInfo);
   const [isConfirmCVModal, setConfirmCVModal] = useState(false);
   const [phone, setPhone] = useState('');
   const toggleConfirmCVModal = () => {
     setConfirmCVModal(!isConfirmCVModal);
   };
-
-  const [userAuth, setUserAuth] = useState('');
-  auth().onAuthStateChanged((user) => {
-    if (user) {
-      setUserAuth(user);
-    } else setUserAuth('Unknown');
-  });
-
-  const [userInfo, setUserInfo] = useState();
-  useEffect(() => {
-    firestore()
-      .collection('users')
-      .where('id', '==', `${userAuth.uid}`)
-      .onSnapshot((snapshot) => {
-        let user = [];
-        snapshot.forEach((doc) => {
-          user.push({
-            id: doc.id,
-            ...doc.data(),
-          });
-        });
-        setUserInfo(user[0]);
-      });
-  }, [userAuth]);
 
   return (
     <View
@@ -194,23 +170,47 @@ const Recruitment = ({ route, navigation }) => {
               borderColor: colors.secondary,
             }}
           />
-          <TouchableOpacity
-            style={{
-              marginTop: 10,
-              height: 50,
-              borderRadius: 5,
-              alignItems: 'center',
-              justifyContent: 'center',
-              backgroundColor: colors.secondary,
-              width: '100%',
-              paddingHorizontal: 15,
-            }}
-            onPress={toggleConfirmCVModal}
-          >
-            <Text style={{ color: '#fff', fontWeight: 'bold', fontSize: 16 }}>
-              Xác nhận ứng tuyển
-            </Text>
-          </TouchableOpacity>
+          {!userInfo?.file ? (
+            <View>
+              <View
+                style={{
+                  marginTop: 10,
+                  height: 50,
+                  borderRadius: 5,
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  backgroundColor: 'rgba(61, 222, 21, 0.5)',
+                  width: '100%',
+                  paddingHorizontal: 15,
+                }}
+              >
+                <Text style={{ color: '#fff', fontWeight: 'bold', fontSize: 16 }}>
+                  Xác nhận ứng tuyển
+                </Text>
+              </View>
+              <Text style={{ marginTop: 10, textAlign: 'center', color: 'red', fontSize: 13 }}>
+                Bạn chưa upload hồ sơ cá nhân của mình!
+              </Text>
+            </View>
+          ) : (
+            <TouchableOpacity
+              style={{
+                marginTop: 10,
+                height: 50,
+                borderRadius: 5,
+                alignItems: 'center',
+                justifyContent: 'center',
+                backgroundColor: colors.secondary,
+                width: '100%',
+                paddingHorizontal: 15,
+              }}
+              onPress={toggleConfirmCVModal}
+            >
+              <Text style={{ color: '#fff', fontWeight: 'bold', fontSize: 16 }}>
+                Xác nhận ứng tuyển
+              </Text>
+            </TouchableOpacity>
+          )}
           <ConfirmCVModal
             userInfo={userInfo}
             phone={phone}

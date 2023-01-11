@@ -12,6 +12,7 @@ const ConfirmCVModal = ({
   isConfirmCVModal,
   handleToggleConfirmCVModal = () => {},
 }) => {
+  console.log('userInfo,: ', userInfo);
   const showToast = () => {
     Toast.show({
       type: 'success',
@@ -21,13 +22,14 @@ const ConfirmCVModal = ({
       visibilityTime: 2500,
     });
   };
+
   const handleApply = () => {
     firestore()
       .collection('recruitment')
       .add({
         username: userInfo?.username,
         email: userInfo?.email,
-        file: userInfo?.file,
+        file: userInfo?.file || '',
         userId: userInfo?.id,
         phoneNumber: phone,
         jobId: jobID,
