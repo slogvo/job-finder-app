@@ -9,7 +9,6 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const Bookmark = ({ navigation }) => {
   const { catList, toggleFavorite } = useGallery();
-  // console.log(catList);
 
   return (
     <View

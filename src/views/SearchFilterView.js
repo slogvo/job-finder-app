@@ -30,7 +30,6 @@ const SearchFilterView = ({ navigation }) => {
             ...doc.data(),
           });
         });
-        console.log('posts: ', posts);
         const list = posts.filter((item) => {
           const addressRef = removeVNeTones(item.address).toLowerCase();
           const careerRef = removeVNeTones(item.career).toLowerCase();

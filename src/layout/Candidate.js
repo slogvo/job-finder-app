@@ -18,23 +18,6 @@ const Candidate = ({
   ...props
 }) => {
   const usernameArr = username?.split(' ');
-  // useEffect(() => {
-  //   firestore()
-  //     .collection('recruitment')
-  //     .where('jobId', '==', `${id}`)
-  //     .onSnapshot((snapshot) => {
-  //       let recruitment = [];
-  //       snapshot.forEach((doc) => {
-  //         recruitment.push({
-  //           id: doc.id,
-  //           ...doc.data(),
-  //         });
-  //       });
-  //       console.log('recruitmentDetail: ', recruitment);
-  //       setRecruitmentDetail(recruitment);
-  //     });
-  // }, [id]);
-
   return (
     <View
       style={{

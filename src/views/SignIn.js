@@ -16,7 +16,6 @@ const SignIn = ({ navigation }) => {
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
-    console.log('data: ', data);
     auth()
       .signInWithEmailAndPassword(data?.email, data?.password)
       .then((user) => {})

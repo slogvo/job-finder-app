@@ -201,7 +201,7 @@ const JobDetail = ({ route, navigation }) => {
                   color: '#fff',
                 }}
               >
-                {job?.type_job === 'IVsZXydpyRFVmd5jh2MO' ? 'Full-time' : 'Part-time'}
+                {job?.type_job === 'fruqq8kDn2IEb4cV7hcb' ? 'Part-time' : 'Full-time'}
               </Text>
             </View>
           </View>
@@ -296,18 +296,7 @@ const JobDetail = ({ route, navigation }) => {
             <Text style={{ fontSize: 14, fontWeight: '500', lineHeight: 25 }}>{job?.address}</Text>
           </View>
           {/* Vote */}
-          <View style={{ paddingHorizontal: 20 }}>
-            <Text
-              style={{
-                textAlign: 'center',
-                fontSize: 18,
-                color: colors.text,
-                fontWeight: '700',
-                marginTop: 30,
-              }}
-            >
-              Đánh giá công việc này
-            </Text>
+          <View style={{ marginTop: 20, paddingHorizontal: 20 }}>
             <View style={styles.customRatingBarStyle}>
               {maxRating.map((item, key) => {
                 return (
@@ -316,10 +305,6 @@ const JobDetail = ({ route, navigation }) => {
                     key={item}
                     onPress={() => setDefaultRating(item)}
                   >
-                    {/* <Image
-                      style={styles.starImgStyle}
-                      source={item <= defaultRating ? { uri: starImgFilled } : { uri: starImgCorner }}
-                    /> */}
                     {item <= defaultRating ? (
                       <AntDesign name="star" size={35} color={colors.yellowStar} />
                     ) : (
@@ -329,7 +314,19 @@ const JobDetail = ({ route, navigation }) => {
                 );
               })}
             </View>
+            <Text
+              style={{
+                textAlign: 'center',
+                fontSize: 18,
+                color: colors.text,
+                fontWeight: '700',
+                marginTop: 20,
+              }}
+            >
+              Đánh giá công việc này
+            </Text>
           </View>
+          {/* Comment */}
         </View>
         <View style={{ marginBottom: 100 }} />
       </ScrollView>

@@ -35,7 +35,6 @@ const MainViewAccount = ({ navigation }) => {
             ...doc.data(),
           });
         });
-        console.log('user: ', user[0]);
         setUserInfo(user[0]);
       });
   }, [userAuth]);
@@ -197,9 +196,7 @@ const MainViewAccount = ({ navigation }) => {
                   paddingHorizontal: 15,
                 }}
                 onPress={() => {
-                  console.log('userInfo.file: ', typeof userInfo.file);
                   if (userInfo.file !== undefined) {
-                    console.log(true);
                     return navigation.navigate('PDFViewAccount', { pdfFile: userInfo.file });
                   }
                   return toggleNoCVModal();

@@ -18,7 +18,6 @@ const SignUp = ({ navigation }) => {
     formState: { errors },
   } = useForm();
   const onSubmit = async (data) => {
-    console.log(data);
     await auth()
       .createUserWithEmailAndPassword(data?.email, data?.password)
       .then(async (values) => {

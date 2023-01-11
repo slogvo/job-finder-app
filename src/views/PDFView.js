@@ -4,7 +4,6 @@ import Pdf from 'react-native-pdf';
 
 const PDFView = ({ route }) => {
   const sourceURL = route?.params?.pdfFile;
-  console.log('sourceURL: ', sourceURL);
   const source = { uri: `${sourceURL}`, cache: true };
   return (
     <View style={styles.container}>
