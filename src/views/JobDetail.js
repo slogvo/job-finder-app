@@ -21,10 +21,9 @@ import auth from '@react-native-firebase/auth';
 const windowWidth = Dimensions.get('window').width;
 
 const JobDetail = ({ route, navigation }) => {
-  const [defaultRating, setDefaultRating] = useState(2);
+  const [defaultRating, setDefaultRating] = useState(4);
   const [maxRating, setmaxRating] = useState([1, 2, 3, 4, 5]);
   const [offComment, setOffComment] = useState(false);
-  const [comment, setComment] = useState(false);
   const commentRef = useRef('');
   const { itemId } = route.params;
   const [job, setJob] = useState();
@@ -36,7 +35,7 @@ const JobDetail = ({ route, navigation }) => {
       setUserAuth(user);
     } else setUserAuth('Unknown');
   });
-
+  // Get posts
   useEffect(() => {
     firestore()
       .collection('posts')
@@ -46,6 +45,7 @@ const JobDetail = ({ route, navigation }) => {
       });
   }, []);
 
+  //Get userInfo
   useEffect(() => {
     firestore()
       .collection('users')
@@ -67,21 +67,33 @@ const JobDetail = ({ route, navigation }) => {
     commentRef.current = text;
   };
 
+  const feedbacksClone = job?.feedbacks || [];
+  var currentdate = new Date();
   const handleSubmitFeedback = () => {
-    // firestore()
-    //   .collection('feedbacks')
-    //   .doc(itemId)
-    //   .add({
-    //     jobId: itemId,
-    //     star: defaultRating,
-    //     user_id: userInfo?.uid,
-    //     feedback: commentRef.current,
-    //     userName: userInfo?.username,
-    //   })
-    //   .then(() => {
-    //     console.log('Feedback added!');
-    //   })
-    //   .catch((err) => console.log(err));
+    feedbacksClone.push({
+      jobId: itemId,
+      star: defaultRating,
+      user_id: userInfo?.id,
+      feedback: commentRef.current,
+      userName: userInfo?.username,
+      createdAt:
+        currentdate.getDate() +
+        '-' +
+        (currentdate.getMonth() + 1) +
+        '-' +
+        currentdate.getFullYear(),
+    });
+    console.log('feedbacksClone: ', feedbacksClone);
+    firestore()
+      .collection('posts')
+      .doc(itemId)
+      .update({
+        feedbacks: feedbacksClone,
+      })
+      .then(() => {
+        setOffComment(true);
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -353,105 +365,139 @@ const JobDetail = ({ route, navigation }) => {
             ></Image>
             <Text style={{ fontSize: 14, fontWeight: '500', lineHeight: 25 }}>{job?.address}</Text>
           </View>
-          {/* Vote */}
-          <View style={{ marginTop: 20 }}>
-            <Text
-              style={{
-                textAlign: 'center',
-                fontSize: 18,
-                color: colors.text,
-                fontWeight: '700',
-                marginTop: 20,
-              }}
-            >
-              Đánh giá công việc này
-            </Text>
-            <View style={styles.customRatingBarStyle}>
-              {maxRating.map((item, key) => {
-                return (
-                  <TouchableOpacity
-                    activeOpacity={0.7}
-                    key={item}
-                    onPress={() => setDefaultRating(item)}
-                  >
-                    {item <= defaultRating ? (
-                      <View
-                        style={{
-                          borderRadius: 100,
-                          width: 50,
-                          height: 50,
-                          backgroundColor: '#FEFCE8',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                        }}
-                      >
-                        <AntDesign name="star" size={30} color={colors.yellowStar} />
-                      </View>
-                    ) : (
-                      <View
-                        style={{
-                          borderRadius: 100,
-                          width: 50,
-                          height: 50,
-                          // backgroundColor: '#FEF9C3',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                        }}
-                      >
-                        <AntDesign name="staro" size={30} color={colors.yellowStar} />
-                      </View>
-                    )}
-                  </TouchableOpacity>
-                );
-              })}
-            </View>
-            <View style={{ position: 'relative', marginTop: 15, marginBottom: 30 }}>
-              <TextInput
-                multiline={true}
-                blurOnSubmit={true}
-                onChangeText={handleComment}
-                placeholder="Bạn thấy công việc này như thế nào..."
+
+          {offComment === false ? (
+            <View style={{ marginTop: 20 }}>
+              {/* FeedBacks */}
+              <Text
                 style={{
-                  marginTop: 10,
-                  width: '100%',
-                  borderRadius: 8,
-                  height: 150,
-                  textAlignVertical: 'top',
-                  flexDirection: 'column',
-                  alignItems: 'flex-start',
-                  justifyContent: 'flex-start',
-                  backgroundColor: '#f9fafe',
-                  paddingHorizontal: 20,
-                  padding: 25,
-                }}
-              />
-              <TouchableOpacity
-                activeOpacity={0.7}
-                onPress={handleSubmitFeedback}
-                style={{
-                  position: 'absolute',
-                  width: 55,
-                  height: 55,
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  backgroundColor: '#e8dafe',
-                  borderRadius: 100,
-                  bottom: -20,
-                  left: '50%',
-                  transform: [{ translateX: -40 }],
+                  textAlign: 'center',
+                  fontSize: 18,
+                  color: colors.text,
+                  fontWeight: '700',
+                  marginTop: 20,
                 }}
               >
-                {/* <Text style={{ color: '#fff' }}>Gửi</Text> */}
-                <FontAwesome name="send" size={20} color={colors.primary} />
-              </TouchableOpacity>
+                Đánh giá công việc này
+              </Text>
+              <View style={styles.customRatingBarStyle}>
+                {maxRating.map((item, key) => {
+                  return (
+                    <TouchableOpacity
+                      activeOpacity={0.7}
+                      key={item}
+                      onPress={() => setDefaultRating(item)}
+                    >
+                      {item <= defaultRating ? (
+                        <View
+                          style={{
+                            width: 50,
+                            height: 50,
+                            borderRadius: 9999,
+                            backgroundColor: '#FEFCE8',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                          }}
+                        >
+                          <AntDesign name="star" size={30} color={colors.yellowStar} />
+                        </View>
+                      ) : (
+                        <View
+                          style={{
+                            borderRadius: 100,
+                            width: 50,
+                            height: 50,
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                          }}
+                        >
+                          <AntDesign name="staro" size={30} color={colors.yellowStar} />
+                        </View>
+                      )}
+                    </TouchableOpacity>
+                  );
+                })}
+              </View>
+              <View style={{ position: 'relative', marginTop: 15, marginBottom: 30 }}>
+                <TextInput
+                  multiline={true}
+                  blurOnSubmit={true}
+                  onChangeText={handleComment}
+                  placeholder="Bạn thấy công việc này như thế nào..."
+                  style={{
+                    marginTop: 10,
+                    width: '100%',
+                    borderRadius: 8,
+                    height: 150,
+                    textAlignVertical: 'top',
+                    flexDirection: 'column',
+                    alignItems: 'flex-start',
+                    justifyContent: 'flex-start',
+                    backgroundColor: '#f9fafe',
+                    paddingHorizontal: 20,
+                    padding: 25,
+                    lineHeight: 30,
+                  }}
+                />
+                <TouchableOpacity
+                  activeOpacity={0.7}
+                  onPress={handleSubmitFeedback}
+                  style={{
+                    position: 'absolute',
+                    width: 55,
+                    height: 55,
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    backgroundColor: '#e8dafe',
+                    borderRadius: 100,
+                    bottom: -20,
+                    left: '50%',
+                    transform: [{ translateX: -40 }],
+                  }}
+                >
+                  {/* <Text style={{ color: '#fff' }}>Gửi</Text> */}
+                  <FontAwesome name="send" size={20} color={colors.primary} />
+                </TouchableOpacity>
+              </View>
             </View>
-          </View>
-
+          ) : null}
           {/* Comment */}
           <View style={{ marginTop: 20 }}>
             <Text style={{ fontSize: 16, color: colors.text, fontWeight: '700' }}>
               Các đánh giá khác:
             </Text>
+            {job?.feedbacks?.length > 0 &&
+              job?.feedbacks.reverse().map((item) => (
+                <View key={item.id} style={{ marginTop: 25, flexDirection: 'row' }}>
+                  <Image
+                    source={require('../../assets/images/user-image.png')}
+                    style={{ marginRight: 10, width: 45, height: 45, resizeMode: 'cover' }}
+                  ></Image>
+                  <View>
+                    <View style={{ flexDirection: 'row' }}>
+                      <Text style={{ fontWeight: '700', color: colors.text }}>
+                        {item?.userName}
+                      </Text>
+                      {Array(item?.star)
+                        .fill(0)
+                        .map(() => (
+                          <AntDesign
+                            name="star"
+                            size={15}
+                            color={colors.yellowStar}
+                            style={{ marginLeft: 4 }}
+                          />
+                        ))}
+                    </View>
+                    <Text
+                      style={{ marginTop: 3, color: colors.primary, width: 320, lineHeight: 20 }}
+                    >
+                      {item?.feedback}
+                    </Text>
+                    <Text style={{ marginTop: 5, fontSize: 12 }}>{item?.createdAt}</Text>
+                  </View>
+                </View>
+              ))}
           </View>
         </View>
         <View style={{ marginBottom: 100 }} />
