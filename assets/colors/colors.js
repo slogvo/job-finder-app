@@ -1,13 +1,13 @@
 const colors = {
-  text: '#333236',
-  primary: '#867EEE',
+  text: '#0d1b2a',
+  primary: '#a375ff',
   lightPurple: '#C4BFFD',
   focusColor: '#7C73F8',
-  darkGray: '#424244',
-  secondary: '#fb5a75',
+  darkGray: '#1b263b',
+  secondary: '#fe947c',
   border: '#D2D6DA',
   lightGray: '#EEE',
   redColor: '#fd3a75',
-  yellowStar: '#fec927',
+  yellowStar: '#fde258',
 };
 export default colors;
