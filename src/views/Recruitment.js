@@ -1,11 +1,12 @@
 import { Image, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import colors from '../../assets/colors/colors';
-import { Controller, useForm } from 'react-hook-form';
 import ConfirmCVModal from '../component/modal/ConfirmCVModal';
-import { useEffect, useState } from 'react';
-import firestore from '@react-native-firebase/firestore';
+import { useState } from 'react';
 import Toast from 'react-native-toast-message';
+import { LogBox } from 'react-native';
+
+LogBox.ignoreLogs(['Non-serializable values were found in the navigation state']);
 
 const Recruitment = ({ route, navigation }) => {
   const { itemId, userInfo } = route.params;

@@ -13,6 +13,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import colors from '../../assets/colors/colors';
 import Entypo from 'react-native-vector-icons/Entypo';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import firestore from '@react-native-firebase/firestore';
 import Toast from 'react-native-toast-message';
 import auth from '@react-native-firebase/auth';
@@ -58,26 +59,29 @@ const JobDetail = ({ route, navigation }) => {
           });
         });
         setUserInfo(user[0]);
+        console.log('user[0]: ', user[0]);
       });
   }, [userAuth]);
 
   const handleComment = (text) => {
     commentRef.current = text;
   };
+
   const handleSubmitFeedback = () => {
-    firestore()
-      .collection('feedbacks')
-      .add({
-        jobId: itemId,
-        star: defaultRating,
-        user_id: userAuth.uid,
-        feedback: commentRef.current,
-        createdAt: firestore.FieldValue.serverTimestamp(),
-      })
-      .then(() => {
-        console.log('Feedback added!');
-      })
-      .catch((err) => console.log(err));
+    // firestore()
+    //   .collection('feedbacks')
+    //   .doc(itemId)
+    //   .add({
+    //     jobId: itemId,
+    //     star: defaultRating,
+    //     user_id: userInfo?.uid,
+    //     feedback: commentRef.current,
+    //     userName: userInfo?.username,
+    //   })
+    //   .then(() => {
+    //     console.log('Feedback added!');
+    //   })
+    //   .catch((err) => console.log(err));
   };
 
   return (
@@ -371,15 +375,37 @@ const JobDetail = ({ route, navigation }) => {
                     onPress={() => setDefaultRating(item)}
                   >
                     {item <= defaultRating ? (
-                      <AntDesign name="star" size={35} color={colors.yellowStar} />
+                      <View
+                        style={{
+                          borderRadius: 100,
+                          width: 50,
+                          height: 50,
+                          backgroundColor: '#FEFCE8',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                        }}
+                      >
+                        <AntDesign name="star" size={30} color={colors.yellowStar} />
+                      </View>
                     ) : (
-                      <AntDesign name="staro" size={35} color={colors.yellowStar} />
+                      <View
+                        style={{
+                          borderRadius: 100,
+                          width: 50,
+                          height: 50,
+                          // backgroundColor: '#FEF9C3',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                        }}
+                      >
+                        <AntDesign name="staro" size={30} color={colors.yellowStar} />
+                      </View>
                     )}
                   </TouchableOpacity>
                 );
               })}
             </View>
-            <View style={{ marginTop: 10 }}>
+            <View style={{ position: 'relative', marginTop: 15, marginBottom: 30 }}>
               <TextInput
                 multiline={true}
                 blurOnSubmit={true}
@@ -394,7 +420,7 @@ const JobDetail = ({ route, navigation }) => {
                   flexDirection: 'column',
                   alignItems: 'flex-start',
                   justifyContent: 'flex-start',
-                  backgroundColor: '#f8f8f8',
+                  backgroundColor: '#f9fafe',
                   paddingHorizontal: 20,
                   padding: 25,
                 }}
@@ -403,17 +429,20 @@ const JobDetail = ({ route, navigation }) => {
                 activeOpacity={0.7}
                 onPress={handleSubmitFeedback}
                 style={{
-                  width: 70,
+                  position: 'absolute',
+                  width: 55,
+                  height: 55,
                   alignItems: 'center',
                   justifyContent: 'center',
-                  backgroundColor: colors.primary,
-                  padding: 10,
-                  marginLeft: 'auto',
-                  marginTop: 15,
-                  borderRadius: 4,
+                  backgroundColor: '#e8dafe',
+                  borderRadius: 100,
+                  bottom: -20,
+                  left: '50%',
+                  transform: [{ translateX: -40 }],
                 }}
               >
-                <Text style={{ color: '#fff' }}>Gửi</Text>
+                {/* <Text style={{ color: '#fff' }}>Gửi</Text> */}
+                <FontAwesome name="send" size={20} color={colors.primary} />
               </TouchableOpacity>
             </View>
           </View>

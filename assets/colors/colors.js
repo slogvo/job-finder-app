@@ -8,6 +8,6 @@ const colors = {
   border: '#D2D6DA',
   lightGray: '#EEE',
   redColor: '#ff1255',
-  yellowStar: '#fde258',
+  yellowStar: '#FFEB39',
 };
 export default colors;
