@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   Dimensions,
   Image,
   ScrollView,
   StyleSheet,
   Text,
+  TextInput,
   TouchableOpacity,
   View,
 } from 'react-native';
@@ -13,13 +14,27 @@ import colors from '../../assets/colors/colors';
 import Entypo from 'react-native-vector-icons/Entypo';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import firestore from '@react-native-firebase/firestore';
+import Toast from 'react-native-toast-message';
+import auth from '@react-native-firebase/auth';
+
 const windowWidth = Dimensions.get('window').width;
 
 const JobDetail = ({ route, navigation }) => {
   const [defaultRating, setDefaultRating] = useState(2);
   const [maxRating, setmaxRating] = useState([1, 2, 3, 4, 5]);
+  const [offComment, setOffComment] = useState(false);
+  const [comment, setComment] = useState(false);
+  const commentRef = useRef('');
   const { itemId } = route.params;
   const [job, setJob] = useState();
+  const [userInfo, setUserInfo] = useState();
+
+  const [userAuth, setUserAuth] = useState('');
+  auth().onAuthStateChanged((user) => {
+    if (user) {
+      setUserAuth(user);
+    } else setUserAuth('Unknown');
+  });
 
   useEffect(() => {
     firestore()
@@ -29,6 +44,41 @@ const JobDetail = ({ route, navigation }) => {
         setJob(snapshot.data());
       });
   }, []);
+
+  useEffect(() => {
+    firestore()
+      .collection('users')
+      .where('id', '==', `${userAuth.uid}`)
+      .onSnapshot((snapshot) => {
+        let user = [];
+        snapshot.forEach((doc) => {
+          user.push({
+            id: doc.id,
+            ...doc.data(),
+          });
+        });
+        setUserInfo(user[0]);
+      });
+  }, [userAuth]);
+
+  const handleComment = (text) => {
+    commentRef.current = text;
+  };
+  const handleSubmitFeedback = () => {
+    firestore()
+      .collection('feedbacks')
+      .add({
+        jobId: itemId,
+        star: defaultRating,
+        user_id: userAuth.uid,
+        feedback: commentRef.current,
+        createdAt: firestore.FieldValue.serverTimestamp(),
+      })
+      .then(() => {
+        console.log('Feedback added!');
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <View
@@ -226,7 +276,11 @@ const JobDetail = ({ route, navigation }) => {
                 height: 50,
               }}
               onPress={() => {
-                navigation.navigate('Recruitment', { itemId: itemId });
+                navigation.navigate('Recruitment', {
+                  itemId: itemId,
+                  userAuth: userAuth,
+                  userInfo: userInfo,
+                });
               }}
             >
               <Text
@@ -296,7 +350,18 @@ const JobDetail = ({ route, navigation }) => {
             <Text style={{ fontSize: 14, fontWeight: '500', lineHeight: 25 }}>{job?.address}</Text>
           </View>
           {/* Vote */}
-          <View style={{ marginTop: 20, paddingHorizontal: 20 }}>
+          <View style={{ marginTop: 20 }}>
+            <Text
+              style={{
+                textAlign: 'center',
+                fontSize: 18,
+                color: colors.text,
+                fontWeight: '700',
+                marginTop: 20,
+              }}
+            >
+              Đánh giá công việc này
+            </Text>
             <View style={styles.customRatingBarStyle}>
               {maxRating.map((item, key) => {
                 return (
@@ -314,19 +379,51 @@ const JobDetail = ({ route, navigation }) => {
                 );
               })}
             </View>
-            <Text
-              style={{
-                textAlign: 'center',
-                fontSize: 18,
-                color: colors.text,
-                fontWeight: '700',
-                marginTop: 20,
-              }}
-            >
-              Đánh giá công việc này
+            <View style={{ marginTop: 10 }}>
+              <TextInput
+                multiline={true}
+                blurOnSubmit={true}
+                onChangeText={handleComment}
+                placeholder="Bạn thấy công việc này như thế nào..."
+                style={{
+                  marginTop: 10,
+                  width: '100%',
+                  borderRadius: 8,
+                  height: 150,
+                  textAlignVertical: 'top',
+                  flexDirection: 'column',
+                  alignItems: 'flex-start',
+                  justifyContent: 'flex-start',
+                  backgroundColor: '#f8f8f8',
+                  paddingHorizontal: 20,
+                  padding: 25,
+                }}
+              />
+              <TouchableOpacity
+                activeOpacity={0.7}
+                onPress={handleSubmitFeedback}
+                style={{
+                  width: 70,
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  backgroundColor: colors.primary,
+                  padding: 10,
+                  marginLeft: 'auto',
+                  marginTop: 15,
+                  borderRadius: 4,
+                }}
+              >
+                <Text style={{ color: '#fff' }}>Gửi</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+
+          {/* Comment */}
+          <View style={{ marginTop: 20 }}>
+            <Text style={{ fontSize: 16, color: colors.text, fontWeight: '700' }}>
+              Các đánh giá khác:
             </Text>
           </View>
-          {/* Comment */}
         </View>
         <View style={{ marginBottom: 100 }} />
       </ScrollView>
@@ -359,4 +456,5 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
   },
 });
+
 export default JobDetail;
