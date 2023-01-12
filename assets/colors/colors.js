@@ -1,5 +1,6 @@
 const colors = {
   text: '#0d1b2a',
+  text2: '#14213d',
   primary: '#a56ffb',
   secondary: '#3cde17',
   lightPurple: '#C4BFFD',
@@ -9,5 +10,6 @@ const colors = {
   lightGray: '#EEE',
   redColor: '#ff1255',
   yellowStar: '#FFEB39',
+  tabColor: '#adb5bd',
 };
 export default colors;

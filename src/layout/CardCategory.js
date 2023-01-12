@@ -2,6 +2,7 @@ import React from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 import colors from '../../assets/colors/colors';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import firestore from '@react-native-firebase/firestore';
 
 const CardCategory = ({
   id,
@@ -11,10 +12,46 @@ const CardCategory = ({
   wage,
   title,
   career,
-  isFavorite = false,
+  idPost,
+  userInfo,
+  ...props
 }) => {
   // const { toggleFavorite } = useGallery();
   const companyAddressArr = companyAddress?.split(',');
+
+  const favoritesClone = userInfo?.favorites || [];
+  console.log('favoritesClone: ', favoritesClone);
+  const [isFavorite] = favoritesClone
+    .filter((item) => item.id === idPost)
+    .map((item) => item.isFavorite);
+
+  const handleToggleFavorite = (ID) => {
+    const hasPost = favoritesClone?.find((favorite) => favorite.id === ID);
+    if (hasPost === undefined) {
+      favoritesClone.push({
+        id: ID,
+        isFavorite: false,
+      });
+    }
+    const updatedArray = favoritesClone?.map((favorite) => {
+      if (favorite.id === ID)
+        return {
+          ...favorite,
+          isFavorite: !favorite.isFavorite,
+        };
+      return favorite;
+    });
+    console.log('updatedArray: ', updatedArray);
+    firestore()
+      .collection('users')
+      .doc(userInfo.id)
+      .update({
+        favorites: updatedArray,
+      })
+      .then(() => {})
+      .catch((err) => console.log(err));
+  };
+
   return (
     <View
       onPress={() => navigation.navigate('JobDetail')}
@@ -115,7 +152,8 @@ const CardCategory = ({
       </View>
       <TouchableOpacity
         style={{ marginLeft: 'auto' }}
-        // onPress={() => toggleFavorite(id)}
+        activeOpacity={0.6}
+        onPress={() => handleToggleFavorite(idPost)}
       >
         <AntDesign
           name="heart"

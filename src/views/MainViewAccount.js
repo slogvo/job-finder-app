@@ -196,8 +196,8 @@ const MainViewAccount = ({ navigation }) => {
                   paddingHorizontal: 15,
                 }}
                 onPress={() => {
-                  if (userInfo.file !== undefined) {
-                    return navigation.navigate('PDFViewAccount', { pdfFile: userInfo.file });
+                  if (userInfo?.file !== undefined) {
+                    return navigation.navigate('PDFViewAccount', { pdfFile: userInfo?.file });
                   }
                   return toggleNoCVModal();
                 }}

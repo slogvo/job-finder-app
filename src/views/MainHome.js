@@ -6,9 +6,38 @@ import RenderItem from '../../src/layout/RenderItem';
 import Title from '../../src/layout/Title';
 import CardCategory from '../../src/layout/CardCategory';
 import firestore from '@react-native-firebase/firestore';
+import auth from '@react-native-firebase/auth';
 
 const MainHome = ({ navigation }) => {
   const [recommends, setRecommends] = useState([]);
+  const [userInfo, setUserInfo] = useState();
+  const [userAuth, setUserAuth] = useState('');
+
+  auth().onAuthStateChanged((user) => {
+    if (user) {
+      setUserAuth(user);
+    } else setUserAuth('Unknown');
+  });
+  // console.log('userAuth.uid', userAuth.uid);
+
+  //Get userInfo
+  useEffect(() => {
+    firestore()
+      .collection('users')
+      .where('user_id', '==', `${userAuth.uid}`)
+      .onSnapshot((snapshot) => {
+        let user = [];
+        snapshot.forEach((doc) => {
+          user.push({
+            id: doc.id,
+            ...doc.data(),
+          });
+        });
+        setUserInfo(user[0]);
+      });
+  }, [userAuth]);
+
+  //Get posts
   useEffect(() => {
     firestore()
       .collection('posts')
@@ -33,7 +62,8 @@ const MainHome = ({ navigation }) => {
       career={item.career}
       title={item.title}
       navigation={navigation}
-      id={item.id}
+      idPost={item.id}
+      userInfo={userInfo}
     />
   );
 
@@ -120,6 +150,8 @@ const MainHome = ({ navigation }) => {
                   wage={item.wage}
                   career={item.career}
                   title={item.title}
+                  idPost={item.id}
+                  userInfo={userInfo}
                 />
               ))}
           </View>

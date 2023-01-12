@@ -35,15 +35,6 @@ const JobDetail = ({ route, navigation }) => {
       setUserAuth(user);
     } else setUserAuth('Unknown');
   });
-  // Get posts
-  useEffect(() => {
-    firestore()
-      .collection('posts')
-      .doc(itemId)
-      .onSnapshot((snapshot) => {
-        setJob(snapshot.data());
-      });
-  }, []);
 
   //Get userInfo
   useEffect(() => {
@@ -62,6 +53,16 @@ const JobDetail = ({ route, navigation }) => {
         console.log('user[0]: ', user[0]);
       });
   }, [userAuth]);
+
+  // Get posts
+  useEffect(() => {
+    firestore()
+      .collection('posts')
+      .doc(itemId)
+      .onSnapshot((snapshot) => {
+        setJob(snapshot.data());
+      });
+  }, []);
 
   const handleComment = (text) => {
     commentRef.current = text;
@@ -95,6 +96,15 @@ const JobDetail = ({ route, navigation }) => {
       })
       .catch((err) => console.log(err));
   };
+
+  let sumStar = 0,
+    count = 0;
+  if (job?.feedbacks) {
+    job?.feedbacks.forEach((feedback) => {
+      count++;
+      sumStar += feedback.star;
+    });
+  }
 
   return (
     <View
@@ -190,10 +200,11 @@ const JobDetail = ({ route, navigation }) => {
               </Text>
               <Text
                 style={{
-                  color: colors.text,
+                  color: colors.secondary,
                   marginTop: 4,
                   width: windowWidth - 150,
                   fontSize: 14,
+                  fontWeight: '500',
                 }}
               >
                 {job?.career}
@@ -212,16 +223,19 @@ const JobDetail = ({ route, navigation }) => {
               justifyContent: 'space-between',
             }}
           >
-            <Text
-              style={{
-                marginTop: 5,
-                fontSize: 15,
-                fontWeight: '700',
-                color: colors.text,
-              }}
-            >
-              Vote: <Text>0</Text> <AntDesign name="star" size={18} color={colors.yellowStar} />
-            </Text>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <Text
+                style={{
+                  fontSize: 15,
+                  fontWeight: '700',
+                  color: colors.text,
+                  marginRight: 5,
+                }}
+              >
+                Vote: {parseFloat(sumStar / count).toFixed(1)}
+              </Text>
+              <AntDesign name="star" size={18} color={colors.yellowStar} />
+            </View>
             <View
               style={{
                 width: 8,
@@ -236,7 +250,7 @@ const JobDetail = ({ route, navigation }) => {
                 marginTop: 5,
                 fontSize: 15,
                 fontWeight: '700',
-                color: colors.secondary,
+                color: '#14213d',
               }}
             >
               {job?.wage}
@@ -255,7 +269,7 @@ const JobDetail = ({ route, navigation }) => {
                 paddingVertical: 8,
                 borderRadius: 5,
                 height: 40,
-                backgroundColor: colors.secondary,
+                backgroundColor: '#adb5bd',
                 alignItems: 'center',
                 justifyContent: 'center',
               }}
@@ -317,17 +331,17 @@ const JobDetail = ({ route, navigation }) => {
                 paddingVertical: 10,
                 borderRadius: 8,
                 height: 50,
-                backgroundColor: colors.lightGray,
+                backgroundColor: colors.secondary,
                 flexDirection: 'row',
               }}
             >
-              <AntDesign name="heart" size={18} color={colors.text} />
+              <AntDesign name="heart" size={18} color="#fff" />
               <Text
                 style={{
                   fontWeight: '500',
                   marginLeft: 10,
                   fontSize: 16,
-                  color: colors.text,
+                  color: '#fff',
                 }}
               >
                 Lưu
@@ -381,11 +395,11 @@ const JobDetail = ({ route, navigation }) => {
                 Đánh giá công việc này
               </Text>
               <View style={styles.customRatingBarStyle}>
-                {maxRating.map((item, key) => {
+                {maxRating.map((item, index) => {
                   return (
                     <TouchableOpacity
                       activeOpacity={0.7}
-                      key={item}
+                      key={index}
                       onPress={() => setDefaultRating(item)}
                     >
                       {item <= defaultRating ? (
@@ -480,19 +494,21 @@ const JobDetail = ({ route, navigation }) => {
                       </Text>
                       {Array(item?.star)
                         .fill(0)
-                        .map(() => (
-                          <AntDesign
-                            name="star"
-                            size={15}
-                            color={colors.yellowStar}
-                            style={{ marginLeft: 4 }}
-                          />
+                        .map((starItem, index) => (
+                          <View key={index}>
+                            <AntDesign
+                              name="star"
+                              size={15}
+                              color={colors.yellowStar}
+                              style={{ marginLeft: 4 }}
+                            />
+                          </View>
                         ))}
                     </View>
                     <Text
                       style={{ marginTop: 3, color: colors.primary, width: 320, lineHeight: 20 }}
                     >
-                      {item?.feedback}
+                      {item?.feedback || 'Người dùng không để lại bình luận.'}
                     </Text>
                     <Text style={{ marginTop: 5, fontSize: 12 }}>{item?.createdAt}</Text>
                   </View>

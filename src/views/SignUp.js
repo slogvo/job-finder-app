@@ -24,7 +24,7 @@ const SignUp = ({ navigation }) => {
         firestore()
           .collection('users')
           .add({
-            id: values.user.uid,
+            user_id: values.user.uid,
             username: data?.username,
             email: data?.email,
             password: data?.password,

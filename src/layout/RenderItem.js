@@ -1,6 +1,7 @@
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 import colors from '../../assets/colors/colors';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import firestore from '@react-native-firebase/firestore';
 
 const RenderItem = ({
   companyLogo,
@@ -10,10 +11,46 @@ const RenderItem = ({
   title,
   career,
   navigation,
-  id,
+  idPost,
+  userInfo,
   ...props
 }) => {
+  // console.log('id: ', idPost);
   const companyAddressArr = companyAddress?.split(',');
+
+  const favoritesClone = userInfo?.favorites || [];
+  console.log('favoritesClone: ', favoritesClone);
+  const [isFavorite] = favoritesClone
+    .filter((item) => item.id === idPost)
+    .map((item) => item.isFavorite);
+
+  const handleToggleFavorite = (ID) => {
+    const hasPost = favoritesClone?.find((favorite) => favorite.id === ID);
+    if (hasPost === undefined) {
+      favoritesClone.push({
+        id: ID,
+        isFavorite: false,
+      });
+    }
+    const updatedArray = favoritesClone?.map((favorite) => {
+      if (favorite.id === ID)
+        return {
+          ...favorite,
+          isFavorite: !favorite.isFavorite,
+        };
+      return favorite;
+    });
+    console.log('updatedArray: ', updatedArray);
+    firestore()
+      .collection('users')
+      .doc(userInfo.id)
+      .update({
+        favorites: updatedArray,
+      })
+      .then(() => {})
+      .catch((err) => console.log(err));
+  };
+
   return (
     <View
       style={{
@@ -68,7 +105,13 @@ const RenderItem = ({
             </Text>
           </View>
         </View>
-        <AntDesign name="heart" size={20} color={colors.redColor} />
+        <TouchableOpacity activeOpacity={0.6} onPress={() => handleToggleFavorite(idPost)}>
+          <AntDesign
+            name="heart"
+            size={20}
+            color={isFavorite === true ? colors.redColor : colors.border}
+          />
+        </TouchableOpacity>
       </View>
       <Text
         numberOfLines={1}
@@ -114,6 +157,7 @@ const RenderItem = ({
             Hết hạn trong 30 ngày
           </Text>
           <TouchableOpacity
+            activeOpacity={0.6}
             style={{
               marginLeft: 'auto',
               width: '30%',
@@ -125,7 +169,7 @@ const RenderItem = ({
               marginRight: 8,
             }}
             onPress={() => {
-              navigation.navigate('JobDetail', { itemId: id });
+              navigation.navigate('JobDetail', { itemId: idPost });
             }}
           >
             <Text style={{ color: '#fff' }}>Nộp đơn</Text>
