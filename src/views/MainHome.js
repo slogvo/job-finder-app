@@ -18,7 +18,6 @@ const MainHome = ({ navigation }) => {
       setUserAuth(user);
     } else setUserAuth('Unknown');
   });
-  // console.log('userAuth.uid', userAuth.uid);
 
   //Get userInfo
   useEffect(() => {

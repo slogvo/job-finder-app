@@ -12,7 +12,6 @@ const ConfirmCVModal = ({
   isConfirmCVModal,
   handleToggleConfirmCVModal = () => {},
 }) => {
-  console.log('userInfo,: ', userInfo);
   const showToast = () => {
     Toast.show({
       type: 'success',

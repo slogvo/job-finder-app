@@ -26,7 +26,7 @@ const MainViewAccount = ({ navigation }) => {
   useEffect(() => {
     firestore()
       .collection('users')
-      .where('id', '==', `${userAuth.uid}`)
+      .where('user_id', '==', `${userAuth.uid}`)
       .onSnapshot((snapshot) => {
         let user = [];
         snapshot.forEach((doc) => {

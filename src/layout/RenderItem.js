@@ -15,11 +15,9 @@ const RenderItem = ({
   userInfo,
   ...props
 }) => {
-  // console.log('id: ', idPost);
   const companyAddressArr = companyAddress?.split(',');
 
   const favoritesClone = userInfo?.favorites || [];
-  console.log('favoritesClone: ', favoritesClone);
   const [isFavorite] = favoritesClone
     .filter((item) => item.id === idPost)
     .map((item) => item.isFavorite);
@@ -40,7 +38,6 @@ const RenderItem = ({
         };
       return favorite;
     });
-    console.log('updatedArray: ', updatedArray);
     firestore()
       .collection('users')
       .doc(userInfo.id)

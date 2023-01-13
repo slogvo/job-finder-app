@@ -10,7 +10,6 @@ LogBox.ignoreLogs(['Non-serializable values were found in the navigation state']
 
 const Recruitment = ({ route, navigation }) => {
   const { itemId, userInfo } = route.params;
-  console.log('itemId, userInfo: ', itemId, userInfo);
   const [isConfirmCVModal, setConfirmCVModal] = useState(false);
   const [phone, setPhone] = useState('');
   const toggleConfirmCVModal = () => {

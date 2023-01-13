@@ -40,7 +40,7 @@ const JobDetail = ({ route, navigation }) => {
   useEffect(() => {
     firestore()
       .collection('users')
-      .where('id', '==', `${userAuth.uid}`)
+      .where('user_id', '==', `${userAuth.uid}`)
       .onSnapshot((snapshot) => {
         let user = [];
         snapshot.forEach((doc) => {
@@ -50,7 +50,6 @@ const JobDetail = ({ route, navigation }) => {
           });
         });
         setUserInfo(user[0]);
-        console.log('user[0]: ', user[0]);
       });
   }, [userAuth]);
 
@@ -74,7 +73,7 @@ const JobDetail = ({ route, navigation }) => {
     feedbacksClone.push({
       jobId: itemId,
       star: defaultRating,
-      user_id: userInfo?.id,
+      user_id: userInfo?.user_id,
       feedback: commentRef.current,
       userName: userInfo?.username,
       createdAt:
@@ -232,7 +231,7 @@ const JobDetail = ({ route, navigation }) => {
                   marginRight: 5,
                 }}
               >
-                Vote: {parseFloat(sumStar / count).toFixed(1)}
+                Vote: {sumStar ? parseFloat(sumStar / count).toFixed(1) : ''}
               </Text>
               <AntDesign name="star" size={18} color={colors.yellowStar} />
             </View>
@@ -481,12 +480,12 @@ const JobDetail = ({ route, navigation }) => {
               Các đánh giá khác:
             </Text>
             {job?.feedbacks?.length > 0 &&
-              job?.feedbacks.reverse().map((item) => (
-                <View key={item.id} style={{ marginTop: 25, flexDirection: 'row' }}>
+              job?.feedbacks.reverse().map((item, index) => (
+                <View key={`${item.id}${index}`} style={{ marginTop: 25, flexDirection: 'row' }}>
                   <Image
                     source={require('../../assets/images/user-image.png')}
                     style={{ marginRight: 10, width: 45, height: 45, resizeMode: 'cover' }}
-                  ></Image>
+                  />
                   <View>
                     <View style={{ flexDirection: 'row' }}>
                       <Text style={{ fontWeight: '700', color: colors.text }}>
@@ -514,6 +513,9 @@ const JobDetail = ({ route, navigation }) => {
                   </View>
                 </View>
               ))}
+            {job?.feedbacks?.length <= 0 && (
+              <Text style={{ marginTop: 10 }}>Chưa có bất kỳ nhận xét nào.</Text>
+            )}
           </View>
         </View>
         <View style={{ marginBottom: 100 }} />

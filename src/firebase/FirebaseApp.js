@@ -17,7 +17,6 @@ const FirebaseApp = () => {
             ...doc.data(),
           });
         });
-        console.log('posts: ', posts);
         setUsers(posts);
       });
   }, []);
