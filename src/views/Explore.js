@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { Text, View, ScrollView, TouchableOpacity, Image, Dimensions } from 'react-native';
 import colors from '../../assets/colors/colors';
-import Carousel, { Pagination } from 'react-native-snap-carousel';
-import { ViewPropTypes } from 'deprecated-react-native-prop-types';
 
 const { width } = Dimensions.get('window');
 const SPACING = 10;
@@ -90,22 +88,7 @@ const Explore = () => {
             marginTop: 30,
           }}
         >
-          <View style={{ flex: 1 / 2, marginTop: 20 }}>
-            <Carousel
-              layout="default"
-              data={images}
-              sliderWidth={width}
-              itemWidth={width}
-              renderItem={({ item, index }) => (
-                <Image
-                  key={index}
-                  style={{ width: '100%', height: '100%' }}
-                  resizeMode="contain"
-                  source={item.image}
-                />
-              )}
-            />
-          </View>
+          <View style={{ flex: 1 / 2, marginTop: 20 }}></View>
         </View>
         <View style={{ marginBottom: 80 }} />
       </ScrollView>
