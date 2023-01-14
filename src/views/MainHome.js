@@ -1,4 +1,4 @@
-import { ScrollView, FlatList, View } from 'react-native';
+import { ScrollView, FlatList, StatusBar, View } from 'react-native';
 import { useEffect, useState } from 'react';
 import BannerCarousel from '../layout/BannerCarousel';
 import SearchLayout from '../layout/SearchLayout';
@@ -75,6 +75,7 @@ const MainHome = ({ navigation }) => {
         paddingTop: 10,
       }}
     >
+      <StatusBar backgroundColor="#fff" barStyle="dark-content" translucent={false} />
       <ScrollView
         showsVerticalScrollIndicator={false}
         persistentScrollbar={true}

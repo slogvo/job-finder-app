@@ -3,6 +3,7 @@ const colors = {
   text2: '#14213d',
   primary: '#a56ffb',
   secondary: '#3cde17',
+  background: '#fafbfd',
   lightPurple: '#C4BFFD',
   focusColor: '#7C73F8',
   darkGray: '#1b263b',

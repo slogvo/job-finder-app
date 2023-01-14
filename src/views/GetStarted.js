@@ -9,8 +9,6 @@ import {
   View,
 } from 'react-native';
 import colors from '../../assets/colors/colors';
-import FirebaseApp from '../firebase/FirebaseApp';
-const windowHeight = Dimensions.get('window').height;
 
 const GetStarted = ({ navigation }) => {
   return (
@@ -19,7 +17,11 @@ const GetStarted = ({ navigation }) => {
         flex: 1,
       }}
     >
-      <StatusBar backgroundColor="transparent" translucent={true}></StatusBar>
+      <StatusBar
+        backgroundColor="transparent"
+        translucent={true}
+        barStyle="light-content"
+      ></StatusBar>
       <ImageBackground
         source={require('../../assets/images/background.png')}
         resizeMode="cover"

@@ -60,9 +60,9 @@ const CardCategory = ({
         width: '100%',
         height: 100,
         borderRadius: 16,
-        backgroundColor: '#fff',
+        backgroundColor: colors.background,
         padding: 10,
-        elevation: 2,
+        // elevation: 2,
         marginBottom: 20,
       }}
     >

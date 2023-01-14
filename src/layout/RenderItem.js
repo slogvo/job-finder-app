@@ -54,9 +54,9 @@ const RenderItem = ({
         width: 290,
         height: 210,
         borderRadius: 16,
-        backgroundColor: '#fff',
+        backgroundColor: '#fafbfd',
         padding: 15,
-        elevation: 2,
+        // elevation: 2,
         marginRight: 30,
       }}
     >
