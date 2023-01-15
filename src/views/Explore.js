@@ -3,10 +3,8 @@ import {
   Text,
   View,
   ScrollView,
-  TouchableOpacity,
   Image,
   Dimensions,
-  FlatList,
   StatusBar,
   ImageBackground,
 } from 'react-native';

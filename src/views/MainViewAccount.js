@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { Image, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import colors from '../../assets/colors/colors';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -8,8 +8,11 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import NoCVModal from '../component/modal/NoCVModal';
+import { useForm, Controller } from 'react-hook-form';
+import { RadioButton } from 'react-native-paper';
 
 const MainViewAccount = ({ navigation }) => {
+  const [checked, setChecked] = useState('first');
   const [isNoCVModal, setNoCVModal] = useState(false);
   const toggleNoCVModal = () => {
     setNoCVModal(!isNoCVModal);
@@ -40,6 +43,14 @@ const MainViewAccount = ({ navigation }) => {
   }, [userAuth]);
 
   const userDisplayArr = userAuth.displayName?.split(' ');
+
+  const {
+    setValue,
+    handleSubmit,
+    control,
+    reset,
+    formState: { errors },
+  } = useForm();
   return (
     <View
       style={{
@@ -160,7 +171,7 @@ const MainViewAccount = ({ navigation }) => {
               <Text style={{ textAlign: 'center' }}>Việc làm ứng tuyển</Text>
             </View>
           </View>
-          <Text style={{ marginTop: 10, fontSize: 16, color: colors.text, fontWeight: '700' }}>
+          <Text style={{ marginTop: 15, fontSize: 16, color: colors.text, fontWeight: '700' }}>
             {userAuth.displayName}
           </Text>
           <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 5 }}>
@@ -176,7 +187,7 @@ const MainViewAccount = ({ navigation }) => {
             <Text
               style={{
                 fontSize: 16,
-                color: colors.text,
+                color: colors.primary,
                 fontWeight: '500',
               }}
             >
@@ -184,7 +195,7 @@ const MainViewAccount = ({ navigation }) => {
             </Text>
             <View
               style={{
-                marginTop: 20,
+                marginTop: 10,
                 justifyContent: 'space-between',
                 flexDirection: 'row',
                 width: '100%',
@@ -197,7 +208,7 @@ const MainViewAccount = ({ navigation }) => {
                   borderRadius: 5,
                   alignItems: 'center',
                   justifyContent: 'center',
-                  backgroundColor: colors.secondary,
+                  backgroundColor: colors.primary,
                   width: '48%',
                   paddingHorizontal: 15,
                 }}
@@ -221,17 +232,155 @@ const MainViewAccount = ({ navigation }) => {
                   paddingHorizontal: 15,
                   borderWidth: 1,
                   borderStyle: 'dashed',
-                  borderColor: colors.secondary,
+                  borderColor: colors.primary,
                 }}
                 onPress={() => {}}
               >
                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                  <AntDesign name="pluscircle" size={16} color={colors.secondary} />
-                  <Text style={{ marginLeft: 10, color: colors.secondary, fontWeight: 'bold' }}>
+                  <AntDesign name="pluscircle" size={16} color={colors.primary} />
+                  <Text style={{ marginLeft: 10, color: colors.primary, fontWeight: 'bold' }}>
                     Upload CV mới
                   </Text>
                 </View>
               </TouchableOpacity>
+            </View>
+            <View
+              style={{
+                alignItems: 'flex-start',
+                justifyContent: 'flex-start',
+                marginTop: 15,
+              }}
+            >
+              <Text
+                style={{
+                  fontSize: 14,
+                  color: colors.text,
+                  fontWeight: '500',
+                }}
+              >
+                Nghề nghiệp
+              </Text>
+              <Controller
+                control={control}
+                rules={{
+                  required: true,
+                }}
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <TextInput
+                    style={{
+                      marginTop: 8,
+                      borderWidth: 1,
+                      width: '100%',
+                      borderRadius: 5,
+                      height: 50,
+                      borderColor: colors.border,
+                      fontWeight: '400',
+                      paddingLeft: 15,
+                    }}
+                    placeholder="VD: Lập trình viên, designer,..."
+                    onBlur={onBlur}
+                    onChangeText={onChange}
+                    value={value}
+                  />
+                )}
+                name="email"
+              />
+            </View>
+            <View
+              style={{
+                alignItems: 'flex-start',
+                justifyContent: 'flex-start',
+                marginTop: 15,
+              }}
+            >
+              <Text
+                style={{
+                  fontSize: 14,
+                  color: colors.text,
+                  fontWeight: '500',
+                }}
+              >
+                Vị trí (nếu có)
+              </Text>
+              <Controller
+                control={control}
+                rules={{
+                  required: true,
+                }}
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <TextInput
+                    style={{
+                      marginTop: 8,
+                      borderWidth: 1,
+                      width: '100%',
+                      borderRadius: 5,
+                      height: 50,
+                      borderColor: colors.border,
+                      fontWeight: '400',
+                      paddingLeft: 15,
+                    }}
+                    placeholder="VD:Trưởng phòng nhân sự"
+                    onBlur={onBlur}
+                    onChangeText={onChange}
+                    value={value}
+                  />
+                )}
+                name="email"
+              />
+            </View>
+            <View
+              style={{
+                alignItems: 'flex-start',
+                justifyContent: 'flex-start',
+                marginTop: 15,
+              }}
+            >
+              <Text
+                style={{
+                  fontSize: 14,
+                  color: colors.text,
+                  fontWeight: '500',
+                }}
+              >
+                Ngày sinh
+              </Text>
+              <Controller
+                control={control}
+                rules={{
+                  required: true,
+                }}
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <TextInput
+                    style={{
+                      marginTop: 8,
+                      borderWidth: 1,
+                      width: '100%',
+                      borderRadius: 5,
+                      height: 50,
+                      borderColor: colors.border,
+                      fontWeight: '400',
+                      paddingLeft: 15,
+                    }}
+                    placeholder="Ngày sinh của bạn"
+                    onBlur={onBlur}
+                    onChangeText={onChange}
+                    value={value}
+                  />
+                )}
+                name="email"
+              />
+            </View>
+            <View>
+              <RadioButton
+                value="Nam"
+                status={checked === 'Nam' ? 'checked' : 'unchecked'}
+                onPress={() => setChecked('Nam')}
+              />
+              <RadioButton
+                value="Nữ"
+                status={checked === 'Nữ' ? 'checked' : 'unchecked'}
+                onPress={() => setChecked('Nữ')}
+              />
             </View>
           </View>
         </View>
