@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import colors from '../../assets/colors/colors';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -116,12 +116,18 @@ const MainViewAccount = ({ navigation }) => {
                 width: 75,
                 height: 75,
                 borderRadius: 100,
-                backgroundColor: '#7896FF',
+                // backgroundColor: '#7896FF',
               }}
             >
-              <Text style={{ fontSize: 30, color: '#fff', fontWeight: '900' }}>
+              {/* <Text style={{ fontSize: 30, color: '#fff', fontWeight: '900' }}>
                 {userDisplayArr && userDisplayArr[userDisplayArr?.length - 1][0]}
-              </Text>
+              </Text> */}
+              <Image
+                source={{
+                  uri: 'https://firebasestorage.googleapis.com/v0/b/job-finder-app-c1066.appspot.com/o/user-image.png?alt=media&token=c717e663-745e-491b-a96e-4b3c229ff8ac',
+                }}
+                style={{ width: 75, height: 75 }}
+              />
               {/* Camera */}
               <View
                 style={{
@@ -133,7 +139,7 @@ const MainViewAccount = ({ navigation }) => {
                   width: 28,
                   height: 28,
                   borderRadius: 100,
-                  backgroundColor: '#f9f9f9',
+                  backgroundColor: colors.background,
                   borderWidth: 1,
                   borderColor: 'white',
                 }}

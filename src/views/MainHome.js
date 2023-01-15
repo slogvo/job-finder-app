@@ -152,6 +152,7 @@ const MainHome = ({ navigation }) => {
                   title={item.title}
                   idPost={item.id}
                   userInfo={userInfo}
+                  navigation={navigation}
                 />
               ))}
           </View>

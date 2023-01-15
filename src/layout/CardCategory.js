@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, Text, TouchableOpacity, View } from 'react-native';
+import { Image, Pressable, Text, TouchableOpacity, View } from 'react-native';
 import colors from '../../assets/colors/colors';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import firestore from '@react-native-firebase/firestore';
@@ -14,6 +14,7 @@ const CardCategory = ({
   career,
   idPost,
   userInfo,
+  navigation,
   ...props
 }) => {
   // const { toggleFavorite } = useGallery();
@@ -51,8 +52,10 @@ const CardCategory = ({
   };
 
   return (
-    <View
-      onPress={() => navigation.navigate('JobDetail')}
+    <Pressable
+      onPress={() => {
+        navigation.navigate('JobDetail', { itemId: idPost });
+      }}
       style={{
         flex: 1,
         alignItems: 'flex-start',
@@ -159,7 +162,7 @@ const CardCategory = ({
           color={isFavorite === true ? colors.redColor : colors.border}
         />
       </TouchableOpacity>
-    </View>
+    </Pressable>
   );
 };
 
