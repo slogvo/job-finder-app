@@ -20,6 +20,7 @@ const MyJob = ({ status, jobId, isFavorite = false }) => {
         });
         const post = posts.filter((post) => post.id === jobId);
         setPostDetail(post[0]);
+        console.log('post[0]: ', post[0]);
       });
   }, [jobId]);
   return (

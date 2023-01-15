@@ -13,6 +13,7 @@ const MyJobsScreen = ({ navigation }) => {
   auth().onAuthStateChanged((user) => {
     if (user) {
       setUserId(user.uid);
+      console.log('user.uid: ', user.uid);
     } else setUserId('Unknown');
   });
   useEffect(() => {

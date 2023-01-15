@@ -29,7 +29,7 @@ const ConfirmCVModal = ({
         username: userInfo?.username,
         email: userInfo?.email,
         file: userInfo?.file || '',
-        userId: userInfo?.id,
+        userId: userInfo?.user_id,
         phoneNumber: phone,
         jobId: jobID,
         status: 0,
