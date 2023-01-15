@@ -1,14 +1,74 @@
-import React from 'react';
-import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Image, ImageBackground, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import colors from '../../assets/colors/colors';
-import { useGallery } from '../contexts/gallery-context';
-import useProduct from '../hooks/useProduct';
+import firestore from '@react-native-firebase/firestore';
 import CardCategory from '../layout/CardCategory';
-import Entypo from 'react-native-vector-icons/Entypo';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import auth from '@react-native-firebase/auth';
 
 const Bookmark = ({ navigation }) => {
-  const { catList, toggleFavorite } = useGallery();
+  const [posts, setPosts] = useState([]);
+  const [favorites, setFavorites] = useState([]);
+  const [userAuth, setUserAuth] = useState('');
+
+  auth().onAuthStateChanged((user) => {
+    if (user) {
+      setUserAuth(user);
+    } else setUserAuth('Unknown');
+  });
+
+  //Get favorites
+  useEffect(() => {
+    firestore()
+      .collection('users')
+      .where('user_id', '==', `${userAuth.uid}`)
+      .onSnapshot((snapshot) => {
+        let user = [];
+        snapshot.forEach((doc) => {
+          user.push({
+            id: doc.id,
+            ...doc.data(),
+          });
+        });
+        let isFavoriteArr = [];
+        isFavoriteArr = user[0]?.favorites.filter((item) => item.isFavorite === true);
+        console.log(' isFavorite: ', isFavoriteArr);
+        setFavorites(isFavoriteArr);
+      });
+  }, [userAuth]);
+
+  //Get posts
+  useEffect(() => {
+    firestore()
+      .collection('posts')
+      .onSnapshot((snapshot) => {
+        let posts = [];
+        snapshot.forEach((doc) => {
+          posts.push({
+            id: doc.id,
+            ...doc.data(),
+          });
+        });
+        setPosts(posts);
+      });
+  }, [favorites]);
+
+  // let props = ['id', ''];
+
+  // let result = posts
+  //   ?.filter(function (o1) {
+  //     // filter out (!) items in result2
+  //     return favorites?.some(function (o2) {
+  //       return o1.id === o2.id; // assumes unique id
+  //     });
+  //   })
+  //   .map(function (o) {
+  //     // use reduce to make objects with only the required properties
+  //     // and map to apply this to the filtered array as a whole
+  //     return props.reduce(function (newo, name) {
+  //       newo[name] = o[name];
+  //       return newo;
+  //     }, {});
+  //   });
 
   return (
     <View
@@ -33,32 +93,17 @@ const Bookmark = ({ navigation }) => {
             width: '100%',
             height: 60,
             backgroundColor: '#fff',
-            elevation: 10,
+            elevation: 5,
           }}
         >
           <View
             style={{
               flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'space-between',
               paddingHorizontal: 25,
-              paddingTop: 15,
+              paddingTop: 20,
               width: '100%',
             }}
           >
-            <TouchableOpacity onPress={() => navigation.goBack()}>
-              <View
-                style={{
-                  width: 40,
-                  height: 40,
-                  borderRadius: 40,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}
-              >
-                <Ionicons name="ios-arrow-back-sharp" size={28} color={colors.darkGray} />
-              </View>
-            </TouchableOpacity>
             <Text
               style={{
                 fontSize: 18,
@@ -68,33 +113,98 @@ const Bookmark = ({ navigation }) => {
             >
               Công việc yêu thích
             </Text>
-            <Entypo name="dots-three-vertical" size={20} color={colors.text} />
           </View>
         </View>
         <View
           style={{
+            marginTop: 15,
+            width: '100%',
             paddingHorizontal: 25,
             justifyContent: 'center',
-            alignItems: 'center',
-            marginTop: 30,
           }}
         >
-          {catList?.length > 0 &&
-            catList
-              .filter((item) => item.isFavorite === true)
+          <View style={{ width: '100%', position: 'relative', marginBottom: 25 }}>
+            <Image
+              source={require('../../assets/images/bg-gradient.png')}
+              style={{
+                paddingTop: 20,
+                width: '100%',
+                marginTop: 10,
+                height: 195,
+                resizeMode: 'stretch',
+              }}
+            />
+            <View
+              style={{
+                marginTop: 10,
+                marginBottom: 10,
+                padding: 20,
+                position: 'absolute',
+                top: 10,
+              }}
+            >
+              <Text
+                style={{ fontSize: 23, color: '#fff', lineHeight: 30, fontFamily: 'Poppins-Bold' }}
+              >
+                Big Opportunity {'\n'}Around You!
+              </Text>
+              <Text style={{ color: '#fff', lineHeight: 20 }}>
+                Tìm công việc thực sự tốt chỉ {'\n'}dành cho bạn và xung quanh bạn.
+              </Text>
+              <TouchableOpacity
+                activeOpacity={0.7}
+                style={{
+                  marginTop: 10,
+                  height: 40,
+                  width: 90,
+                  borderRadius: 8,
+                  backgroundColor: '#fff',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                <Text style={{ color: colors.primary, fontWeight: '600' }}>Tìm kiếm</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+          <Text
+            style={{
+              fontSize: 16,
+              marginBottom: 15,
+              color: colors.text2,
+              fontWeight: '700',
+              textAlign: 'left',
+            }}
+          >
+            Bạn đang quan tâm
+          </Text>
+          {favorites?.length > 0 &&
+            posts
+              .filter((item) => favorites.find((favorite) => favorite.id === item.id))
               .map((item) => (
-                <CardCategory
-                  toggleFavorite={toggleFavorite}
-                  key={item.id}
-                  id={item.id}
-                  isFavorite={item.isFavorite}
-                  img={item.companyLogo}
-                  companyName={item.companyName}
-                  desc={item.companyDescription}
-                  salary={item.salary}
-                  location={item.companyLocation}
-                />
+                <View key={item.id}>
+                  <CardCategory
+                    id={item.id}
+                    companyLogo={item.image}
+                    companyName={item.name_company}
+                    companyAddress={item.address}
+                    wage={item.wage}
+                    career={item.career}
+                    title={item.title}
+                    idPost={item.id}
+                  />
+                </View>
               ))}
+          {favorites?.length <= 0 && (
+            <Text
+              style={{
+                fontSize: 14,
+                color: colors.secondary,
+              }}
+            >
+              Chưa có công việc nào được theo dõi!
+            </Text>
+          )}
         </View>
         <View style={{ marginBottom: 80 }} />
       </ScrollView>

@@ -143,7 +143,7 @@ const Explore = () => {
               <Carousel
                 ref={carouselRef}
                 onSnapToItem={(index) => onSelect(index)}
-                layout={'default'}
+                layout={'stack'}
                 data={images}
                 sliderWidth={width}
                 itemWidth={width}
