@@ -1,8 +1,8 @@
 const colors = {
   text: '#0d1b2a',
   text2: '#14213d',
-  primary: '#a56ffb',
-  secondary: '#3cde17',
+  primary: '#35405a',
+  secondary: '#30DB59',
   background: '#fafbfd',
   lightPurple: '#C4BFFD',
   focusColor: '#7C73F8',

@@ -53,7 +53,7 @@ function DrawerNavigation({ navigation }) {
         }}
       />
 
-      <Drawer.Screen
+      {/* <Drawer.Screen
         name="Thông báo"
         component={Notifications}
         options={{
@@ -71,7 +71,7 @@ function DrawerNavigation({ navigation }) {
             />
           ),
         }}
-      />
+      /> */}
 
       <Drawer.Screen
         name="Tiếp nhận hồ sơ"

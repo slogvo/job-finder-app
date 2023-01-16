@@ -15,8 +15,8 @@ import Entypo from 'react-native-vector-icons/Entypo';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import firestore from '@react-native-firebase/firestore';
-import Toast from 'react-native-toast-message';
 import auth from '@react-native-firebase/auth';
+import Toast from 'react-native-toast-message';
 
 const windowWidth = Dimensions.get('window').width;
 
@@ -28,6 +28,15 @@ const JobDetail = ({ route, navigation }) => {
   const { itemId } = route.params;
   const [job, setJob] = useState();
   const [userInfo, setUserInfo] = useState();
+  const showToast = () => {
+    Toast.show({
+      type: 'success',
+      text1: 'Xóa thành công!',
+      text2: 'Bài tuyển dụng của bạn đã được xóa!',
+      topOffset: 0,
+      visibilityTime: 2500,
+    });
+  };
 
   const [userAuth, setUserAuth] = useState('');
   auth().onAuthStateChanged((user) => {
@@ -104,6 +113,46 @@ const JobDetail = ({ route, navigation }) => {
       sumStar += feedback.star;
     });
   }
+
+  const favoritesClone = userInfo?.favorites || [];
+  const [isFavorite] = favoritesClone
+    .filter((item) => item.id === itemId)
+    .map((item) => item.isFavorite);
+
+  const handleToggleFavorite = (ID) => {
+    const hasPost = favoritesClone?.find((favorite) => favorite.id === ID);
+    if (hasPost === undefined) {
+      favoritesClone.push({
+        id: ID,
+        isFavorite: false,
+      });
+    }
+    const updatedArray = favoritesClone?.map((favorite) => {
+      if (favorite.id === ID)
+        return {
+          ...favorite,
+          isFavorite: !favorite.isFavorite,
+        };
+      return favorite;
+    });
+    firestore()
+      .collection('users')
+      .doc(userInfo.id)
+      .update({
+        favorites: updatedArray,
+      })
+      .then(() => {})
+      .catch((err) => console.log(err));
+  };
+
+  // Delete Post
+  const handleDeletePost = () => {
+    firestore()
+      .collection('posts')
+      .doc(itemId)
+      .delete()
+      .then(() => {});
+  };
 
   return (
     <View
@@ -268,7 +317,7 @@ const JobDetail = ({ route, navigation }) => {
                 paddingVertical: 8,
                 borderRadius: 5,
                 height: 40,
-                backgroundColor: '#adb5bd',
+                backgroundColor: '#ecedee',
                 alignItems: 'center',
                 justifyContent: 'center',
               }}
@@ -277,7 +326,7 @@ const JobDetail = ({ route, navigation }) => {
                 style={{
                   fontWeight: '500',
                   fontSize: 14,
-                  color: '#fff',
+                  color: colors.text2,
                 }}
               >
                 {job?.type_job === 'fruqq8kDn2IEb4cV7hcb' ? 'Part-time' : 'Full-time'}
@@ -294,58 +343,125 @@ const JobDetail = ({ route, navigation }) => {
               width: '100%',
             }}
           >
-            <TouchableOpacity
-              style={{
-                width: '65%',
-                alignItems: 'center',
-                justifyContent: 'center',
-                paddingVertical: 10,
-                borderRadius: 8,
-                backgroundColor: colors.primary,
-                height: 50,
-              }}
-              onPress={() => {
-                navigation.navigate('Recruitment', {
-                  itemId: itemId,
-                  userAuth: userAuth,
-                  userInfo: userInfo,
-                });
-              }}
-            >
-              <Text
+            {job?.user_id === userInfo?.user_id ? (
+              <TouchableOpacity
                 style={{
-                  fontWeight: '500',
-                  fontSize: 16,
-                  color: 'white',
+                  width: '65%',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  paddingVertical: 10,
+                  borderRadius: 8,
+                  backgroundColor: colors.redColor,
+                  height: 50,
+                }}
+                onPress={() => {
+                  showToast();
+                  setTimeout(() => {
+                    navigation.goBack();
+                  }, 1000);
+                  setTimeout(() => {
+                    handleDeletePost();
+                  }, 1100);
                 }}
               >
-                Ứng tuyển
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={{
-                width: '30%',
-                alignItems: 'center',
-                justifyContent: 'center',
-                paddingVertical: 10,
-                borderRadius: 8,
-                height: 50,
-                backgroundColor: colors.secondary,
-                flexDirection: 'row',
-              }}
-            >
-              <AntDesign name="heart" size={18} color="#fff" />
-              <Text
+                <Text
+                  style={{
+                    fontWeight: '500',
+                    fontSize: 16,
+                    color: 'white',
+                  }}
+                >
+                  Xóa bài tuyển dụng
+                </Text>
+              </TouchableOpacity>
+            ) : (
+              <TouchableOpacity
                 style={{
-                  fontWeight: '500',
-                  marginLeft: 10,
-                  fontSize: 16,
-                  color: '#fff',
+                  width: '65%',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  paddingVertical: 10,
+                  borderRadius: 8,
+                  backgroundColor: colors.primary,
+                  height: 50,
+                }}
+                onPress={() => {
+                  navigation.navigate('Recruitment', {
+                    itemId: itemId,
+                    userAuth: userAuth,
+                    userInfo: userInfo,
+                  });
                 }}
               >
-                Lưu
-              </Text>
-            </TouchableOpacity>
+                <Text
+                  style={{
+                    fontWeight: '500',
+                    fontSize: 16,
+                    color: 'white',
+                  }}
+                >
+                  Ứng tuyển
+                </Text>
+              </TouchableOpacity>
+            )}
+            {isFavorite === true ? (
+              <TouchableOpacity
+                onPress={() => handleToggleFavorite(itemId)}
+                style={{
+                  width: '30%',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  paddingVertical: 10,
+                  borderRadius: 8,
+                  height: 50,
+                  backgroundColor: colors.border,
+                  flexDirection: 'row',
+                }}
+              >
+                <AntDesign
+                  name="plus"
+                  size={18}
+                  color={colors.text}
+                  style={{ transform: [{ rotate: '45deg' }] }}
+                />
+                <Text
+                  style={{
+                    fontWeight: '500',
+                    marginLeft: 10,
+                    fontSize: 16,
+                    color: colors.text,
+                  }}
+                >
+                  Huỷ
+                </Text>
+              </TouchableOpacity>
+            ) : (
+              <TouchableOpacity
+                onPress={() => handleToggleFavorite(itemId)}
+                style={{
+                  width: '30%',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  paddingVertical: 10,
+                  borderRadius: 8,
+                  height: 50,
+                  backgroundColor: colors.secondary,
+                  flexDirection: 'row',
+                }}
+              >
+                <AntDesign name="heart" size={18} color="#fff" />
+                <Text
+                  style={{
+                    fontWeight: '500',
+                    marginLeft: 10,
+                    fontSize: 16,
+                    color: '#fff',
+                  }}
+                >
+                  Lưu
+                </Text>
+              </TouchableOpacity>
+            )}
           </View>
           {/* Detail */}
           <View style={{ marginTop: 20 }}>
@@ -461,7 +577,7 @@ const JobDetail = ({ route, navigation }) => {
                     height: 55,
                     alignItems: 'center',
                     justifyContent: 'center',
-                    backgroundColor: '#e8dafe',
+                    backgroundColor: '#e5effa',
                     borderRadius: 100,
                     bottom: -20,
                     left: '50%',
@@ -520,6 +636,7 @@ const JobDetail = ({ route, navigation }) => {
         </View>
         <View style={{ marginBottom: 100 }} />
       </ScrollView>
+      <Toast />
     </View>
   );
 };

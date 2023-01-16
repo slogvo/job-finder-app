@@ -3,6 +3,7 @@ import { Image, ScrollView, Text, TextInput, TouchableOpacity, View } from 'reac
 import colors from '../../assets/colors/colors';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import Fontisto from 'react-native-vector-icons/Fontisto';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import auth from '@react-native-firebase/auth';
@@ -160,37 +161,42 @@ const MainViewAccount = ({ navigation }) => {
             </View>
             <View style={{ width: 60, alignItems: 'center', justifyContent: 'center' }}>
               <Text style={{ fontSize: 16, color: colors.text, fontWeight: '700' }}>0</Text>
-              <Text style={{ textAlign: 'center' }}>Lượt xem hồ sơ</Text>
+              <Text style={{ textAlign: 'center', color: '#676767' }}>Lượt xem hồ sơ</Text>
             </View>
             <View style={{ width: 70, alignItems: 'center', justifyContent: 'center' }}>
               <Text style={{ fontSize: 16, color: colors.text, fontWeight: '700' }}>0</Text>
-              <Text style={{ textAlign: 'center' }}>Thông báo việc làm</Text>
+              <Text style={{ textAlign: 'center', color: '#676767' }}>Thông báo việc làm</Text>
             </View>
             <View style={{ width: 70, alignItems: 'center', justifyContent: 'center' }}>
               <Text style={{ fontSize: 16, color: colors.text, fontWeight: '700' }}>0</Text>
-              <Text style={{ textAlign: 'center' }}>Việc làm ứng tuyển</Text>
+              <Text style={{ textAlign: 'center', color: '#676767' }}>Việc làm ứng tuyển</Text>
             </View>
           </View>
           <Text style={{ marginTop: 15, fontSize: 16, color: colors.text, fontWeight: '700' }}>
             {userAuth.displayName}
           </Text>
-          <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 5 }}>
-            <MaterialIcons name="email" size={15} />
-            <Text style={{ marginLeft: 5 }}>{userAuth?.email}</Text>
+          <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 8 }}>
+            <MaterialIcons name="email" size={18} color="#676767" />
+            <Text style={{ marginLeft: 5, color: '#676767' }}>{userAuth?.email}</Text>
           </View>
-          <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 5 }}>
+          <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 8 }}>
             {/* <FontAwesome name="phone" size={15} /> */}
-            <AntDesign name="pluscircle" size={15} />
-            <Text style={{ marginLeft: 5 }}>Thêm số điện thoại</Text>
+            <AntDesign name="pluscircle" size={17} color="#676767" />
+            <Text style={{ marginLeft: 5, color: '#676767' }}>Thêm số điện thoại</Text>
           </View>
           <View style={{ marginTop: 20 }}>
             <Text
               style={{
-                fontSize: 16,
-                color: colors.primary,
+                color: colors.text,
                 fontWeight: '500',
+                fontSize: 16,
               }}
             >
+              <Image
+                source={require('../../assets/images/accountImage/file.png')}
+                style={{ width: 20, height: 20 }}
+              />
+              {'   '}
               Hồ sơ của tôi
             </Text>
             <View
@@ -244,6 +250,7 @@ const MainViewAccount = ({ navigation }) => {
                 </View>
               </TouchableOpacity>
             </View>
+            {/* Nghề nghiệp */}
             <View
               style={{
                 alignItems: 'flex-start',
@@ -258,6 +265,11 @@ const MainViewAccount = ({ navigation }) => {
                   fontWeight: '500',
                 }}
               >
+                <Image
+                  source={require('../../assets/images/accountImage/brief.png')}
+                  style={{ width: 20, height: 20 }}
+                />
+                {'   '}
                 Nghề nghiệp
               </Text>
               <Controller
@@ -286,6 +298,7 @@ const MainViewAccount = ({ navigation }) => {
                 name="email"
               />
             </View>
+            {/* Vị trí hiện tại */}
             <View
               style={{
                 alignItems: 'flex-start',
@@ -300,6 +313,11 @@ const MainViewAccount = ({ navigation }) => {
                   fontWeight: '500',
                 }}
               >
+                <Image
+                  source={require('../../assets/images/accountImage/office-chair.png')}
+                  style={{ width: 20, height: 20 }}
+                />
+                {'  '}
                 Vị trí (nếu có)
               </Text>
               <Controller
@@ -319,7 +337,7 @@ const MainViewAccount = ({ navigation }) => {
                       fontWeight: '400',
                       paddingLeft: 15,
                     }}
-                    placeholder="VD:Trưởng phòng nhân sự"
+                    placeholder="VD: Trưởng phòng nhân sự"
                     onBlur={onBlur}
                     onChangeText={onChange}
                     value={value}
@@ -328,6 +346,7 @@ const MainViewAccount = ({ navigation }) => {
                 name="email"
               />
             </View>
+            {/* Kinh nghiệm làm việc */}
             <View
               style={{
                 alignItems: 'flex-start',
@@ -342,6 +361,65 @@ const MainViewAccount = ({ navigation }) => {
                   fontWeight: '500',
                 }}
               >
+                <Image
+                  source={require('../../assets/images/accountImage/rating.png')}
+                  style={{ width: 20, height: 20 }}
+                />
+                {'  '}
+                Kinh nghiệm
+              </Text>
+              <Controller
+                control={control}
+                rules={{
+                  required: true,
+                }}
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <TextInput
+                    multiline={true}
+                    blurOnSubmit={true}
+                    style={{
+                      marginTop: 10,
+                      width: '100%',
+                      borderRadius: 8,
+                      height: 150,
+                      textAlignVertical: 'top',
+                      flexDirection: 'column',
+                      alignItems: 'flex-start',
+                      justifyContent: 'flex-start',
+                      backgroundColor: '#f9fafe',
+                      paddingHorizontal: 20,
+                      padding: 25,
+                      lineHeight: 30,
+                    }}
+                    placeholder="Mô tả kinh nghiệm làm việc, những gì đạt được trong quá trình làm việc,..."
+                    onBlur={onBlur}
+                    onChangeText={onChange}
+                    value={value}
+                  />
+                )}
+                name="email"
+              />
+            </View>
+            {/* Ngày sinh */}
+            <View
+              style={{
+                alignItems: 'flex-start',
+                justifyContent: 'flex-start',
+                marginTop: 15,
+              }}
+            >
+              <Text
+                style={{
+                  fontSize: 14,
+                  color: colors.text,
+                  fontWeight: '500',
+                }}
+              >
+                <Image
+                  source={require('../../assets/images/accountImage/date.png')}
+                  style={{ width: 20, height: 20 }}
+                />
+                {'   '}
                 Ngày sinh
               </Text>
               <Controller
@@ -370,21 +448,64 @@ const MainViewAccount = ({ navigation }) => {
                 name="email"
               />
             </View>
-            <View>
-              <RadioButton
-                value="Nam"
-                status={checked === 'Nam' ? 'checked' : 'unchecked'}
-                onPress={() => setChecked('Nam')}
-              />
-              <RadioButton
-                value="Nữ"
-                status={checked === 'Nữ' ? 'checked' : 'unchecked'}
-                onPress={() => setChecked('Nữ')}
-              />
+            {/* Checkbox */}
+            <View
+              style={{
+                marginTop: 15,
+              }}
+            >
+              <Text
+                style={{
+                  fontSize: 14,
+                  color: colors.text,
+                  fontWeight: '500',
+                }}
+              >
+                <Image
+                  source={require('../../assets/images/accountImage/female.png')}
+                  style={{ width: 20, height: 20 }}
+                />
+                {'   '}
+                Giới tính
+              </Text>
+              <View style={{ marginTop: 5, flexDirection: 'row', alignItems: 'center' }}>
+                <RadioButton
+                  color={colors.primary}
+                  uncheckedColor={colors.border}
+                  value="Nam"
+                  status={checked === 'Nam' ? 'checked' : 'unchecked'}
+                  onPress={() => setChecked('Nam')}
+                />
+                <Text style={{ marginRight: 20 }}>Nam</Text>
+                <RadioButton
+                  color={colors.primary}
+                  uncheckedColor={colors.border}
+                  value="Nữ"
+                  status={checked === 'Nữ' ? 'checked' : 'unchecked'}
+                  onPress={() => setChecked('Nữ')}
+                />
+                <Text>Nữ</Text>
+              </View>
             </View>
+            <TouchableOpacity
+              activeOpacity={0.7}
+              style={{
+                marginTop: 20,
+                backgroundColor: colors.primary,
+                padding: 10,
+                alignItems: 'center',
+                justifyContent: 'center',
+                width: 90,
+                // marginStart: 'auto',
+                // marginEnd: 'auto',
+                borderRadius: 5,
+              }}
+            >
+              <Text style={{ color: '#fff' }}>Cập nhật</Text>
+            </TouchableOpacity>
           </View>
         </View>
-        <View style={{ marginBottom: 80 }} />
+        <View style={{ marginBottom: 100 }} />
       </ScrollView>
     </View>
   );
