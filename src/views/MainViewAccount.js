@@ -251,7 +251,7 @@ const MainViewAccount = ({ navigation }) => {
                               color: '#fff',
                             }}
                           >
-                            Đang xử lý...
+                            Đang chờ xử lý...
                           </Text>
                         )}
                         <Image
