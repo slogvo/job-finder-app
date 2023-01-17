@@ -5,7 +5,7 @@ import firebaseSetup from '../firebase/firebase-config';
 
 export default function useUploadImage() {
   const [fileData, setFileData] = useState([]);
-  const [url, setUrl] = useState('');
+  const [url, setUrl] = useState(null);
   //We can choose all types of files here
   const { database, storage } = firebaseSetup();
   const handleFileUpload = async (props) => {
@@ -72,5 +72,5 @@ export default function useUploadImage() {
       .ref(`allFiles/${uniqueKey}`)
       .update({ fileName: file.name, fileType: file.type, fileURL: downloadURL });
   }
-  return { fileData, setFileData, handleFileUpload, url };
+  return { fileData, setFileData, handleFileUpload, setUrl, url };
 }

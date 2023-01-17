@@ -5,41 +5,39 @@ import colors from '../../../assets/colors/colors';
 
 const UploadLogo = ({ fileData, handleFileUpload }) => {
   return (
-    <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-      <Text style={{ fontSize: 14, color: colors.text2, fontWeight: '700' }}>Tải ảnh lên</Text>
-      <TouchableOpacity
-        style={{
-          marginTop: 15,
-          alignItems: 'center',
-          justifyContent: 'center',
-          borderWidth: 1,
-          backgroundColor: colors.background,
-          borderStyle: 'dashed',
-          borderColor: '#ccc',
-          padding: 5,
-          borderRadius: 16,
-          width: '100%',
-        }}
-        onPress={handleFileUpload}
-      >
-        <View>
+    <TouchableOpacity
+      style={{
+        marginTop: 15,
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderWidth: 1,
+        backgroundColor: '#fff',
+        borderStyle: 'dashed',
+        borderColor: '#ccc',
+        padding: 5,
+        borderRadius: 16,
+        width: 100,
+        height: 100,
+      }}
+      onPress={handleFileUpload}
+    >
+      <View>
+        {!fileData?.uri ? (
+          <Image
+            source={require('../../../assets/images/form/image-gallery.png')}
+            style={{ height: 50, width: 50, resizeMode: 'contain' }}
+          />
+        ) : (
           <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-            {!fileData?.uri ? (
-              <Image
-                source={require('../../../assets/images/form/image-gallery.png')}
-                style={{ height: 100, width: 100, resizeMode: 'contain' }}
-              />
-            ) : (
-              <Image
-                source={{ uri: fileData?.uri }}
-                style={{ height: 100, width: 100, resizeMode: 'contain' }}
-              />
-            )}
-            <Text style={{ color: colors.text2 }}>{fileData?.name}</Text>
+            <Image
+              source={{ uri: fileData?.uri }}
+              style={{ height: 50, width: 50, resizeMode: 'contain' }}
+            />
+            <Text style={{ color: colors.text2, fontSize: 12 }}>{fileData?.name}</Text>
           </View>
-        </View>
-      </TouchableOpacity>
-    </View>
+        )}
+      </View>
+    </TouchableOpacity>
   );
 };
 

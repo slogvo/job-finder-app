@@ -24,8 +24,34 @@ const PostView = ({ navigation }) => {
     formState: { errors },
   } = useForm();
 
-  const { fileData, setFileData, handleFileUpload, url } = useUploadImage();
+  const { fileData, setFileData, handleFileUpload, setUrl, url } = useUploadImage();
   console.log('url: ', url);
+
+  const onSubmit = async (data) => {
+    firestore()
+      .collection('posts')
+      .add({
+        ...data,
+        image: url,
+        createdAt: firestore.FieldValue.serverTimestamp(),
+      })
+      .then(() => {
+        reset({
+          title: '',
+          wage: '',
+          type_job: '',
+          description: '',
+          requirement: '',
+          address: '',
+          career: '',
+          name_company: '',
+        });
+        setUrl(null);
+        setFileData(null);
+        console.log('Posts added!');
+      })
+      .catch((err) => console.log(err));
+  };
   return (
     <View
       style={{
@@ -93,12 +119,34 @@ const PostView = ({ navigation }) => {
             marginTop: 30,
           }}
         >
-          <View>
+          {/* Logo công ty */}
+          <View
+            style={{
+              marginTop: 15,
+            }}
+          >
+            <Text
+              style={{
+                fontSize: 14,
+                color: colors.text,
+                fontWeight: '500',
+              }}
+            >
+              <Image
+                source={require('../../assets/images/form/buildings.png')}
+                style={{ width: 20, height: 20 }}
+              />
+              {'   '}
+              Logo công ty
+            </Text>
+            <UploadLogo fileData={fileData} handleFileUpload={handleFileUpload}></UploadLogo>
+          </View>
+          <View style={{ marginTop: 15 }}>
             <Text
               style={{
                 color: colors.text,
                 fontWeight: '500',
-                fontSize: 16,
+                fontSize: 14,
               }}
             >
               <Image
@@ -226,7 +274,7 @@ const PostView = ({ navigation }) => {
                     value={value}
                   />
                 )}
-                name="email"
+                name="type_job"
               />
             </View>
             {/* Ngành nghề */}
@@ -274,7 +322,7 @@ const PostView = ({ navigation }) => {
                     value={value}
                   />
                 )}
-                name="email"
+                name="career"
               />
             </View>
             {/* Mô tả */}
@@ -328,7 +376,7 @@ const PostView = ({ navigation }) => {
                     value={value}
                   />
                 )}
-                name="email"
+                name="description"
               />
             </View>
             {/* Kinh nghiệm làm việc */}
@@ -382,7 +430,7 @@ const PostView = ({ navigation }) => {
                     value={value}
                   />
                 )}
-                name="email"
+                name="requirement"
               />
             </View>
             {/* Tên công ty */}
@@ -430,7 +478,7 @@ const PostView = ({ navigation }) => {
                     value={value}
                   />
                 )}
-                name="email"
+                name="name_company"
               />
             </View>
             {/* Địa chỉ */}
@@ -476,32 +524,24 @@ const PostView = ({ navigation }) => {
                     value={value}
                   />
                 )}
-                name="email"
+                name="address"
               />
             </View>
-            {/* Logo công ty */}
-            <View
-              style={{
-                marginTop: 15,
-              }}
-            >
-              <Text
-                style={{
-                  fontSize: 14,
-                  color: colors.text,
-                  fontWeight: '500',
-                }}
-              >
-                <Image
-                  source={require('../../assets/images/form/buildings.png')}
-                  style={{ width: 20, height: 20 }}
-                />
-                {'   '}
-                Logo công ty
-              </Text>
-              <UploadLogo fileData={fileData} handleFileUpload={handleFileUpload}></UploadLogo>
-            </View>
           </View>
+          <TouchableOpacity
+            style={{
+              width: '100%',
+              marginTop: 30,
+              alignItems: 'center',
+              justifyContent: 'center',
+              backgroundColor: colors.primary,
+              paddingVertical: 15,
+              borderRadius: 8,
+            }}
+            onPress={handleSubmit(onSubmit)}
+          >
+            <Text style={{ color: '#fff' }}>Xác nhận đăng tuyển</Text>
+          </TouchableOpacity>
         </View>
         <View style={{ marginBottom: 80 }} />
       </ScrollView>
