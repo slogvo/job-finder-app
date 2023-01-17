@@ -25,6 +25,8 @@ const SignUp = ({ navigation }) => {
           .collection('users')
           .add({
             user_id: values.user.uid,
+            avatar:
+              'https://firebasestorage.googleapis.com/v0/b/job-finder-app-c1066.appspot.com/o/user-image.png?alt=media&token=c717e663-745e-491b-a96e-4b3c229ff8ac',
             username: data?.username,
             email: data?.email,
             password: data?.password,

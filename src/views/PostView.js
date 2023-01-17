@@ -25,7 +25,6 @@ const PostView = ({ navigation }) => {
   } = useForm();
 
   const { fileData, setFileData, handleFileUpload, setUrl, url } = useUploadImage();
-  console.log('url: ', url);
 
   const onSubmit = async (data) => {
     firestore()
@@ -116,9 +115,13 @@ const PostView = ({ navigation }) => {
         <View
           style={{
             paddingHorizontal: 25,
-            marginTop: 30,
+            marginTop: 25,
           }}
         >
+          <Text style={{ color: colors.secondary, fontWeight: '600', lineHeight: 23 }}>
+            Đăng đầy đủ chi tiết các thông tin để ứng cử viên có thể nắm rõ đầy đủ các thông tin về
+            công ty của bạn!
+          </Text>
           {/* Logo công ty */}
           <View
             style={{
