@@ -61,11 +61,6 @@ const Explore = () => {
         backgroundColor: '#fff',
       }}
     >
-      <StatusBar
-        backgroundColor="transparent"
-        translucent={true}
-        barStyle="light-content"
-      ></StatusBar>
       <ScrollView
         showsVerticalScrollIndicator={false}
         persistentScrollbar={true}

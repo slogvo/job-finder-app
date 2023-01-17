@@ -10,6 +10,7 @@ import Notifications from '../views/Notifications';
 import TabsNavigation from './TabsNavigation';
 import ReceivingScreen from '../views/ReceivingScreen';
 import MyJobsScreen from '../views/MyJobsScreen';
+import PostView from '../views/PostView';
 
 const Drawer = createDrawerNavigator();
 
@@ -115,7 +116,7 @@ function DrawerNavigation({ navigation }) {
 
       <Drawer.Screen
         name="Đăng tuyển dụng"
-        component={MyJobsScreen}
+        component={PostView}
         options={{
           drawerIcon: ({ color }) => (
             <MaterialIcons

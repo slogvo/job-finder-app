@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { Image, ImageBackground, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import colors from '../../assets/colors/colors';
 import firestore from '@react-native-firebase/firestore';
-import CardCategory from '../layout/CardCategory';
 import auth from '@react-native-firebase/auth';
+import CardBookmark from '../layout/CardBookmark';
+// import ItemBox from './src/components/ItemBox';
 
 const Bookmark = ({ navigation }) => {
   const [posts, setPosts] = useState([]);
   const [favorites, setFavorites] = useState([]);
+  const [userInfo, setUserInfo] = useState();
   const [userAuth, setUserAuth] = useState('');
 
   auth().onAuthStateChanged((user) => {
@@ -15,6 +17,23 @@ const Bookmark = ({ navigation }) => {
       setUserAuth(user);
     } else setUserAuth('Unknown');
   });
+
+  //Get userInfo
+  useEffect(() => {
+    firestore()
+      .collection('users')
+      .where('user_id', '==', `${userAuth.uid}`)
+      .onSnapshot((snapshot) => {
+        let user = [];
+        snapshot.forEach((doc) => {
+          user.push({
+            id: doc.id,
+            ...doc.data(),
+          });
+        });
+        setUserInfo(user[0]);
+      });
+  }, [userAuth]);
 
   //Get favorites
   useEffect(() => {
@@ -52,23 +71,30 @@ const Bookmark = ({ navigation }) => {
       });
   }, [favorites]);
 
-  // let props = ['id', ''];
+  const favoritesClone = userInfo?.favorites || [];
+  console.log('favoritesClone: ', favoritesClone);
 
-  // let result = posts
-  //   ?.filter(function (o1) {
-  //     // filter out (!) items in result2
-  //     return favorites?.some(function (o2) {
-  //       return o1.id === o2.id; // assumes unique id
-  //     });
-  //   })
-  //   .map(function (o) {
-  //     // use reduce to make objects with only the required properties
-  //     // and map to apply this to the filtered array as a whole
-  //     return props.reduce(function (newo, name) {
-  //       newo[name] = o[name];
-  //       return newo;
-  //     }, {});
-  //   });
+  const deleteItem = (index) => {
+    console.log('index: ', index);
+    console.log('favorites: ', favorites);
+    let favoritesUpdate = favoritesClone.map((favorite) => {
+      if (favorite.id === index)
+        return {
+          ...favorite,
+          isFavorite: false,
+        };
+      return favorite;
+    });
+    console.log('favoritesUpdate: ', favoritesUpdate);
+    firestore()
+      .collection('users')
+      .doc(userInfo.id)
+      .update({
+        favorites: favoritesUpdate,
+      })
+      .then(() => {})
+      .catch((err) => console.log(err));
+  };
 
   return (
     <View
@@ -152,6 +178,9 @@ const Bookmark = ({ navigation }) => {
                 Tìm công việc thực sự tốt chỉ {'\n'}dành cho bạn và xung quanh bạn.
               </Text>
               <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate('SearchFilterView');
+                }}
                 activeOpacity={0.7}
                 style={{
                   marginTop: 10,
@@ -183,7 +212,7 @@ const Bookmark = ({ navigation }) => {
               .filter((item) => favorites.find((favorite) => favorite.id === item.id))
               .map((item) => (
                 <View key={item.id}>
-                  <CardCategory
+                  <CardBookmark
                     id={item.id}
                     companyLogo={item.image}
                     companyName={item.name_company}
@@ -192,19 +221,22 @@ const Bookmark = ({ navigation }) => {
                     career={item.career}
                     title={item.title}
                     idPost={item.id}
+                    handleRemove={() => deleteItem(item.id)}
                   />
                 </View>
               ))}
-          {favorites?.length <= 0 && (
-            <Text
-              style={{
-                fontSize: 14,
-                color: colors.secondary,
-              }}
-            >
-              Chưa có công việc nào được theo dõi!
-            </Text>
-          )}
+          {favorites?.length > 0 &&
+            posts.filter((item) => favorites.find((favorite) => favorite.id === item.id)).length <=
+              0 && (
+              <Text
+                style={{
+                  fontSize: 14,
+                  color: colors.text2,
+                }}
+              >
+                Chưa có công việc nào được theo dõi!
+              </Text>
+            )}
         </View>
         <View style={{ marginBottom: 80 }} />
       </ScrollView>

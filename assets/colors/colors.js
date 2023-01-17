@@ -5,11 +5,11 @@ const colors = {
   secondary: '#30DB59',
   background: '#fafbfd',
   lightPurple: '#C4BFFD',
-  focusColor: '#7C73F8',
+  focusColor: '#7c828e',
   darkGray: '#1b263b',
   border: '#D2D6DA',
   lightGray: '#EEE',
-  redColor: '#ff1255',
+  redColor: '#ff0140',
   yellowStar: '#FFEB39',
   tabColor: '#adb5bd',
 };
