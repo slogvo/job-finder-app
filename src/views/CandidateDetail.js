@@ -8,6 +8,9 @@ import Toast from 'react-native-toast-message';
 
 const CandidateDetail = ({ route, navigation }) => {
   const { itemId, recruitmentId, userInfo } = route.params;
+  console.log('recruitmentId: ', recruitmentId);
+  console.log('itemId: ', itemId);
+  const [recruitmentDetail, setRecruitmentDetail] = useState();
   console.log('userInfo: ', userInfo);
   const [candidate, setCandidate] = useState('');
   const showToast = () => {
@@ -19,6 +22,24 @@ const CandidateDetail = ({ route, navigation }) => {
       visibilityTime: 2500,
     });
   };
+
+  useEffect(() => {
+    firestore()
+      .collection('recruitment')
+      .onSnapshot((snapshot) => {
+        let recruitment = [];
+        snapshot.forEach((doc) => {
+          const { status, jobId } = doc.data();
+          recruitment.push({
+            id: doc.id,
+            jobId,
+            status,
+          });
+        });
+        let recruitmentClone = recruitment.find((item) => item.id === recruitmentId);
+        setRecruitmentDetail(recruitmentClone);
+      });
+  }, [userInfo]);
 
   const handleApprove = () => {
     firestore()
@@ -145,24 +166,41 @@ const CandidateDetail = ({ route, navigation }) => {
           >
             <Text style={{ color: '#fff', fontWeight: 'bold' }}>Xem hồ sơ</Text>
           </TouchableOpacity>
-          <TouchableOpacity
-            style={{
-              height: 45,
-              borderRadius: 5,
-              alignItems: 'center',
-              justifyContent: 'center',
-              backgroundColor: colors.border,
 
-              width: '46%',
-              paddingHorizontal: 15,
-            }}
-            onPress={() => {
-              handleApprove();
-              showToast();
-            }}
-          >
-            <Text style={{ color: colors.primary, fontWeight: 'bold' }}>Duyệt</Text>
-          </TouchableOpacity>
+          {recruitmentDetail?.status === 0 ? (
+            <TouchableOpacity
+              style={{
+                height: 45,
+                borderRadius: 5,
+                alignItems: 'center',
+                justifyContent: 'center',
+                backgroundColor: colors.border,
+
+                width: '46%',
+                paddingHorizontal: 15,
+              }}
+              onPress={() => {
+                handleApprove();
+                showToast();
+              }}
+            >
+              <Text style={{ color: colors.primary, fontWeight: 'bold' }}>Duyệt</Text>
+            </TouchableOpacity>
+          ) : (
+            <View
+              style={{
+                height: 45,
+                borderRadius: 5,
+                alignItems: 'center',
+                justifyContent: 'center',
+                backgroundColor: colors.secondary,
+                width: '46%',
+                paddingHorizontal: 15,
+              }}
+            >
+              <Text style={{ color: '#fff', fontWeight: 'bold' }}>Đã duyệt</Text>
+            </View>
+          )}
         </View>
         <View style={{ paddingHorizontal: 30, marginTop: 15 }}>
           <Text
