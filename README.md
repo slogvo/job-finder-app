@@ -7,4 +7,4 @@ Lỗi này nằm trong đường dẫn: node_modules/react-native-snap-carousel
 - Sau khi clone về, copy toàn bộ thư mục src của gói này rồi ghi/dán đè lên thư mục .../react-native-snap-carouse của dự án.
 - Paste xong, chạy lệnh npx react-native run-android
 
-### Sẽ cập nhật phiên bản mới nhất của thư viện "react-native-snap-carousel" để cài đặt chương trình dễ dàng hơn.
+### Xin lỗi vì sự bất tiện này. Sẽ cập nhật phiên bản mới nhất của thư viện "react-native-snap-carousel" để cài đặt chương trình dễ dàng hơn.
