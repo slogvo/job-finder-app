@@ -72,11 +72,8 @@ const Bookmark = ({ navigation }) => {
   }, [favorites]);
 
   const favoritesClone = userInfo?.favorites || [];
-  console.log('favoritesClone: ', favoritesClone);
 
   const deleteItem = (index) => {
-    console.log('index: ', index);
-    console.log('favorites: ', favorites);
     let favoritesUpdate = favoritesClone.map((favorite) => {
       if (favorite.id === index)
         return {
@@ -85,7 +82,6 @@ const Bookmark = ({ navigation }) => {
         };
       return favorite;
     });
-    console.log('favoritesUpdate: ', favoritesUpdate);
     firestore()
       .collection('users')
       .doc(userInfo.id)

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import {
   Dimensions,
   Image,
+  Pressable,
   ScrollView,
   Text,
   TextInput,
@@ -20,18 +21,18 @@ import { useForm, Controller } from 'react-hook-form';
 import { RadioButton } from 'react-native-paper';
 import useUploadImage from '../hooks/useUploadImage';
 import { Modal, Portal, Provider } from 'react-native-paper';
+import Toast from 'react-native-toast-message';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
 const MainViewAccount = ({ navigation }) => {
-  const [checked, setChecked] = useState('first');
+  const [checked, setChecked] = useState('');
   const [isNoCVModal, setNoCVModal] = useState(false);
+  const [editInfo, setEditInfo] = useState(false);
   const toggleNoCVModal = () => {
     setNoCVModal(!isNoCVModal);
   };
   const { fileData, setUrl, url, setFileData, handleFileUpload } = useUploadImage();
-  console.log('url: ', url);
-  console.log('fileData: ', fileData.length);
   const [visible, setVisible] = React.useState(false);
 
   const showModal = () => setVisible(true);
@@ -69,6 +70,9 @@ const MainViewAccount = ({ navigation }) => {
           });
         });
         setUserInfo(user[0]);
+        if (user[0]?.gender) {
+          setChecked(user[0]?.gender);
+        }
       });
   }, [userAuth]);
 
@@ -91,6 +95,36 @@ const MainViewAccount = ({ navigation }) => {
       .catch((err) => console.log(err));
   };
 
+  const onSubmit = (data) => {
+    showToast();
+    firestore()
+      .collection('users')
+      .doc(userInfo.id)
+      .update({
+        job: data.job || userInfo?.job,
+        job_position: data?.job_position || userInfo?.job_position,
+        experience: data?.experience || userInfo?.experience,
+        dateOfBirth: data?.dateOfBirth || userInfo?.dateOfBirth,
+        gender: checked,
+      });
+    reset({
+      job: '',
+      job_position: '',
+      experience: '',
+      dateOfBirth: '',
+    });
+    setEditInfo(false);
+  };
+
+  const showToast = () => {
+    Toast.show({
+      type: 'success',
+      text1: 'Cập nhật thành công!',
+      text2: 'Thông tin cá nhân đã được cập nhật',
+      topOffset: 0,
+      visibilityTime: 2500,
+    });
+  };
   return (
     <Provider>
       <View
@@ -388,263 +422,399 @@ const MainViewAccount = ({ navigation }) => {
                   </View>
                 </TouchableOpacity>
               </View>
-              {/* Nghề nghiệp */}
+              {/* Thông tin khác */}
               <View
-                style={{
-                  alignItems: 'flex-start',
-                  justifyContent: 'flex-start',
-                  marginTop: 15,
-                }}
+                style={{ marginTop: 20, flexDirection: 'row', justifyContent: 'space-between' }}
               >
                 <Text
                   style={{
-                    fontSize: 14,
                     color: colors.text,
                     fontWeight: '500',
+                    fontSize: 16,
                   }}
                 >
+                  <Image
+                    source={require('../../assets/images/accountImage/profile.png')}
+                    style={{ width: 20, height: 20 }}
+                  />
+                  {'   '}
+                  Về bản thân tôi {'  '}
+                </Text>
+                <Pressable
+                  onPress={() => setEditInfo(!editInfo)}
+                  style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}
+                >
+                  <AntDesign name="edit" size={16} color={colors.secondary} />
+
+                  <Text
+                    style={{
+                      marginLeft: 5,
+                      fontSize: 14,
+                      fontWeight: '600',
+                      color: colors.secondary,
+                    }}
+                  >
+                    Chỉnh sửa
+                  </Text>
+                </Pressable>
+              </View>
+              {/* Nghề nghiệp */}
+              <View
+                style={{
+                  marginTop: 25,
+                }}
+              >
+                <View style={{ flexDirection: 'row', alignItems: 'stretch' }}>
                   <Image
                     source={require('../../assets/images/accountImage/brief.png')}
                     style={{ width: 20, height: 20 }}
                   />
-                  {'   '}
-                  Nghề nghiệp
-                </Text>
-                <Controller
-                  control={control}
-                  rules={{
-                    required: true,
-                  }}
-                  render={({ field: { onChange, onBlur, value } }) => (
-                    <TextInput
-                      style={{
-                        marginTop: 8,
-                        borderWidth: 1,
-                        width: '100%',
-                        borderRadius: 5,
-                        height: 50,
-                        borderColor: colors.border,
-                        fontWeight: '400',
-                        paddingLeft: 15,
-                      }}
-                      placeholder="VD: Lập trình viên, designer,..."
-                      onBlur={onBlur}
-                      onChangeText={onChange}
-                      value={value}
-                    />
-                  )}
-                  name="email"
-                />
+                  <Text
+                    style={{
+                      marginLeft: 10,
+                      fontSize: 15,
+                      color: colors.text,
+                      fontWeight: '500',
+                    }}
+                  >
+                    Nghề nghiệp:
+                  </Text>
+                  <Text
+                    style={{
+                      marginLeft: 20,
+                      fontSize: 15,
+                      color: colors.secondary,
+                      fontWeight: '400',
+                      width: 250,
+                    }}
+                  >
+                    {userInfo?.job}
+                  </Text>
+                </View>
+                {editInfo && (
+                  <Controller
+                    control={control}
+                    rules={{
+                      required: false,
+                    }}
+                    render={({ field: { onChange, onBlur, value } }) => (
+                      <TextInput
+                        style={{
+                          marginTop: 8,
+                          borderWidth: 1,
+                          width: '100%',
+                          borderRadius: 5,
+                          height: 50,
+                          borderColor: colors.border,
+                          fontWeight: '400',
+                          paddingLeft: 15,
+                        }}
+                        placeholder="VD: Lập trình viên, designer,..."
+                        value={value}
+                        onBlur={onBlur}
+                        onChangeText={onChange}
+                      />
+                    )}
+                    name="job"
+                  />
+                )}
               </View>
               {/* Vị trí hiện tại */}
               <View
                 style={{
-                  alignItems: 'flex-start',
-                  justifyContent: 'flex-start',
-                  marginTop: 15,
+                  marginTop: 25,
                 }}
               >
-                <Text
+                <View
                   style={{
-                    fontSize: 14,
-                    color: colors.text,
-                    fontWeight: '500',
+                    alignItems: 'stretch',
+                    flexDirection: 'row',
                   }}
                 >
                   <Image
                     source={require('../../assets/images/accountImage/office-chair.png')}
                     style={{ width: 20, height: 20 }}
                   />
-                  {'  '}
-                  Vị trí (nếu có)
-                </Text>
-                <Controller
-                  control={control}
-                  rules={{
-                    required: true,
-                  }}
-                  render={({ field: { onChange, onBlur, value } }) => (
-                    <TextInput
-                      style={{
-                        marginTop: 8,
-                        borderWidth: 1,
-                        width: '100%',
-                        borderRadius: 5,
-                        height: 50,
-                        borderColor: colors.border,
-                        fontWeight: '400',
-                        paddingLeft: 15,
-                      }}
-                      placeholder="VD: Trưởng phòng nhân sự"
-                      onBlur={onBlur}
-                      onChangeText={onChange}
-                      value={value}
-                    />
-                  )}
-                  name="email"
-                />
+                  <Text
+                    style={{
+                      fontSize: 15,
+                      marginLeft: 10,
+                      color: colors.text,
+                      fontWeight: '500',
+                    }}
+                  >
+                    Vị trí:
+                  </Text>
+                  <Text
+                    style={{
+                      marginLeft: 20,
+                      fontSize: 15,
+                      color: colors.secondary,
+                      fontWeight: '400',
+                      width: 250,
+                    }}
+                  >
+                    {userInfo?.job_position}
+                  </Text>
+                </View>
+                {editInfo && (
+                  <Controller
+                    control={control}
+                    rules={{
+                      required: false,
+                    }}
+                    render={({ field: { onChange, onBlur, value } }) => (
+                      <TextInput
+                        style={{
+                          marginTop: 8,
+                          borderWidth: 1,
+                          width: '100%',
+                          borderRadius: 5,
+                          height: 50,
+                          borderColor: colors.border,
+                          fontWeight: '400',
+                          paddingLeft: 15,
+                        }}
+                        placeholder="VD: Trưởng phòng nhân sự"
+                        value={value}
+                        onBlur={onBlur}
+                        onChangeText={onChange}
+                      />
+                    )}
+                    name="job_position"
+                  />
+                )}
               </View>
               {/* Kinh nghiệm làm việc */}
               <View
                 style={{
                   alignItems: 'flex-start',
                   justifyContent: 'flex-start',
-                  marginTop: 15,
+                  marginTop: 25,
                 }}
               >
-                <Text
+                <View
                   style={{
-                    fontSize: 14,
-                    color: colors.text,
-                    fontWeight: '500',
+                    alignItems: 'center',
+                    flexDirection: 'row',
                   }}
                 >
                   <Image
                     source={require('../../assets/images/accountImage/rating.png')}
                     style={{ width: 20, height: 20 }}
                   />
-                  {'  '}
-                  Kinh nghiệm
-                </Text>
-                <Controller
-                  control={control}
-                  rules={{
-                    required: true,
+                  <Text
+                    style={{
+                      fontSize: 15,
+                      color: colors.text,
+                      fontWeight: '500',
+                      marginLeft: 10,
+                    }}
+                  >
+                    Kinh nghiệm:
+                  </Text>
+                </View>
+                <Text
+                  style={{
+                    marginLeft: 30,
+                    marginTop: 10,
+                    fontSize: 15,
+                    lineHeight: 22,
+                    color: colors.secondary,
+                    fontWeight: '400',
                   }}
-                  render={({ field: { onChange, onBlur, value } }) => (
-                    <TextInput
-                      multiline={true}
-                      blurOnSubmit={true}
-                      style={{
-                        marginTop: 10,
-                        width: '100%',
-                        borderRadius: 8,
-                        height: SCREEN_WIDTH / 2,
-                        textAlignVertical: 'top',
-                        flexDirection: 'column',
-                        alignItems: 'flex-start',
-                        justifyContent: 'flex-start',
-                        backgroundColor: '#f9fafe',
-                        paddingHorizontal: 20,
-                        padding: 25,
-                        lineHeight: 30,
-                      }}
-                      placeholder="Mô tả kinh nghiệm làm việc, những gì đạt được trong quá trình làm việc,..."
-                      onBlur={onBlur}
-                      onChangeText={onChange}
-                      value={value}
-                    />
-                  )}
-                  name="email"
-                />
+                >
+                  {userInfo?.experience}
+                </Text>
+                {editInfo && (
+                  <Controller
+                    control={control}
+                    rules={{
+                      required: false,
+                    }}
+                    render={({ field: { onChange, onBlur, value } }) => (
+                      <TextInput
+                        multiline={true}
+                        blurOnSubmit={true}
+                        style={{
+                          marginTop: 10,
+                          width: '100%',
+                          borderRadius: 8,
+                          height: 130,
+                          textAlignVertical: 'top',
+                          flexDirection: 'column',
+                          alignItems: 'flex-start',
+                          justifyContent: 'flex-start',
+                          backgroundColor: '#f9fafe',
+                          paddingHorizontal: 20,
+                          padding: 25,
+                          lineHeight: 30,
+                        }}
+                        placeholder="Mô tả kinh nghiệm làm việc, những gì đạt được trong quá trình làm việc,..."
+                        value={value}
+                        onBlur={onBlur}
+                        onChangeText={onChange}
+                      />
+                    )}
+                    name="experience"
+                  />
+                )}
               </View>
               {/* Ngày sinh */}
               <View
                 style={{
                   alignItems: 'flex-start',
                   justifyContent: 'flex-start',
-                  marginTop: 15,
+                  marginTop: 25,
                 }}
               >
-                <Text
+                <View
                   style={{
-                    fontSize: 14,
-                    color: colors.text,
-                    fontWeight: '500',
+                    alignItems: 'center',
+                    flexDirection: 'row',
                   }}
                 >
                   <Image
                     source={require('../../assets/images/accountImage/date.png')}
                     style={{ width: 20, height: 20 }}
                   />
-                  {'   '}
-                  Ngày sinh
-                </Text>
-                <Controller
-                  control={control}
-                  rules={{
-                    required: true,
-                  }}
-                  render={({ field: { onChange, onBlur, value } }) => (
-                    <TextInput
-                      style={{
-                        marginTop: 8,
-                        borderWidth: 1,
-                        width: '100%',
-                        borderRadius: 5,
-                        height: 50,
-                        borderColor: colors.border,
-                        fontWeight: '400',
-                        paddingLeft: 15,
-                      }}
-                      placeholder="Ngày sinh của bạn"
-                      onBlur={onBlur}
-                      onChangeText={onChange}
-                      value={value}
-                    />
-                  )}
-                  name="email"
-                />
+                  <Text
+                    style={{
+                      fontSize: 15,
+                      color: colors.text,
+                      fontWeight: '500',
+                      marginLeft: 10,
+                    }}
+                  >
+                    Ngày sinh:
+                  </Text>
+                  <Text
+                    style={{
+                      marginLeft: 20,
+                      fontSize: 15,
+                      color: colors.secondary,
+                      fontWeight: '400',
+                    }}
+                  >
+                    {userInfo?.dateOfBirth}
+                  </Text>
+                </View>
+                {editInfo && (
+                  <Controller
+                    control={control}
+                    rules={{
+                      required: false,
+                    }}
+                    render={({ field: { onChange, onBlur, value } }) => (
+                      <TextInput
+                        style={{
+                          marginTop: 8,
+                          borderWidth: 1,
+                          width: '100%',
+                          borderRadius: 5,
+                          height: 50,
+                          borderColor: colors.border,
+                          fontWeight: '400',
+                          paddingLeft: 15,
+                        }}
+                        placeholder="VD: 19-5-1890"
+                        value={value}
+                        onBlur={onBlur}
+                        onChangeText={onChange}
+                      />
+                    )}
+                    name="dateOfBirth"
+                  />
+                )}
               </View>
               {/* Checkbox */}
               <View
                 style={{
-                  marginTop: 15,
+                  marginTop: 25,
                 }}
               >
-                <Text
-                  style={{
-                    fontSize: 14,
-                    color: colors.text,
-                    fontWeight: '500',
-                  }}
-                >
-                  <Image
-                    source={require('../../assets/images/accountImage/female.png')}
-                    style={{ width: 20, height: 20 }}
-                  />
-                  {'   '}
-                  Giới tính
-                </Text>
-                <View style={{ marginTop: 5, flexDirection: 'row', alignItems: 'center' }}>
-                  <RadioButton
-                    color={colors.primary}
-                    uncheckedColor={colors.border}
-                    value="Nam"
-                    status={checked === 'Nam' ? 'checked' : 'unchecked'}
-                    onPress={() => setChecked('Nam')}
-                  />
-                  <Text style={{ marginRight: 20 }}>Nam</Text>
-                  <RadioButton
-                    color={colors.primary}
-                    uncheckedColor={colors.border}
-                    value="Nữ"
-                    status={checked === 'Nữ' ? 'checked' : 'unchecked'}
-                    onPress={() => setChecked('Nữ')}
-                  />
-                  <Text>Nữ</Text>
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                  <View
+                    style={{
+                      alignItems: 'center',
+                      flexDirection: 'row',
+                    }}
+                  >
+                    <Image
+                      source={require('../../assets/images/accountImage/female.png')}
+                      style={{ width: 20, height: 20 }}
+                    />
+                    <Text
+                      style={{
+                        fontSize: 15,
+                        color: colors.text,
+                        marginLeft: 10,
+                        fontWeight: '500',
+                      }}
+                    >
+                      Giới tính:
+                    </Text>
+                    <Text
+                      style={{
+                        marginLeft: 20,
+                        fontSize: 15,
+                        color: colors.secondary,
+                        fontWeight: '400',
+                      }}
+                    >
+                      {userInfo?.gender}
+                    </Text>
+                  </View>
+                  {editInfo && (
+                    <View
+                      style={{
+                        marginLeft: 22,
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                      }}
+                    >
+                      <RadioButton
+                        color={colors.primary}
+                        uncheckedColor={colors.border}
+                        value="Nam"
+                        status={checked === 'Nam' ? 'checked' : 'unchecked'}
+                        onPress={() => setChecked('Nam')}
+                      />
+                      <Text style={{ marginRight: 20 }}>Nam</Text>
+                      <RadioButton
+                        color={colors.primary}
+                        uncheckedColor={colors.border}
+                        value="Nữ"
+                        status={checked === 'Nữ' ? 'checked' : 'unchecked'}
+                        onPress={() => setChecked('Nữ')}
+                      />
+                      <Text>Nữ</Text>
+                    </View>
+                  )}
                 </View>
               </View>
-              <TouchableOpacity
-                activeOpacity={0.7}
-                style={{
-                  marginTop: 20,
-                  backgroundColor: colors.primary,
-                  padding: 10,
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  width: 90,
-                  // marginStart: 'auto',
-                  // marginEnd: 'auto',
-                  borderRadius: 5,
-                }}
-              >
-                <Text style={{ color: '#fff' }}>Cập nhật</Text>
-              </TouchableOpacity>
+              {editInfo && (
+                <TouchableOpacity
+                  activeOpacity={0.7}
+                  onPress={handleSubmit(onSubmit)}
+                  style={{
+                    marginTop: 20,
+                    backgroundColor: colors.primary,
+                    padding: 10,
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    width: 90,
+                    borderRadius: 5,
+                  }}
+                >
+                  <Text style={{ color: '#fff' }}>Cập nhật</Text>
+                </TouchableOpacity>
+              )}
             </View>
           </View>
           <View style={{ marginBottom: 100 }} />
         </ScrollView>
+        <Toast />
       </View>
     </Provider>
   );

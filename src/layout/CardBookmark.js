@@ -51,9 +51,6 @@ const CardBookmark = ({
   return (
     <Swipeable renderRightActions={leftSwipe}>
       <Pressable
-        // onPress={() => {
-        //   navigation.navigate('JobDetail', { itemId: idPost });
-        // }}
         style={{
           flex: 1,
           alignItems: 'flex-start',
