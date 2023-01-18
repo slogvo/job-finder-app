@@ -1,9 +1,10 @@
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 import colors from '../../assets/colors/colors';
-import firestore from '@react-native-firebase/firestore';
 import { useEffect, useState } from 'react';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+import firestore from '@react-native-firebase/firestore';
 
 const Candidate = ({
   id,
@@ -17,43 +18,55 @@ const Candidate = ({
   navigation,
   ...props
 }) => {
-  const usernameArr = username?.split(' ');
+  const [userInfo, setUserInfo] = useState();
+
+  useEffect(() => {
+    firestore()
+      .collection('users')
+      .where('user_id', '==', `${userId}`)
+      .onSnapshot((snapshot) => {
+        let user = [];
+        snapshot.forEach((doc) => {
+          user.push({
+            id: doc.id,
+            ...doc.data(),
+          });
+        });
+        setUserInfo(user[0]);
+        console.log('user[0]: ', user[0]);
+      });
+  }, [userId]);
   return (
     <View
       style={{
         width: '100%',
-        height: 146,
+        height: 120,
         borderRadius: 16,
-        backgroundColor: '#fff',
         padding: 15,
-        elevation: 2,
-        marginRight: 30,
+        backgroundColor: colors.background,
+        elevation: 1,
         marginTop: 25,
       }}
     >
       <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-        <View style={{ flexDirection: 'row', width: 200 }}>
-          <View
+        <View style={{ flexDirection: 'row' }}>
+          <Image
+            source={{
+              uri: userInfo?.avatar,
+            }}
+            resizeMode="cover"
             style={{
               width: 70,
               height: 70,
               borderRadius: 100,
-              backgroundColor: '#7896FF',
-              elevation: 1,
-              alignItems: 'center',
-              justifyContent: 'center',
               marginRight: 15,
             }}
-          >
-            <Text style={{ fontSize: 26, color: '#fff', fontWeight: '900' }}>
-              {username && usernameArr[usernameArr?.length - 1][0]}
-            </Text>
-          </View>
+          />
           <View>
+            {/* Tên */}
             <Text
               numberOfLines={1}
               style={{
-                width: 240,
                 fontSize: 16,
                 color: colors.text,
                 fontWeight: '700',
@@ -61,66 +74,52 @@ const Candidate = ({
             >
               {username}
             </Text>
+            {/* Nghề */}
+            <Text style={{ fontSize: 13, marginTop: 3, fontWeight: '600', color: colors.primary }}>
+              {userInfo?.job}
+            </Text>
+            {/* Email + SDT */}
             <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 5 }}>
-              <MaterialIcons name="email" size={15} />
-              <Text style={{ marginLeft: 5 }}>{email}</Text>
+              <MaterialIcons name="email" size={15} color={'#7f879d'} />
+              <Text style={{ marginLeft: 5, fontSize: 13, color: '#7f879d' }}>{email}</Text>
             </View>
             <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 5 }}>
-              <FontAwesome name="phone" size={15} />
-              <Text style={{ marginLeft: 5 }}>{phoneNumber}</Text>
+              <FontAwesome name="phone" size={15} color={'#7f879d'} />
+              <Text style={{ marginLeft: 5, fontSize: 13, color: '#7f879d' }}>
+                {phoneNumber || userInfo?.phoneNumber}
+              </Text>
             </View>
           </View>
         </View>
-      </View>
-
-      <Text style={{ marginTop: 4 }} numberOfLines={1}></Text>
-      <View style={{ flexDirection: 'column', marginTop: 'auto' }}>
-        <View
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-          }}
-        ></View>
-
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          {status === 1 ? (
-            <View
-              style={{
-                paddingVertical: 5,
-                paddingHorizontal: 10,
-                backgroundColor: '#bfffda',
-                borderRadius: 4,
-              }}
-            >
-              <Text style={{ fontWeight: '500', color: '#0DDE65' }}>Đã duyệt</Text>
-            </View>
-          ) : (
-            <View
-              style={{
-                paddingVertical: 5,
-                paddingHorizontal: 10,
-                backgroundColor: '#fae3c9',
-                borderRadius: 4,
-              }}
-            >
-              <Text style={{ fontWeight: '500', color: '#ED8E29' }}>Chưa duyệt</Text>
-            </View>
-          )}
-
+        <View>
           <TouchableOpacity
             style={{
-              marginLeft: 'auto',
-              width: '30%',
-              height: 40,
+              width: 50,
+              height: 38,
               borderRadius: 5,
               alignItems: 'center',
               justifyContent: 'center',
-              backgroundColor: colors.secondary,
-              marginRight: 8,
+              // backgroundColor: colors.redColor,
+            }}
+          >
+            <FontAwesome name="trash-o" size={20} color={colors.redColor} />
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={{
+              marginTop: 'auto',
+              width: 60,
+              height: 38,
+              borderRadius: 5,
+              alignItems: 'center',
+              justifyContent: 'center',
+              backgroundColor: colors.primary,
             }}
             onPress={() => {
-              navigation.navigate('CandidateDetail', { itemId: userId, recruitmentId: id });
+              navigation.navigate('CandidateDetail', {
+                itemId: userId,
+                recruitmentId: id,
+                userInfo: userInfo,
+              });
             }}
           >
             <Text style={{ color: '#fff' }}>Xem</Text>

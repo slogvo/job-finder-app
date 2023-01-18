@@ -37,9 +37,9 @@ const ReceivingCV = ({
     <View
       style={{
         width: '100%',
-        height: 195,
+        height: 145,
         borderRadius: 16,
-        backgroundColor: '#fff',
+        backgroundColor: colors.background,
         padding: 15,
         elevation: 2,
         marginRight: 30,
@@ -64,11 +64,11 @@ const ReceivingCV = ({
               style={{ width: 58, height: 58, resizeMode: 'contain' }}
             />
           </View>
-          <View style={{}}>
+          <View>
             <Text
               numberOfLines={1}
               style={{
-                width: 240,
+                width: 150,
                 fontSize: 15,
                 color: colors.text,
                 marginBottom: 3,
@@ -77,81 +77,88 @@ const ReceivingCV = ({
             >
               {companyName}
             </Text>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <Image
+                source={require('../../assets/images/icons/location.png')}
+                style={{
+                  width: 15,
+                  height: 15,
+                  marginRight: 5,
+                }}
+              />
+              <Text
+                style={{
+                  fontSize: 14,
+                  fontFamily: 'SanFranciscoDisplay-Medium',
+                }}
+              >
+                {companyAddressArr[companyAddressArr.length - 1]}
+              </Text>
+            </View>
             <Text
+              numberOfLines={1}
               style={{
-                fontSize: 14,
-                fontFamily: 'SanFranciscoDisplay-Medium',
-              }}
-            >
-              {companyAddressArr[companyAddressArr.length - 1]}
-            </Text>
-            <Text
-              style={{
-                marginTop: 2,
+                marginTop: 5,
+                width: 240,
                 fontSize: 14,
                 color: colors.secondary,
                 fontWeight: '500',
               }}
             >
-              {wage}
+              {title}
             </Text>
           </View>
         </View>
         {/* <AntDesign name="heart" size={20} color={colors.redColor} /> */}
+        <TouchableOpacity
+          style={{
+            width: 80,
+            height: 40,
+            borderRadius: 5,
+            alignItems: 'center',
+            justifyContent: 'center',
+            backgroundColor: colors.primary,
+          }}
+          onPress={() => {
+            navigation.navigate('ReceivingDetailScreen', {
+              recruitmentDetail: recruitmentDetail,
+            });
+          }}
+        >
+          <Text style={{ color: '#fff' }}>Chi tiết</Text>
+        </TouchableOpacity>
       </View>
       <Text
         numberOfLines={1}
         style={{
-          marginTop: 10,
-          fontSize: 16,
+          marginTop: 5,
+          fontSize: 14,
           color: colors.text,
-          fontWeight: '600',
+          fontWeight: '500',
         }}
       >
-        {title}
+        {career}
       </Text>
-      <Text style={{ marginTop: 4 }} numberOfLines={1}>
-        Lĩnh vực: {career}
-      </Text>
-      <View style={{ flexDirection: 'column', marginTop: 'auto' }}>
-        <View
+      <View
+        style={{
+          flexDirection: 'row',
+          marginTop: 5,
+          alignItems: 'flex-start',
+        }}
+      >
+        <Text
           style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'space-between',
+            fontSize: 14,
+            color: colors.darkGray,
+            fontWeight: '500',
+            marginRight: 15,
           }}
-        ></View>
-
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <Text
-            style={{
-              fontSize: 14,
-              color: colors.darkGray,
-              fontWeight: '700',
-            }}
-          >
-            Ứng tuyển: {recruitmentDetail ? recruitmentDetail.length : '0'}
-          </Text>
-          <TouchableOpacity
-            style={{
-              marginLeft: 'auto',
-              width: '30%',
-              height: 40,
-              borderRadius: 5,
-              alignItems: 'center',
-              justifyContent: 'center',
-              backgroundColor: colors.primary,
-              marginRight: 8,
-            }}
-            onPress={() => {
-              navigation.navigate('ReceivingDetailScreen', {
-                recruitmentDetail: recruitmentDetail,
-              });
-            }}
-          >
-            <Text style={{ color: '#fff' }}>Chi tiết</Text>
-          </TouchableOpacity>
-        </View>
+        >
+          Ứng tuyển: {recruitmentDetail ? recruitmentDetail.length : '0'}
+        </Text>
+        <Text style={{ color: colors.redColor, fontWeight: '500' }} numberOfLines={1}>
+          {wage}
+        </Text>
       </View>
     </View>
   );

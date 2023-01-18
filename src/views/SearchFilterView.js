@@ -3,8 +3,9 @@ import { View, ScrollView, Text, ActivityIndicator } from 'react-native';
 import CardCategory from '../layout/CardCategory';
 import GoBackFilter from '../layout/GoBackSearch';
 import colors from '../../assets/colors/colors';
-import firestore from '@react-native-firebase/firestore';
 import useRemoveTones from '../hooks/useRemoveTones';
+import firestore from '@react-native-firebase/firestore';
+import auth from '@react-native-firebase/auth';
 
 const SearchFilterView = ({ navigation }) => {
   const removeVNeTones = useRemoveTones();
@@ -13,6 +14,32 @@ const SearchFilterView = ({ navigation }) => {
   const [categoriesList, setCategoriesList] = useState([]);
   const [catsList, setCatsList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+
+  const [userInfo, setUserInfo] = useState();
+  const [userAuth, setUserAuth] = useState('');
+
+  auth().onAuthStateChanged((user) => {
+    if (user) {
+      setUserAuth(user);
+    } else setUserAuth('Unknown');
+  });
+
+  //Get userInfo
+  useEffect(() => {
+    firestore()
+      .collection('users')
+      .where('user_id', '==', `${userAuth.uid}`)
+      .onSnapshot((snapshot) => {
+        let user = [];
+        snapshot.forEach((doc) => {
+          user.push({
+            id: doc.id,
+            ...doc.data(),
+          });
+        });
+        setUserInfo(user[0]);
+      });
+  }, [userAuth]);
 
   const onChangeText = (text) => {
     setQueryText(text);
@@ -109,8 +136,6 @@ const SearchFilterView = ({ navigation }) => {
           >
             {catsList?.map((item) => (
               <CardCategory
-                // toggleFavorite={toggleFavorite}
-                // isFavorite={item.isFavorite}
                 key={item.id}
                 id={item.id}
                 companyLogo={item.image}
@@ -119,6 +144,9 @@ const SearchFilterView = ({ navigation }) => {
                 wage={item.wage}
                 career={item.career}
                 title={item.title}
+                idPost={item.id}
+                userInfo={userInfo}
+                navigation={navigation}
               />
             ))}
           </View>

@@ -6,6 +6,9 @@ import Candidate from '../layout/Candidate';
 
 const ReceivingDetailScreen = ({ route, navigation }) => {
   const candidates = route?.params?.recruitmentDetail;
+  // console.log('candidates: ', candidates);
+  const { userId } = candidates;
+  console.log('userId: ', userId);
   return (
     <View
       style={{
@@ -64,7 +67,6 @@ const ReceivingDetailScreen = ({ route, navigation }) => {
             >
               Các ứng cử viên
             </Text>
-            {/* <Entypo name="dots-three-vertical" size={20} color={colors.text} /> */}
             <Text style={{ width: 20 }}></Text>
           </View>
         </View>

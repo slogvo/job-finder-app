@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { Image, ImageBackground, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import colors from '../../assets/colors/colors';
 import Entypo from 'react-native-vector-icons/Entypo';
@@ -7,7 +7,8 @@ import firestore from '@react-native-firebase/firestore';
 import Toast from 'react-native-toast-message';
 
 const CandidateDetail = ({ route, navigation }) => {
-  const { itemId, recruitmentId } = route.params;
+  const { itemId, recruitmentId, userInfo } = route.params;
+  console.log('userInfo: ', userInfo);
   const [candidate, setCandidate] = useState('');
   const showToast = () => {
     Toast.show({
@@ -18,22 +19,6 @@ const CandidateDetail = ({ route, navigation }) => {
       visibilityTime: 2500,
     });
   };
-
-  useEffect(() => {
-    firestore()
-      .collection('users')
-      .where('id', '==', `${itemId}`)
-      .onSnapshot((snapshot) => {
-        let candidates = [];
-        snapshot.forEach((doc) => {
-          candidates.push({
-            id: doc.id,
-            ...doc.data(),
-          });
-        });
-        setCandidate(candidates[0]);
-      });
-  }, [itemId]);
 
   const handleApprove = () => {
     firestore()
@@ -67,77 +52,108 @@ const CandidateDetail = ({ route, navigation }) => {
         }}
         stickyHeaderIndices={[0]}
       >
-        <View
-          style={{
-            width: '100%',
-            height: 60,
-            backgroundColor: '#fff',
-            elevation: 10,
-          }}
-        >
-          <View
+        <View style={{ marginTop: 10, height: 240, position: 'relative', paddingHorizontal: 10 }}>
+          <ImageBackground
+            source={require('../../assets/images/bg-candidate.png')}
+            resizeMode="cover"
             style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              paddingHorizontal: 25,
-              paddingTop: 15,
               width: '100%',
+              height: 200,
+              borderRadius: 16,
+              marginRight: 15,
             }}
           >
-            <TouchableOpacity onPress={() => navigation.goBack()}>
-              <View
-                style={{
-                  width: 40,
-                  height: 40,
-                  borderRadius: 40,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}
-              >
-                <Ionicons name="ios-arrow-back-sharp" size={28} color={colors.darkGray} />
-              </View>
-            </TouchableOpacity>
-            <Text
+            <View
               style={{
-                fontSize: 18,
-                color: colors.text,
-                fontWeight: 'bold',
+                paddingHorizontal: 25,
+                paddingTop: 15,
               }}
             >
-              Chi tiết ứng cử viên
-            </Text>
-            <Entypo name="dots-three-vertical" size={20} color={colors.text} />
+              <TouchableOpacity activeOpacity={0.7} onPress={() => navigation.goBack()}>
+                <View
+                  style={{
+                    width: 40,
+                    height: 40,
+                    borderRadius: 40,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    backgroundColor: '#fff',
+                    borderRadius: 50,
+                  }}
+                >
+                  <Ionicons name="ios-arrow-back-sharp" size={23} color={colors.primary} />
+                </View>
+              </TouchableOpacity>
+            </View>
+          </ImageBackground>
+          <View
+            style={{
+              position: 'absolute',
+              left: '50%',
+              zIndex: 3,
+              width: 100,
+              height: 100,
+              bottom: 0,
+              borderRadius: 100,
+              alignItems: 'center',
+              justifyContent: 'center',
+              backgroundColor: colors.background,
+              transform: [{ translateX: -50 }],
+            }}
+          >
+            <Image
+              source={{
+                uri: userInfo?.avatar,
+              }}
+              resizeMode="cover"
+              style={{
+                width: 90,
+                height: 90,
+                borderRadius: 100,
+              }}
+            />
           </View>
         </View>
-        <View style={{ marginTop: 25, paddingHorizontal: 25 }}>
-          <Text>{candidate?.username}</Text>
-          <Text>{candidate?.email}</Text>
-          <Text>{candidate?.phoneNumber}</Text>
+        <View style={{ paddingHorizontal: 25, alignItems: 'center', justifyContent: 'center' }}>
+          <Text style={{ fontSize: 22, fontWeight: '700', color: colors.text }}>
+            {userInfo?.username}
+          </Text>
+          <Text style={{ marginTop: 3, fontSize: 15, color: '#7f879d' }}>{userInfo?.job}</Text>
+          <Text style={{ fontSize: 16, fontWeight: '500' }}>{userInfo?.experience}</Text>
+        </View>
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            width: '100%',
+            paddingHorizontal: 25,
+          }}
+        >
           <TouchableOpacity
             style={{
-              height: 50,
+              height: 45,
               borderRadius: 5,
               alignItems: 'center',
               justifyContent: 'center',
-              backgroundColor: colors.secondary,
-              width: '45%',
+              width: '46%',
               paddingHorizontal: 15,
+              backgroundColor: colors.primary,
             }}
             onPress={() => {
-              return navigation.navigate('PDFView', { pdfFile: candidate.file });
+              return navigation.navigate('PDFView', { pdfFile: userInfo?.file });
             }}
           >
             <Text style={{ color: '#fff', fontWeight: 'bold' }}>Xem hồ sơ</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={{
-              height: 50,
+              height: 45,
               borderRadius: 5,
               alignItems: 'center',
               justifyContent: 'center',
-              backgroundColor: colors.primary,
-              width: '45%',
+              backgroundColor: colors.border,
+
+              width: '46%',
               paddingHorizontal: 15,
             }}
             onPress={() => {
@@ -145,8 +161,162 @@ const CandidateDetail = ({ route, navigation }) => {
               showToast();
             }}
           >
-            <Text style={{ color: '#fff', fontWeight: 'bold' }}>Duyệt</Text>
+            <Text style={{ color: colors.primary, fontWeight: 'bold' }}>Duyệt</Text>
           </TouchableOpacity>
+        </View>
+        <View style={{ paddingHorizontal: 30, marginTop: 15 }}>
+          <Text
+            style={{
+              color: colors.text,
+              fontWeight: '500',
+              fontSize: 16,
+            }}
+          >
+            Tổng quan
+          </Text>
+
+          {/* Ngày sinh */}
+          <View
+            style={{
+              alignItems: 'flex-start',
+              justifyContent: 'flex-start',
+              marginTop: 25,
+            }}
+          >
+            <View
+              style={{
+                alignItems: 'center',
+                flexDirection: 'row',
+              }}
+            >
+              <Image
+                source={require('../../assets/images/accountImage/date.png')}
+                style={{ width: 20, height: 20 }}
+              />
+              <Text
+                style={{
+                  fontSize: 14,
+                  color: colors.text,
+                  fontWeight: '500',
+                  marginLeft: 10,
+                }}
+              >
+                Ngày sinh:
+              </Text>
+              <Text
+                style={{
+                  marginLeft: 20,
+                  fontSize: 14,
+                  color: colors.text2,
+                  fontWeight: '400',
+                }}
+              >
+                {userInfo?.dateOfBirth}
+              </Text>
+            </View>
+          </View>
+          {/* Giới tính */}
+          <View
+            style={{
+              alignItems: 'center',
+              flexDirection: 'row',
+              marginTop: 20,
+            }}
+          >
+            <Image
+              source={require('../../assets/images/accountImage/female.png')}
+              style={{ width: 20, height: 20 }}
+            />
+            <Text
+              style={{
+                fontSize: 14,
+                color: colors.text,
+                marginLeft: 10,
+                fontWeight: '500',
+              }}
+            >
+              Giới tính:
+            </Text>
+            <Text
+              style={{
+                marginLeft: 20,
+                fontSize: 14,
+                color: colors.text2,
+                fontWeight: '400',
+              }}
+            >
+              {userInfo?.gender}
+            </Text>
+          </View>
+          {/* Vị trí hiện tại */}
+          <View
+            style={{
+              marginTop: 20,
+              alignItems: 'stretch',
+              flexDirection: 'row',
+            }}
+          >
+            <Image
+              source={require('../../assets/images/accountImage/office-chair.png')}
+              style={{ width: 20, height: 20 }}
+            />
+            <Text
+              style={{
+                fontSize: 14,
+                marginLeft: 10,
+                color: colors.text,
+                fontWeight: '500',
+              }}
+            >
+              Vị trí:
+            </Text>
+            <Text
+              style={{
+                marginLeft: 20,
+                fontSize: 14,
+                color: colors.text2,
+                fontWeight: '400',
+                width: 250,
+              }}
+            >
+              {userInfo?.job_position}
+            </Text>
+          </View>
+          {/* Kinh nghiệm */}
+          <View
+            style={{
+              alignItems: 'center',
+              flexDirection: 'row',
+              marginTop: 20,
+              width: '100%',
+            }}
+          >
+            <Image
+              source={require('../../assets/images/accountImage/rating.png')}
+              style={{ width: 20, height: 20 }}
+            />
+            <Text
+              style={{
+                fontSize: 14,
+                color: colors.text,
+                fontWeight: '500',
+                marginLeft: 10,
+              }}
+            >
+              Kinh nghiệm làm việc:
+            </Text>
+            <Text
+              style={{
+                marginLeft: 30,
+                fontSize: 14,
+                lineHeight: 22,
+                color: colors.text2,
+                fontWeight: '400',
+              }}
+            >
+              {userInfo?.experience || 'Chưa cập nhật'}
+            </Text>
+          </View>
         </View>
       </ScrollView>
       <Toast />

@@ -85,6 +85,7 @@ const MainViewAccount = ({ navigation }) => {
   } = useForm();
 
   const updateAvatar = () => {
+    hideModal();
     firestore()
       .collection('users')
       .doc(userInfo.id)
@@ -279,8 +280,8 @@ const MainViewAccount = ({ navigation }) => {
                               bottom: -60,
                               right: 25,
                               borderRadius: 8,
-                              fontSize: 16,
-                              fontWeight: '500',
+                              fontSize: 14,
+                              fontWeight: '400',
                               color: '#fff',
                             }}
                           >
@@ -332,28 +333,28 @@ const MainViewAccount = ({ navigation }) => {
               </View>
               <View style={{ width: 60, alignItems: 'center', justifyContent: 'center' }}>
                 <Text style={{ fontSize: 16, color: colors.text, fontWeight: '700' }}>0</Text>
-                <Text style={{ textAlign: 'center', color: '#676767' }}>Lượt xem hồ sơ</Text>
+                <Text style={{ textAlign: 'center', color: '#7f879d' }}>Lượt xem hồ sơ</Text>
               </View>
               <View style={{ width: 70, alignItems: 'center', justifyContent: 'center' }}>
                 <Text style={{ fontSize: 16, color: colors.text, fontWeight: '700' }}>0</Text>
-                <Text style={{ textAlign: 'center', color: '#676767' }}>Thông báo việc làm</Text>
+                <Text style={{ textAlign: 'center', color: '#7f879d' }}>Thông báo việc làm</Text>
               </View>
               <View style={{ width: 70, alignItems: 'center', justifyContent: 'center' }}>
                 <Text style={{ fontSize: 16, color: colors.text, fontWeight: '700' }}>0</Text>
-                <Text style={{ textAlign: 'center', color: '#676767' }}>Việc làm ứng tuyển</Text>
+                <Text style={{ textAlign: 'center', color: '#7f879d' }}>Việc làm ứng tuyển</Text>
               </View>
             </View>
             <Text style={{ marginTop: 15, fontSize: 16, color: colors.text, fontWeight: '700' }}>
               {userAuth.displayName}
             </Text>
             <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 8 }}>
-              <MaterialIcons name="email" size={18} color="#676767" />
-              <Text style={{ marginLeft: 5, color: '#676767' }}>{userAuth?.email}</Text>
+              <MaterialIcons name="email" size={18} color="#7f879d" />
+              <Text style={{ marginLeft: 5, color: '#7f879d' }}>{userAuth?.email}</Text>
             </View>
             <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 8 }}>
               {/* <FontAwesome name="phone" size={15} /> */}
-              <AntDesign name="pluscircle" size={17} color="#676767" />
-              <Text style={{ marginLeft: 5, color: '#676767' }}>Thêm số điện thoại</Text>
+              <AntDesign name="pluscircle" size={17} color="#7f879d" />
+              <Text style={{ marginLeft: 5, color: '#7f879d' }}>Thêm số điện thoại</Text>
             </View>
             <View style={{ marginTop: 20 }}>
               <Text
@@ -482,7 +483,7 @@ const MainViewAccount = ({ navigation }) => {
                     style={{
                       marginLeft: 20,
                       fontSize: 14,
-                      color: colors.secondary,
+                      color: colors.text2,
                       fontWeight: '400',
                       width: 250,
                     }}
@@ -548,7 +549,7 @@ const MainViewAccount = ({ navigation }) => {
                     style={{
                       marginLeft: 20,
                       fontSize: 14,
-                      color: colors.secondary,
+                      color: colors.text2,
                       fontWeight: '400',
                       width: 250,
                     }}
@@ -619,7 +620,7 @@ const MainViewAccount = ({ navigation }) => {
                     marginTop: 10,
                     fontSize: 14,
                     lineHeight: 22,
-                    color: colors.secondary,
+                    color: colors.text2,
                     fontWeight: '400',
                   }}
                 >
@@ -691,7 +692,7 @@ const MainViewAccount = ({ navigation }) => {
                     style={{
                       marginLeft: 20,
                       fontSize: 14,
-                      color: colors.secondary,
+                      color: colors.text2,
                       fontWeight: '400',
                     }}
                   >
@@ -757,7 +758,7 @@ const MainViewAccount = ({ navigation }) => {
                       style={{
                         marginLeft: 20,
                         fontSize: 14,
-                        color: colors.secondary,
+                        color: colors.text2,
                         fontWeight: '400',
                       }}
                     >
