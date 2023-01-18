@@ -8,8 +8,22 @@ import CardCategory from '../../src/layout/CardCategory';
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
 
+const sortVote = (vote, voteResult = 0) => {
+  let sumStar = 0,
+    count = 0;
+  vote.feedbacks.forEach((feedback) => {
+    count++;
+    sumStar += feedback.star;
+  });
+  voteResult = parseFloat(sumStar / count).toFixed(1);
+  if (voteResult === 'NaN') voteResult = 0;
+  return voteResult;
+};
+
 const MainHome = ({ navigation }) => {
+  const [posts, setPosts] = useState([]);
   const [recommends, setRecommends] = useState([]);
+  const [ranks, setRanks] = useState([]);
   const [userInfo, setUserInfo] = useState();
   const [userAuth, setUserAuth] = useState('');
 
@@ -48,7 +62,25 @@ const MainHome = ({ navigation }) => {
             ...doc.data(),
           });
         });
-        setRecommends(posts);
+        setPosts(posts);
+        let ranksClone = [...posts];
+        let recommendsClone = [...posts];
+
+        let ranksArr = ranksClone
+          .sort((a, b) => {
+            if (parseFloat(sortVote(b, 0)) >= parseFloat(sortVote(a, 0))) return 1;
+            return -1;
+          })
+          .filter((item, index) => index <= 10);
+        setRanks(ranksArr);
+
+        let recommendsArr = recommendsClone
+          .sort((a, b) => {
+            if (a.createdAt >= b.createdAt) return -1;
+            return 1;
+          })
+          .filter((item, index) => index <= 7);
+        setRecommends(recommendsArr);
       });
   }, []);
 
@@ -124,12 +156,46 @@ const MainHome = ({ navigation }) => {
 
         <View
           style={{
-            marginTop: 30,
+            marginTop: 20,
+            width: '100%',
+          }}
+        >
+          <Title title="BXH nhà tuyển dụng"></Title>
+          <View
+            style={{
+              marginTop: 10,
+              width: '100%',
+              paddingLeft: 25,
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            <FlatList
+              style={{
+                height: 220,
+              }}
+              contentContainerStyle={{
+                flexGrow: 1,
+                justifyContent: 'center',
+                alignItems: 'center',
+                padding: 2,
+              }}
+              showsHorizontalScrollIndicator={false}
+              data={ranks}
+              renderItem={renderItem}
+              keyExtractor={(item) => item.id}
+              horizontal={true}
+            />
+          </View>
+        </View>
+
+        <View
+          style={{
+            marginTop: 20,
             width: '100%',
           }}
         >
           <Title title="Việc làm nổi bật"></Title>
-
           <View
             style={{
               marginTop: 10,
@@ -139,8 +205,8 @@ const MainHome = ({ navigation }) => {
               alignItems: 'center',
             }}
           >
-            {recommends?.length > 0 &&
-              recommends.map((item) => (
+            {posts?.length > 0 &&
+              posts.map((item) => (
                 <CardCategory
                   key={item.id}
                   id={item.id}

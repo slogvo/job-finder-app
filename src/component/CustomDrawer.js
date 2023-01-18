@@ -88,12 +88,8 @@ const CustomDrawer = ({ ...props }) => {
         </View>
       </DrawerContentScrollView>
       <View style={{ padding: 20, borderTopWidth: 1, borderTopColor: '#ccc' }}>
-        <TouchableOpacity
-          style={{ flexDirection: 'row', padding: 10, borderRadius: 8 }}
-          onPress={() => {
-            props.navigation.navigate('SignIn');
-          }}
-        >
+        {/* Cài đặt */}
+        <TouchableOpacity style={{ flexDirection: 'row', padding: 10, borderRadius: 8 }}>
           <Ionicons name="ios-settings-sharp" size={22} color={colors.darkGray} />
           <Text
             style={{

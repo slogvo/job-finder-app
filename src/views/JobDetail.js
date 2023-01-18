@@ -495,7 +495,7 @@ const JobDetail = ({ route, navigation }) => {
             <Text style={{ fontSize: 14, fontWeight: '500', lineHeight: 25 }}>{job?.address}</Text>
           </View>
 
-          {offComment === false ? (
+          {offComment === false && job?.user_id !== userInfo?.user_id ? (
             <View style={{ marginTop: 20 }}>
               {/* FeedBacks */}
               <Text

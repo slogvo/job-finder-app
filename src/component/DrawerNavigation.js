@@ -6,7 +6,6 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import colors from '../../assets/colors/colors';
 import CustomDrawer from './CustomDrawer';
-import Notifications from '../views/Notifications';
 import TabsNavigation from './TabsNavigation';
 import ReceivingScreen from '../views/ReceivingScreen';
 import MyJobsScreen from '../views/MyJobsScreen';

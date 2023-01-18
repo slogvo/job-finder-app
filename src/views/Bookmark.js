@@ -49,7 +49,7 @@ const Bookmark = ({ navigation }) => {
           });
         });
         let isFavoriteArr = [];
-        isFavoriteArr = user[0]?.favorites.filter((item) => item.isFavorite === true);
+        isFavoriteArr = user[0]?.favorites?.filter((item) => item.isFavorite === true);
         console.log(' isFavorite: ', isFavoriteArr);
         setFavorites(isFavoriteArr);
       });
@@ -204,6 +204,7 @@ const Bookmark = ({ navigation }) => {
             Bạn đang quan tâm
           </Text>
           {favorites?.length > 0 &&
+            posts.length > 0 &&
             posts
               .filter((item) => favorites.find((favorite) => favorite.id === item.id))
               .map((item) => (
@@ -221,8 +222,8 @@ const Bookmark = ({ navigation }) => {
                   />
                 </View>
               ))}
-          {favorites?.length > 0 &&
-            posts.filter((item) => favorites.find((favorite) => favorite.id === item.id)).length <=
+          {favorites?.length <= 0 &&
+            posts?.filter((item) => favorites.find((favorite) => favorite.id === item.id)).length <=
               0 && (
               <Text
                 style={{

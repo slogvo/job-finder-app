@@ -5,7 +5,6 @@ import {
   ScrollView,
   Image,
   Dimensions,
-  StatusBar,
   ImageBackground,
   TouchableOpacity,
 } from 'react-native';
@@ -14,7 +13,6 @@ import Carousel, { Pagination } from 'react-native-snap-carousel';
 import firestore from '@react-native-firebase/firestore';
 
 const { width } = Dimensions.get('window');
-const SPACING = 10;
 const THUMB_SIZE = 60;
 
 const ExploreScreen = ({ route, navigation }) => {
@@ -22,6 +20,7 @@ const ExploreScreen = ({ route, navigation }) => {
   const carouselRef = useRef();
   const flatListRef = useRef();
   const [news, setNews] = useState([]);
+  const [handbooks, setHandbooks] = useState([]);
 
   useEffect(() => {
     firestore()
@@ -35,7 +34,9 @@ const ExploreScreen = ({ route, navigation }) => {
           });
         });
         const news = posts.filter((post) => post.type === 'news');
+        const handbooks = posts.filter((post) => post.type === 'handbooks');
         setNews(news);
+        setHandbooks(handbooks);
       });
   }, []);
 
@@ -45,12 +46,6 @@ const ExploreScreen = ({ route, navigation }) => {
       offset: indexSelected * THUMB_SIZE,
       animated: true,
     });
-  };
-
-  const onTouchThumbnail = (touched) => {
-    if (touched === indexSelected) return;
-
-    carouselRef?.current?.snapToItem(touched);
   };
 
   return (
@@ -201,58 +196,6 @@ const ExploreScreen = ({ route, navigation }) => {
               dotStyle={{ width: 10, height: 10, borderRadius: 100 }}
               containerStyle={{ marginTop: -10 }}
             />
-            {/* <View
-              style={{
-                marginTop: 20,
-                paddingHorizontal: 32,
-                alignSelf: 'flex-end',
-              }}
-            >
-              <Text
-                style={{
-                  color: colors.text,
-                  fontSize: 16,
-                }}
-              >
-                {indexSelected + 1}/{images.length}
-              </Text>
-            </View> */}
-            {/* <FlatList
-              horizontal={true}
-              ref={flatListRef}
-              data={images}
-              style={{ position: 'absolute', bottom: -70 }}
-              showsHorizontalScrollIndicator={false}
-              contentContainerStyle={{
-                paddingHorizontal: SPACING,
-              }}
-              keyExtractor={(item) => item.id}
-              renderItem={({ item, index }) => (
-                <TouchableOpacity onPress={() => onTouchThumbnail(index)} activeOpacity={0.9}>
-                  <Image
-                    style={{
-                      width: THUMB_SIZE,
-                      height: THUMB_SIZE,
-                      marginRight: SPACING,
-                      borderRadius: 8,
-                      borderWidth: index === indexSelected ? 2 : 0.75,
-                      borderColor: index === indexSelected ? colors.primary : 'white',
-                    }}
-                    source={item.image}
-                  />
-                </TouchableOpacity>
-              )}
-            /> */}
-          </View>
-          <View style={{ marginTop: -20, paddingHorizontal: 15 }}>
-            <Image
-              source={require('../../assets/images/banner2/banner1.jpg')}
-              style={{
-                height: 150,
-                width: '100%',
-                resizeMode: 'contain',
-              }}
-            />
           </View>
 
           <View style={{ position: 'relative' }}>
@@ -279,161 +222,50 @@ const ExploreScreen = ({ route, navigation }) => {
             </Text>
           </View>
           <View style={{ marginTop: 15, paddingHorizontal: 25 }}>
-            <View
-              style={{
-                width: '100%',
-                height: 110,
-                backgroundColor: colors.background,
-                borderRadius: 8,
-                flexDirection: 'row',
-                padding: 15,
-                justifyContent: 'space-between',
-              }}
-            >
-              <View style={{ width: '70%' }}>
-                <Text style={{ color: colors.secondary, fontWeight: '600' }}>
-                  Phát triển bản thân
-                </Text>
-                <Text
-                  numberOfLines={1}
-                  style={{ marginTop: 2, fontWeight: '700', fontSize: 16, color: colors.text2 }}
-                >
-                  Giải quyết 3 cửa ải của thói quen trì hoãn
-                </Text>
-                <Text numberOfLines={2} style={{ marginTop: 1 }}>
-                  Việc càng nặng, bạn càng muốn trì hoãn. Thực ra nếu vượt được qua 3 cửa ải phổ
-                  biến của thói quen xấu này, bạn có thể vượt qua chính mình để trở thành ''siêu
-                  chiến binh''.
-                </Text>
-              </View>
-              <View style={{ height: '100%' }}>
-                <Image
-                  source={require('../../assets/images/explore/explore1.jpg')}
-                  style={{
-                    width: 80,
-                    height: '100%',
-                    borderRadius: 8,
+            {handbooks.length > 0 &&
+              handbooks.map((item) => (
+                <TouchableOpacity
+                  key={item.id}
+                  onPress={() => {
+                    navigation.navigate('BlogDetail', { itemId: item.id });
                   }}
-                ></Image>
-              </View>
-            </View>
-            <View
-              style={{
-                marginTop: 15,
-                width: '100%',
-                height: 110,
-                backgroundColor: colors.background,
-                borderRadius: 8,
-                flexDirection: 'row',
-                padding: 15,
-                justifyContent: 'space-between',
-              }}
-            >
-              <View style={{ width: '70%' }}>
-                <Text style={{ color: colors.secondary, fontWeight: '600' }}>
-                  Phát triển bản thân
-                </Text>
-                <Text
-                  numberOfLines={1}
-                  style={{ marginTop: 2, fontWeight: '700', fontSize: 16, color: colors.text2 }}
-                >
-                  Giải quyết 3 cửa ải của thói quen trì hoãn
-                </Text>
-                <Text numberOfLines={2} style={{ marginTop: 1 }}>
-                  Việc càng nặng, bạn càng muốn trì hoãn. Thực ra nếu vượt được qua 3 cửa ải phổ
-                  biến của thói quen xấu này, bạn có thể vượt qua chính mình để trở thành ''siêu
-                  chiến binh''.
-                </Text>
-              </View>
-              <View style={{ height: '100%' }}>
-                <Image
-                  source={require('../../assets/images/explore/explore1.jpg')}
                   style={{
-                    width: 80,
-                    height: '100%',
+                    width: '100%',
+                    height: 110,
+                    backgroundColor: colors.background,
                     borderRadius: 8,
+                    flexDirection: 'row',
+                    padding: 15,
+                    justifyContent: 'space-between',
+                    marginBottom: 15,
                   }}
-                ></Image>
-              </View>
-            </View>
-            <View
-              style={{
-                marginTop: 15,
-                width: '100%',
-                height: 110,
-                backgroundColor: colors.background,
-                borderRadius: 8,
-                flexDirection: 'row',
-                padding: 15,
-                justifyContent: 'space-between',
-              }}
-            >
-              <View style={{ width: '70%' }}>
-                <Text style={{ color: colors.secondary, fontWeight: '600' }}>
-                  Phát triển bản thân
-                </Text>
-                <Text
-                  numberOfLines={1}
-                  style={{ marginTop: 2, fontWeight: '700', fontSize: 16, color: colors.text2 }}
                 >
-                  Giải quyết 3 cửa ải của thói quen trì hoãn
-                </Text>
-                <Text numberOfLines={2} style={{ marginTop: 1 }}>
-                  Việc càng nặng, bạn càng muốn trì hoãn. Thực ra nếu vượt được qua 3 cửa ải phổ
-                  biến của thói quen xấu này, bạn có thể vượt qua chính mình để trở thành ''siêu
-                  chiến binh''.
-                </Text>
-              </View>
-              <View style={{ height: '100%' }}>
-                <Image
-                  source={require('../../assets/images/explore/explore1.jpg')}
-                  style={{
-                    width: 80,
-                    height: '100%',
-                    borderRadius: 8,
-                  }}
-                ></Image>
-              </View>
-            </View>
-            <View
-              style={{
-                marginTop: 15,
-                width: '100%',
-                height: 110,
-                backgroundColor: colors.background,
-                borderRadius: 8,
-                flexDirection: 'row',
-                padding: 15,
-                justifyContent: 'space-between',
-              }}
-            >
-              <View style={{ width: '70%' }}>
-                <Text style={{ color: colors.secondary, fontWeight: '600' }}>
-                  Phát triển bản thân
-                </Text>
-                <Text
-                  numberOfLines={1}
-                  style={{ marginTop: 2, fontWeight: '700', fontSize: 16, color: colors.text2 }}
-                >
-                  Giải quyết 3 cửa ải của thói quen trì hoãn
-                </Text>
-                <Text numberOfLines={2} style={{ marginTop: 1 }}>
-                  Việc càng nặng, bạn càng muốn trì hoãn. Thực ra nếu vượt được qua 3 cửa ải phổ
-                  biến của thói quen xấu này, bạn có thể vượt qua chính mình để trở thành ''siêu
-                  chiến binh''.
-                </Text>
-              </View>
-              <View style={{ height: '100%' }}>
-                <Image
-                  source={require('../../assets/images/explore/explore1.jpg')}
-                  style={{
-                    width: 80,
-                    height: '100%',
-                    borderRadius: 8,
-                  }}
-                ></Image>
-              </View>
-            </View>
+                  <View style={{ width: '70%' }}>
+                    <Text style={{ color: colors.secondary, fontWeight: '600' }}>
+                      Phát triển bản thân
+                    </Text>
+                    <Text
+                      numberOfLines={1}
+                      style={{ marginTop: 2, fontWeight: '700', fontSize: 16, color: colors.text2 }}
+                    >
+                      {item?.title}
+                    </Text>
+                    <Text numberOfLines={2} style={{ marginTop: 1 }}>
+                      {item?.content}
+                    </Text>
+                  </View>
+                  <View style={{ height: '100%' }}>
+                    <Image
+                      source={{ uri: item.image }}
+                      style={{
+                        width: 80,
+                        height: '100%',
+                        borderRadius: 8,
+                      }}
+                    ></Image>
+                  </View>
+                </TouchableOpacity>
+              ))}
           </View>
           <View style={{ marginBottom: 80 }} />
         </View>
