@@ -1,18 +1,37 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Image, ImageBackground, Text, TouchableOpacity, View } from 'react-native';
 import { DrawerContentScrollView, DrawerItemList } from '@react-navigation/drawer';
 import colors from '../../assets/colors/colors';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import auth from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
 
 const CustomDrawer = ({ ...props }) => {
-  const [userNameDisplay, setUserNameDisplay] = useState(null);
+  const [userAuth, setUserAuth] = useState('');
   auth().onAuthStateChanged((user) => {
     if (user) {
-      setUserNameDisplay(user?.displayName);
-    } else setUserNameDisplay('Unknown');
+      setUserAuth(user);
+    } else setUserAuth('Unknown');
   });
+
+  const [userInfo, setUserInfo] = useState();
+  useEffect(() => {
+    firestore()
+      .collection('users')
+      .where('user_id', '==', `${userAuth.uid}`)
+      .onSnapshot((snapshot) => {
+        let user = [];
+        snapshot.forEach((doc) => {
+          user.push({
+            id: doc.id,
+            ...doc.data(),
+          });
+        });
+        setUserInfo(user[0]);
+      });
+  }, [userAuth]);
+
   const handleSignOut = () => {
     auth()
       .signOut()
@@ -44,7 +63,9 @@ const CustomDrawer = ({ ...props }) => {
             }}
           >
             <Image
-              source={require('../../assets/images/avatar.png')}
+              source={{
+                uri: userInfo?.avatar,
+              }}
               resizeMode="cover"
               style={{
                 width: '100%',
@@ -62,9 +83,9 @@ const CustomDrawer = ({ ...props }) => {
                 marginTop: 3,
               }}
             >
-              {userNameDisplay}
+              {userAuth.displayName}
             </Text>
-            <Text
+            {/* <Text
               style={{
                 color: 'white',
                 fontSize: 15,
@@ -73,7 +94,7 @@ const CustomDrawer = ({ ...props }) => {
               }}
             >
               Hồ sơ <AntDesign name="edit" size={15} />
-            </Text>
+            </Text> */}
           </View>
         </ImageBackground>
         <View

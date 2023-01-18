@@ -98,9 +98,17 @@ const ReceivingListScreen = ({ navigation }) => {
             marginTop: 25,
           }}
         >
-          <Text style={{ fontSize: 18, color: colors.text, fontWeight: '700', marginBottom: 15 }}>
-            Các bài tuyển dụng
-          </Text>
+          {posts.length > 0 ? (
+            <Text style={{ fontSize: 18, color: colors.text, fontWeight: '700', marginBottom: 15 }}>
+              Các bài tuyển dụng
+            </Text>
+          ) : (
+            <Text
+              style={{ fontSize: 14, color: colors.secondary, fontWeight: '400', marginBottom: 15 }}
+            >
+              Bạn chưa có bài đăng nào gần đây
+            </Text>
+          )}
           {posts.length > 0 &&
             posts.map((post) => (
               <View key={post.id} style={{ marginBottom: 25 }}>

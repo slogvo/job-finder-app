@@ -2,14 +2,32 @@ import { useEffect, useState } from 'react';
 import { Image, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import colors from '../../assets/colors/colors';
 import auth from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
 
 const SearchLayout = ({ navigation }) => {
-  const [userNameDisplay, setUserNameDisplay] = useState(null);
+  const [userAuth, setUserAuth] = useState('');
   auth().onAuthStateChanged((user) => {
     if (user) {
-      setUserNameDisplay(user?.displayName);
-    } else setUserNameDisplay('Unknown');
+      setUserAuth(user);
+    } else setUserAuth('Unknown');
   });
+
+  const [userInfo, setUserInfo] = useState();
+  useEffect(() => {
+    firestore()
+      .collection('users')
+      .where('user_id', '==', `${userAuth.uid}`)
+      .onSnapshot((snapshot) => {
+        let user = [];
+        snapshot.forEach((doc) => {
+          user.push({
+            id: doc.id,
+            ...doc.data(),
+          });
+        });
+        setUserInfo(user[0]);
+      });
+  }, [userAuth]);
 
   return (
     <View
@@ -52,7 +70,9 @@ const SearchLayout = ({ navigation }) => {
 
       <View style={{ flexDirection: 'row', marginBottom: 15 }}>
         <Image
-          source={require('../../assets/images/avatar.png')}
+          source={{
+            uri: userInfo?.avatar,
+          }}
           style={{ width: 50, height: 50, borderRadius: 50, marginRight: 15 }}
         />
         <View>
@@ -64,7 +84,7 @@ const SearchLayout = ({ navigation }) => {
               marginBottom: 5,
             }}
           >
-            Hi, {userNameDisplay}
+            Hi, {userAuth.displayName}
           </Text>
           <Text
             style={{
