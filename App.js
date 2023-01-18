@@ -6,6 +6,7 @@ import GetStarted from './src/views/GetStarted';
 import DrawerNavigation from './src/component/DrawerNavigation';
 import SignUp from './src/views/SignUp';
 import auth from '@react-native-firebase/auth';
+import { Provider as PaperProvider } from 'react-native-paper';
 
 const Stack = createNativeStackNavigator();
 
@@ -38,11 +39,13 @@ function App() {
   }
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="GetStated" screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="DrawerNavigation" component={DrawerNavigation} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <PaperProvider>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="GetStated" screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="DrawerNavigation" component={DrawerNavigation} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </PaperProvider>
   );
 }
 

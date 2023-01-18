@@ -23,7 +23,7 @@ const SearchLayout = ({ navigation }) => {
         <View style={{ marginBottom: 20 }}>
           <TouchableOpacity onPress={() => navigation.openDrawer()}>
             <Image
-              source={require('../../assets/images/menu.png')}
+              source={require('../../assets/images/icons/menu.png')}
               style={{
                 width: 28,
                 height: 28,

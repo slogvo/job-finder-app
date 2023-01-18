@@ -3,6 +3,8 @@ import { Image, Text, TouchableOpacity, View } from 'react-native';
 import colors from '../../assets/colors/colors';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import firestore from '@react-native-firebase/firestore';
+import { Popable } from 'react-native-popable';
+import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
 
 const MyJob = ({ userInfo, status, jobId, navigation }) => {
   const favoritesClone = userInfo?.favorites || [];
@@ -57,8 +59,10 @@ const MyJob = ({ userInfo, status, jobId, navigation }) => {
 
   const companyAddressArr = postDetail?.address?.split(',');
   return (
-    <View
-      onPress={() => navigation.navigate('JobDetail')}
+    <Pressable
+      onPress={() => {
+        navigation.navigate('JobDetail', { itemId: jobId });
+      }}
       style={{
         flex: 1,
         alignItems: 'flex-start',
@@ -89,7 +93,7 @@ const MyJob = ({ userInfo, status, jobId, navigation }) => {
           style={{ width: 58, height: 58, resizeMode: 'contain' }}
         />
       </View>
-      <View style={{ height: '100%', width: '100%' }}>
+      <View style={{ height: '100%' }}>
         <Text
           style={{
             fontSize: 14,
@@ -125,7 +129,7 @@ const MyJob = ({ userInfo, status, jobId, navigation }) => {
           }}
         >
           <Image
-            source={require('../../assets/images/location.png')}
+            source={require('../../assets/images/icons/location.png')}
             style={{
               width: 18,
               height: 18,
@@ -152,15 +156,37 @@ const MyJob = ({ userInfo, status, jobId, navigation }) => {
           >
             {postDetail?.wage}
           </Text>
-          <Text
-            style={{
-              color: colors.secondary,
-              fontWeight: '500',
-              fontSize: 13,
-            }}
-          >
-            {status === 0 && 'Chờ xét duyệt'}
-          </Text>
+          <View style={{ marginLeft: 20 }}>
+            {status == 0 ? (
+              <Popable
+                style={{ opacity: 0.8, width: 90 }}
+                content="Hồ sơ đang chờ duyệt"
+                position="top"
+              >
+                <Image
+                  source={require('../../assets/images/icons/sand-clock.png')}
+                  style={{
+                    width: 15,
+                    height: 15,
+                  }}
+                />
+              </Popable>
+            ) : (
+              <Popable
+                style={{ opacity: 0.8 }}
+                content="Chúc mừng bạn đã được nhà tuyển dụng nhắm đến!"
+                position="top"
+              >
+                <Image
+                  source={require('../../assets/images/icons/approve.png')}
+                  style={{
+                    width: 18,
+                    height: 18,
+                  }}
+                />
+              </Popable>
+            )}
+          </View>
         </View>
       </View>
       <TouchableOpacity style={{ marginLeft: 'auto' }} onPress={() => handleToggleFavorite(jobId)}>
@@ -170,7 +196,7 @@ const MyJob = ({ userInfo, status, jobId, navigation }) => {
           color={isFavorite === true ? colors.redColor : colors.border}
         />
       </TouchableOpacity>
-    </View>
+    </Pressable>
   );
 };
 

@@ -356,7 +356,7 @@ const SignUp = ({ navigation }) => {
             }}
           >
             <Image
-              source={require('../../assets/images/google.png')}
+              source={require('../../assets/images/icons/google.png')}
               style={{
                 width: 22,
                 height: 22,
@@ -389,7 +389,7 @@ const SignUp = ({ navigation }) => {
             }}
           >
             <Image
-              source={require('../../assets/images/facebook.png')}
+              source={require('../../assets/images/icons/facebook.png')}
               style={{
                 width: 22,
                 height: 22,

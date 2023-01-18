@@ -485,7 +485,7 @@ const JobDetail = ({ route, navigation }) => {
           </Text>
           <View style={{ marginTop: 5, flexDirection: 'row', alignItems: 'center' }}>
             <Image
-              source={require('../../assets/images/location.png')}
+              source={require('../../assets/images/icons/location.png')}
               style={{
                 width: 18,
                 height: 18,

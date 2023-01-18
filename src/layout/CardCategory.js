@@ -122,7 +122,7 @@ const CardCategory = ({
           }}
         >
           <Image
-            source={require('../../assets/images/location.png')}
+            source={require('../../assets/images/icons/location.png')}
             style={{
               width: 18,
               height: 18,

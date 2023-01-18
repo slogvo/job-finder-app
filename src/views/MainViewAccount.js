@@ -96,16 +96,15 @@ const MainViewAccount = ({ navigation }) => {
   };
 
   const onSubmit = (data) => {
-    showToast();
     firestore()
       .collection('users')
       .doc(userInfo.id)
       .update({
-        job: data.job || userInfo?.job,
-        job_position: data?.job_position || userInfo?.job_position,
-        experience: data?.experience || userInfo?.experience,
-        dateOfBirth: data?.dateOfBirth || userInfo?.dateOfBirth,
-        gender: checked,
+        job: data?.job || userInfo?.job || '',
+        job_position: data?.job_position || userInfo?.job_position || '',
+        experience: data?.experience || userInfo?.experience || '',
+        dateOfBirth: data?.dateOfBirth || userInfo?.dateOfBirth || '',
+        gender: checked || '',
       });
     reset({
       job: '',
@@ -472,7 +471,7 @@ const MainViewAccount = ({ navigation }) => {
                   <Text
                     style={{
                       marginLeft: 10,
-                      fontSize: 15,
+                      fontSize: 14,
                       color: colors.text,
                       fontWeight: '500',
                     }}
@@ -482,7 +481,7 @@ const MainViewAccount = ({ navigation }) => {
                   <Text
                     style={{
                       marginLeft: 20,
-                      fontSize: 15,
+                      fontSize: 14,
                       color: colors.secondary,
                       fontWeight: '400',
                       width: 250,
@@ -537,7 +536,7 @@ const MainViewAccount = ({ navigation }) => {
                   />
                   <Text
                     style={{
-                      fontSize: 15,
+                      fontSize: 14,
                       marginLeft: 10,
                       color: colors.text,
                       fontWeight: '500',
@@ -548,7 +547,7 @@ const MainViewAccount = ({ navigation }) => {
                   <Text
                     style={{
                       marginLeft: 20,
-                      fontSize: 15,
+                      fontSize: 14,
                       color: colors.secondary,
                       fontWeight: '400',
                       width: 250,
@@ -605,7 +604,7 @@ const MainViewAccount = ({ navigation }) => {
                   />
                   <Text
                     style={{
-                      fontSize: 15,
+                      fontSize: 14,
                       color: colors.text,
                       fontWeight: '500',
                       marginLeft: 10,
@@ -618,7 +617,7 @@ const MainViewAccount = ({ navigation }) => {
                   style={{
                     marginLeft: 30,
                     marginTop: 10,
-                    fontSize: 15,
+                    fontSize: 14,
                     lineHeight: 22,
                     color: colors.secondary,
                     fontWeight: '400',
@@ -680,7 +679,7 @@ const MainViewAccount = ({ navigation }) => {
                   />
                   <Text
                     style={{
-                      fontSize: 15,
+                      fontSize: 14,
                       color: colors.text,
                       fontWeight: '500',
                       marginLeft: 10,
@@ -691,7 +690,7 @@ const MainViewAccount = ({ navigation }) => {
                   <Text
                     style={{
                       marginLeft: 20,
-                      fontSize: 15,
+                      fontSize: 14,
                       color: colors.secondary,
                       fontWeight: '400',
                     }}
@@ -746,7 +745,7 @@ const MainViewAccount = ({ navigation }) => {
                     />
                     <Text
                       style={{
-                        fontSize: 15,
+                        fontSize: 14,
                         color: colors.text,
                         marginLeft: 10,
                         fontWeight: '500',
@@ -757,7 +756,7 @@ const MainViewAccount = ({ navigation }) => {
                     <Text
                       style={{
                         marginLeft: 20,
-                        fontSize: 15,
+                        fontSize: 14,
                         color: colors.secondary,
                         fontWeight: '400',
                       }}
@@ -814,7 +813,7 @@ const MainViewAccount = ({ navigation }) => {
           </View>
           <View style={{ marginBottom: 100 }} />
         </ScrollView>
-        <Toast />
+        {/* <Toast /> */}
       </View>
     </Provider>
   );

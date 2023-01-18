@@ -86,7 +86,7 @@ const GoBackFilter = ({
               }}
             >
               <Image
-                source={require('../../assets/images/filter.png')}
+                source={require('../../assets/images/icons/filter.png')}
                 style={{
                   width: 30,
                   height: 30,
