@@ -9,17 +9,37 @@ import MyJob from '../layout/MyJob';
 
 const MyJobsScreen = ({ navigation }) => {
   const [recruitmentDetail, setRecruitmentDetail] = useState();
-  const [userId, setUserId] = useState('');
+  const [userInfo, setUserInfo] = useState();
+  const [userAuth, setUserAuth] = useState('');
+
   auth().onAuthStateChanged((user) => {
     if (user) {
-      setUserId(user.uid);
-      console.log('user.uid: ', user.uid);
-    } else setUserId('Unknown');
+      setUserAuth(user);
+    } else setUserAuth('Unknown');
   });
+
+  //Get userInfo
+  useEffect(() => {
+    firestore()
+      .collection('users')
+      .where('user_id', '==', `${userAuth.uid}`)
+      .onSnapshot((snapshot) => {
+        let user = [];
+        snapshot.forEach((doc) => {
+          user.push({
+            id: doc.id,
+            ...doc.data(),
+          });
+        });
+        setUserInfo(user[0]);
+        console.log('user[0]: ', user[0]);
+      });
+  }, [userAuth]);
+
   useEffect(() => {
     firestore()
       .collection('recruitment')
-      .where('userId', '==', `${userId}`)
+      .where('userId', '==', `${userInfo?.user_id}`)
       .onSnapshot((snapshot) => {
         let recruitment = [];
         snapshot.forEach((doc) => {
@@ -33,7 +53,7 @@ const MyJobsScreen = ({ navigation }) => {
         console.log('recruitment: ', recruitment);
         setRecruitmentDetail(recruitment);
       });
-  }, [userId]);
+  }, [userInfo]);
 
   return (
     <View
@@ -104,7 +124,13 @@ const MyJobsScreen = ({ navigation }) => {
         >
           {recruitmentDetail?.length > 0 &&
             recruitmentDetail.map((item) => (
-              <MyJob status={item?.status} key={item?.id} jobId={item?.jobId} />
+              <MyJob
+                status={item?.status}
+                key={item?.id}
+                jobId={item?.jobId}
+                userInfo={userInfo}
+                navigation={navigation}
+              />
             ))}
         </View>
         <View style={{ marginBottom: 80 }} />

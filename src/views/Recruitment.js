@@ -96,7 +96,7 @@ const Recruitment = ({ route, navigation }) => {
             </Text>
             <View style={{ flexDirection: 'row', position: 'relative' }}>
               <Image
-                source={require('../../assets/images/vietnam.png')}
+                source={require('../../assets/images/icons/vietnam.png')}
                 style={{
                   width: 25,
                   height: 25,

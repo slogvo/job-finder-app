@@ -90,7 +90,7 @@ const SearchLayout = ({ navigation }) => {
         }}
       >
         <Image
-          source={require('../../assets/images/search-symbol.png')}
+          source={require('../../assets/images/icons/search-symbol.png')}
           style={{
             position: 'absolute',
             width: 20,

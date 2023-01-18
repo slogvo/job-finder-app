@@ -599,7 +599,7 @@ const JobDetail = ({ route, navigation }) => {
               job?.feedbacks.reverse().map((item, index) => (
                 <View key={`${item.id}${index}`} style={{ marginTop: 25, flexDirection: 'row' }}>
                   <Image
-                    source={require('../../assets/images/user-image.png')}
+                    source={require('../../assets/images/icons/user-image.png')}
                     style={{ marginRight: 10, width: 45, height: 45, resizeMode: 'cover' }}
                   />
                   <View>

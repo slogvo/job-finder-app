@@ -4,10 +4,41 @@ import colors from '../../assets/colors/colors';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import firestore from '@react-native-firebase/firestore';
 
-const MyJob = ({ status, jobId, isFavorite = false }) => {
-  console.log('status: ', status);
+const MyJob = ({ userInfo, status, jobId, navigation }) => {
+  const favoritesClone = userInfo?.favorites || [];
+  const [isFavorite] = favoritesClone
+    .filter((item) => item.id === jobId)
+    .map((item) => item.isFavorite);
+
+  const handleToggleFavorite = (ID) => {
+    const hasPost = favoritesClone?.find((favorite) => favorite.id === ID);
+    if (hasPost === undefined) {
+      favoritesClone.push({
+        id: ID,
+        isFavorite: false,
+      });
+    }
+    const updatedArray = favoritesClone?.map((favorite) => {
+      if (favorite.id === ID)
+        return {
+          ...favorite,
+          isFavorite: !favorite.isFavorite,
+        };
+      return favorite;
+    });
+    firestore()
+      .collection('users')
+      .doc(userInfo.id)
+      .update({
+        favorites: updatedArray,
+      })
+      .then(() => {})
+      .catch((err) => console.log(err));
+  };
+
   const [postDetail, setPostDetail] = useState('');
   useEffect(() => {
+    console.log('jobId41: ', jobId);
     firestore()
       .collection('posts')
       .onSnapshot((snapshot) => {
@@ -18,11 +49,13 @@ const MyJob = ({ status, jobId, isFavorite = false }) => {
             ...doc.data(),
           });
         });
-        const post = posts.filter((post) => post.id === jobId);
-        setPostDetail(post[0]);
-        console.log('post[0]: ', post[0]);
+        const [postDetail] = posts.filter((post) => post.id === jobId);
+        console.log('postDetail: ', postDetail);
+        setPostDetail(postDetail);
       });
   }, [jobId]);
+
+  const companyAddressArr = postDetail?.address?.split(',');
   return (
     <View
       onPress={() => navigation.navigate('JobDetail')}
@@ -98,7 +131,7 @@ const MyJob = ({ status, jobId, isFavorite = false }) => {
               height: 18,
               marginRight: 5,
             }}
-          ></Image>
+          />
           <Text
             numberOfLines={1}
             style={{
@@ -107,7 +140,7 @@ const MyJob = ({ status, jobId, isFavorite = false }) => {
               fontSize: 13,
             }}
           >
-            {/* {companyAddressArr && companyAddressArr[companyAddressArr?.length - 1]} */}
+            {companyAddressArr && companyAddressArr[companyAddressArr?.length - 1]}
           </Text>
           <Text
             numberOfLines={1}
@@ -126,14 +159,11 @@ const MyJob = ({ status, jobId, isFavorite = false }) => {
               fontSize: 13,
             }}
           >
-            {status}
+            {status === 0 && 'Chờ xét duyệt'}
           </Text>
         </View>
       </View>
-      <TouchableOpacity
-        style={{ marginLeft: 'auto' }}
-        // onPress={() => toggleFavorite(id)}
-      >
+      <TouchableOpacity style={{ marginLeft: 'auto' }} onPress={() => handleToggleFavorite(jobId)}>
         <AntDesign
           name="heart"
           size={20}

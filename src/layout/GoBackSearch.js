@@ -41,7 +41,7 @@ const GoBackFilter = ({
         </TouchableOpacity>
         <View style={{ width: '70%' }}>
           <Image
-            source={require('../../assets/images/search-symbol.png')}
+            source={require('../../assets/images/icons/search-symbol.png')}
             style={{
               position: 'absolute',
               width: 20,
