@@ -54,7 +54,7 @@ const CustomDrawer = ({ ...props }) => {
         >
           <View
             style={{
-              backgroundColor: colors.secondary,
+              backgroundColor: '#Fff',
               borderRadius: 100,
               alignItems: 'center',
               width: 70,

@@ -3,25 +3,57 @@ import { Image, StatusBar, Text, TextInput, TouchableOpacity, View } from 'react
 import colors from '../../assets/colors/colors';
 import auth from '@react-native-firebase/auth';
 import { useForm, Controller } from 'react-hook-form';
+import Toast from 'react-native-toast-message';
+import * as Yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
+
+const schema = Yup.object({
+  email: Yup.string()
+    .email('Địa chỉ email không hợp lệ')
+    .required('Vui lòng nhập địa chỉ email của bạn!'),
+  password: Yup.string()
+    .min(6, 'Mật khẩu của bạn phải có ít nhất 8 ký tự')
+    .required('Vui lòng nhập mật khẩu của bạn'),
+}).required();
 
 // const windowHeight = Dimensions.get('window').height;
 const SignIn = ({ navigation }) => {
   const [activeEmail, setActiveEmail] = useState(false);
   const [activePassword, setActivePassword] = useState(false);
+
   const {
-    setValue,
     handleSubmit,
     control,
-    reset,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    mode: 'onChange',
+    resolver: yupResolver(schema),
+  });
   const onSubmit = (data) => {
     auth()
       .signInWithEmailAndPassword(data?.email, data?.password)
       .then((user) => {})
-      .catch((err) => {
-        console.log('err : ', err);
+      .catch((error) => {
+        console.log('error: ', error);
+        if (error.code === 'auth/user-not-found') {
+          showToast('Không tồn tại người dùng hoặc người dùng đã bị xóa!');
+        }
+        if (error.code === 'auth/wrong-password') {
+          showToast('Mật khẩu không đúng!');
+        }
+        if (error.code === 'auth/too-many-requests') {
+          showToast('Phát hiện hoạt động bất thường! Tài khoản sẽ bị khóa');
+        }
       });
+  };
+
+  const showToast = (error) => {
+    Toast.show({
+      type: 'error',
+      text2: `${error}`,
+      topOffset: 0,
+      visibilityTime: 2500,
+    });
   };
 
   return (
@@ -140,6 +172,11 @@ const SignIn = ({ navigation }) => {
               )}
               name="email"
             />
+            {errors?.email && (
+              <Text style={{ marginTop: 10, color: colors.redColor }}>
+                {errors?.email?.message}
+              </Text>
+            )}
           </View>
           <View
             style={{
@@ -187,6 +224,11 @@ const SignIn = ({ navigation }) => {
               )}
               name="password"
             />
+            {errors?.password && (
+              <Text style={{ marginTop: 10, color: colors.redColor }}>
+                {errors?.password?.message}
+              </Text>
+            )}
           </View>
           <View
             style={{
@@ -343,6 +385,7 @@ const SignIn = ({ navigation }) => {
           </TouchableOpacity>
         </View>
       </View>
+      <Toast />
     </View>
   );
 };

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Image, ImageBackground, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import colors from '../../assets/colors/colors';
-import Entypo from 'react-native-vector-icons/Entypo';
 import firestore from '@react-native-firebase/firestore';
 import Toast from 'react-native-toast-message';
 
