@@ -57,8 +57,8 @@ const CustomDrawer = ({ ...props }) => {
               backgroundColor: '#Fff',
               borderRadius: 100,
               alignItems: 'center',
-              width: 70,
-              height: 70,
+              width: 60,
+              height: 60,
               marginBottom: 10,
             }}
           >
@@ -78,23 +78,13 @@ const CustomDrawer = ({ ...props }) => {
             <Text
               style={{
                 color: 'white',
-                fontSize: 18,
+                fontSize: 16,
                 fontWeight: 'bold',
                 marginTop: 3,
               }}
             >
               {userAuth.displayName}
             </Text>
-            {/* <Text
-              style={{
-                color: 'white',
-                fontSize: 15,
-                fontWeight: '600',
-                marginTop: 10,
-              }}
-            >
-              Hồ sơ <AntDesign name="edit" size={15} />
-            </Text> */}
           </View>
         </ImageBackground>
         <View
