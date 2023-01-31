@@ -60,11 +60,13 @@ const SearchFilterView = ({ navigation }) => {
         const list = posts.filter((item) => {
           const addressRef = removeVNeTones(item.address).toLowerCase();
           const careerRef = removeVNeTones(item.career).toLowerCase();
+          const titleRef = removeVNeTones(item.title).toLowerCase();
           const name_companyRef = removeVNeTones(item.name_company).toLowerCase();
           const queryTextRef = removeVNeTones(queryText).toLowerCase();
           if (
             addressRef.includes(queryTextRef) ||
             careerRef.includes(queryTextRef) ||
+            titleRef.includes(queryTextRef) ||
             name_companyRef.includes(queryTextRef)
           )
             return item;

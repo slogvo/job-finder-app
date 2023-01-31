@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Image, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import colors from '../../assets/colors/colors';
-import FilterOptions from '../../assets/data/FilterOptions';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
