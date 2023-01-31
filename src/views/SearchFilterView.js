@@ -11,7 +11,7 @@ const SearchFilterView = ({ navigation }) => {
   const removeVNeTones = useRemoveTones();
   const [queryText, setQueryText] = useState('');
   const [type, setType] = useState(0);
-  const [categoriesList, setCategoriesList] = useState([]);
+  const [textTab, setTextTab] = useState(null);
   const [catsList, setCatsList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -95,8 +95,8 @@ const SearchFilterView = ({ navigation }) => {
         stickyHeaderIndices={[0]}
       >
         <GoBackFilter
-          categories={categoriesList}
           onChange={setType}
+          // onChangeTab={setTextTab}
           currentType={type}
           value={queryText}
           onChangeText={onChangeText}

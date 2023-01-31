@@ -118,7 +118,7 @@ const MainHome = ({ navigation }) => {
         stickyHeaderIndices={[0]}
       >
         <SearchLayout navigation={navigation}></SearchLayout>
-        <BannerCarousel></BannerCarousel>
+        <BannerCarousel navigation={navigation}></BannerCarousel>
         <View
           style={{
             marginTop: 30,

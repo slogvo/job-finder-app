@@ -6,7 +6,7 @@ const ImageBanner = ({ src }) => {
   return (
     <View>
       <Image
-        source={src}
+        source={{ uri: src }}
         style={{
           width: screenWidth - 50,
           height: 200,

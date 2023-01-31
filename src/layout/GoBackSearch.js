@@ -4,11 +4,50 @@ import colors from '../../assets/colors/colors';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
+const listCategories = [
+  {
+    id: 1,
+    name: 'Full-time',
+  },
+  {
+    id: 2,
+    name: 'Part-time',
+  },
+  {
+    id: 3,
+    name: 'Thực tập',
+  },
+  {
+    id: 4,
+    name: 'Thiết kế đồ họa',
+  },
+  {
+    id: 5,
+    name: 'Tài chính',
+  },
+  {
+    id: 6,
+    name: 'Nhân sự',
+  },
+  {
+    id: 7,
+    name: 'IT',
+  },
+  {
+    id: 8,
+    name: 'Marketing',
+  },
+  {
+    id: 9,
+    name: 'Khác',
+  },
+];
+
 const GoBackFilter = ({
-  categories = [],
   value,
   onChangeText,
   navigation,
+  onChangeTab = () => {},
   onChange,
   currentType,
 }) => {
@@ -30,15 +69,15 @@ const GoBackFilter = ({
             style={{
               width: 40,
               height: 40,
-              borderRadius: 40,
               justifyContent: 'center',
               alignItems: 'center',
+              borderRadius: 8,
             }}
           >
-            <Ionicons name="ios-arrow-back-sharp" size={28} color={colors.darkGray} />
+            <AntDesign name="closecircle" size={28} color={colors.darkGray} />
           </View>
         </TouchableOpacity>
-        <View style={{ width: '70%' }}>
+        <View style={{ width: '85%' }}>
           <Image
             source={require('../../assets/images/icons/search-symbol.png')}
             style={{
@@ -65,7 +104,7 @@ const GoBackFilter = ({
             placeholder="Nhập từ khóa tìm kiếm"
           />
         </View>
-        <TouchableOpacity
+        {/* <TouchableOpacity
           onPress={() => {
             setFilter(!filter);
             if (filter === true) {
@@ -106,11 +145,11 @@ const GoBackFilter = ({
               <AntDesign name="closecircle" size={25} color={colors.darkGray} />
             </View>
           )}
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
 
       {/* advanced filter */}
-      <View
+      {/* <View
         style={{
           flexDirection: 'row',
           marginTop: 10,
@@ -122,13 +161,16 @@ const GoBackFilter = ({
         }}
       >
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-          {categories?.length > 0 &&
+          {listCategories?.length > 0 &&
             filter === true &&
-            categories.map((item) => {
+            listCategories.map((item) => {
               return (
                 <TouchableOpacity
                   key={item.id}
-                  onPress={() => onChange(item.id)}
+                  onPress={() => {
+                    onChangeTab(item.name);
+                    console.log('item.name: ', item?.name);
+                  }}
                   style={{
                     paddingHorizontal: 10,
                     height: 40,
@@ -151,7 +193,7 @@ const GoBackFilter = ({
               );
             })}
         </ScrollView>
-      </View>
+      </View> */}
     </View>
   );
 };

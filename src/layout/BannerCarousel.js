@@ -1,16 +1,30 @@
-import BannerList from '../../assets/data/BannerList';
 import React, { useEffect, useRef, useState } from 'react';
-import { Dimensions, ScrollView, Text, View } from 'react-native';
+import { Dimensions, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import colors from '../../assets/colors/colors';
+import firestore from '@react-native-firebase/firestore';
+import ImageBanner from './ImageBanner';
 
 const { width: screenWidth } = Dimensions.get('window');
 
-const BannerCarousel = () => {
+const BannerCarousel = ({ navigation }) => {
   const [imageList, setImageList] = useState([]);
   const [currentImage, setCurrentImage] = useState(0);
   const stepCarousel = useRef(null);
   useEffect(() => {
-    setImageList(BannerList);
+    firestore()
+      .collection('posts')
+      .where('typePost', '==', 1)
+      .onSnapshot((snapshot) => {
+        let posts = [];
+        snapshot.forEach((doc) => {
+          posts.push({
+            id: doc.id,
+            ...doc.data(),
+          });
+        });
+        setImageList(posts);
+        console.log('posts: ', posts);
+      });
   }, []);
 
   let interval = 3000;
@@ -56,8 +70,15 @@ const BannerCarousel = () => {
           ref={stepCarousel}
         >
           {imageList?.map((item) => (
-            <View key={item.id} style={{ width: screenWidth }}>
-              <View>{item.image}</View>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate('JobDetail', { itemId: item.id });
+              }}
+              activeOpacity={0.8}
+              key={item.id}
+              style={{ width: screenWidth }}
+            >
+              <ImageBanner src={item.image} />
               <View
                 style={{
                   position: 'absolute',
@@ -76,7 +97,7 @@ const BannerCarousel = () => {
                     color: 'white',
                   }}
                 >
-                  {item.jobName}
+                  {item.title}
                 </Text>
                 <Text
                   style={{
@@ -86,10 +107,10 @@ const BannerCarousel = () => {
                     color: 'white',
                   }}
                 >
-                  {item.companyName}
+                  {item.name_company}
                 </Text>
               </View>
-            </View>
+            </TouchableOpacity>
           ))}
         </ScrollView>
       )}

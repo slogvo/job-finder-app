@@ -351,11 +351,10 @@ const MainViewAccount = ({ navigation }) => {
               <MaterialIcons name="email" size={18} color="#7f879d" />
               <Text style={{ marginLeft: 5, color: '#7f879d' }}>{userAuth?.email}</Text>
             </View>
-            <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 8 }}>
-              {/* <FontAwesome name="phone" size={15} /> */}
+            {/* <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 8 }}>
               <AntDesign name="pluscircle" size={17} color="#7f879d" />
               <Text style={{ marginLeft: 5, color: '#7f879d' }}>Thêm số điện thoại</Text>
-            </View>
+            </View> */}
             <View style={{ marginTop: 20 }}>
               <Text
                 style={{
