@@ -5,14 +5,13 @@ import database from '@react-native-firebase/database';
 import storage from '@react-native-firebase/storage';
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyD4QjNqPX37UvOKTsT6Z6bCAgumY-75XAg',
-  authDomain: 'job-finder-app-c1066.firebaseapp.com',
-  databaseURL: 'https://job-finder-app-c1066-default-rtdb.asia-southeast1.firebasedatabase.app/',
-  projectId: 'job-finder-app-c1066',
-  storageBucket: 'job-finder-app-c1066.appspot.com',
-  messagingSenderId: '81602874614',
-  appId: '1:81602874614:web:0b9d7801a2f50bad9430d7',
-  measurementId: 'G-4CP5PHQQ1C',
+  apiKey: 'AIzaSyDS_LpX1jZvXcTZiQutAs-dTYm8-YFOgfc',
+  authDomain: 'job-finder-app-fb9fd.firebaseapp.com',
+  databaseURL: 'https://job-finder-app-fb9fd-default-rtdb.asia-southeast1.firebasedatabase.app',
+  projectId: 'job-finder-app-fb9fd',
+  storageBucket: 'job-finder-app-fb9fd.appspot.com',
+  messagingSenderId: '981831217824',
+  appId: '1:981831217824:web:a8e5d74d5798aa7c56cfc5',
 };
 
 // Initialize Firebase

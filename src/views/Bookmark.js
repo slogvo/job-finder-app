@@ -50,7 +50,6 @@ const Bookmark = ({ navigation }) => {
         });
         let isFavoriteArr = [];
         isFavoriteArr = user[0]?.favorites?.filter((item) => item.isFavorite === true);
-        console.log(' isFavorite: ', isFavoriteArr);
         setFavorites(isFavoriteArr);
       });
   }, [userAuth]);

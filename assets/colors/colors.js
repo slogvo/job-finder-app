@@ -2,7 +2,7 @@ const colors = {
   text: '#0d1b2a',
   text2: '#14213d',
   primary: '#35405a',
-  secondary: '#00c695',
+  secondary: '#3EF12F',
   background: '#fafbfd',
   lightPurple: '#C4BFFD',
   focusColor: '#7c828e',

@@ -11,7 +11,7 @@ import auth from '@react-native-firebase/auth';
 const sortVote = (vote, voteResult = 0) => {
   let sumStar = 0,
     count = 0;
-  vote.feedbacks.forEach((feedback) => {
+  vote?.feedbacks?.forEach((feedback) => {
     count++;
     sumStar += feedback.star;
   });
@@ -71,7 +71,7 @@ const MainHome = ({ navigation }) => {
             if (parseFloat(sortVote(b, 0)) >= parseFloat(sortVote(a, 0))) return 1;
             return -1;
           })
-          .filter((item, index) => index <= 10);
+          .filter((item, index) => index <= 8);
         setRanks(ranksArr);
 
         let recommendsArr = recommendsClone
@@ -79,7 +79,7 @@ const MainHome = ({ navigation }) => {
             if (a.createdAt >= b.createdAt) return -1;
             return 1;
           })
-          .filter((item, index) => index <= 7);
+          .filter((item, index) => index <= 6);
         setRecommends(recommendsArr);
       });
   }, []);
@@ -206,21 +206,26 @@ const MainHome = ({ navigation }) => {
             }}
           >
             {posts?.length > 0 &&
-              posts.map((item) => (
-                <CardCategory
-                  key={item.id}
-                  id={item.id}
-                  companyLogo={item.image}
-                  companyName={item.name_company}
-                  companyAddress={item.address}
-                  wage={item.wage}
-                  career={item.career}
-                  title={item.title}
-                  idPost={item.id}
-                  userInfo={userInfo}
-                  navigation={navigation}
-                />
-              ))}
+              posts
+                .sort((a, b) => {
+                  if (a.createdAt >= b.createdAt) return 1;
+                  return -1;
+                })
+                .map((item) => (
+                  <CardCategory
+                    key={item.id}
+                    id={item.id}
+                    companyLogo={item.image}
+                    companyName={item.name_company}
+                    companyAddress={item.address}
+                    wage={item.wage}
+                    career={item.career}
+                    title={item.title}
+                    idPost={item.id}
+                    userInfo={userInfo}
+                    navigation={navigation}
+                  />
+                ))}
           </View>
         </View>
         <View style={{ marginBottom: 80 }} />

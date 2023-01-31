@@ -62,7 +62,6 @@ const SignUp = ({ navigation }) => {
         const update = {
           displayName: data?.username,
         };
-        console.log('update: ', update);
         await auth().currentUser.updateProfile(update);
         setUserInfo(values);
         console.log('User account created & signed in!');

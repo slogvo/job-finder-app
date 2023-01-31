@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>81602874614-e8dpfh5qbnbm2c9aidvuee9dana1vip6.apps.googleusercontent.com</string>
+	<string>981831217824-do6l402hvc2cjnjhm8o3cnghvlu67vhg.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.81602874614-e8dpfh5qbnbm2c9aidvuee9dana1vip6</string>
+	<string>com.googleusercontent.apps.981831217824-do6l402hvc2cjnjhm8o3cnghvlu67vhg</string>
 	<key>API_KEY</key>
-	<string>AIzaSyBaRMQzhLCcbjMuWGpjkSQZX3uFfzhRCA4</string>
+	<string>AIzaSyAFUesLwXpk-BCwlk1KNj-t1Q0BRlXidEc</string>
 	<key>GCM_SENDER_ID</key>
-	<string>81602874614</string>
+	<string>981831217824</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>org.reactjs.native.example.jobfinderapp</string>
 	<key>PROJECT_ID</key>
-	<string>job-finder-app-c1066</string>
+	<string>job-finder-app-fb9fd</string>
 	<key>STORAGE_BUCKET</key>
-	<string>job-finder-app-c1066.appspot.com</string>
+	<string>job-finder-app-fb9fd.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:81602874614:ios:6fb16ee9e0460f0e9430d7</string>
+	<string>1:981831217824:ios:7fa3b9be1b03c81356cfc5</string>
 </dict>
 </plist>

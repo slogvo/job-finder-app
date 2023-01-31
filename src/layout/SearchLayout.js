@@ -73,7 +73,7 @@ const SearchLayout = ({ navigation }) => {
           source={{
             uri: userInfo?.avatar,
           }}
-          style={{ width: 50, height: 50, borderRadius: 50, marginRight: 15 }}
+          style={{ width: 60, height: 60, borderRadius: 50, marginRight: 15 }}
         />
         <View>
           <Text

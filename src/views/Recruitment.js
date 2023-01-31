@@ -179,7 +179,7 @@ const Recruitment = ({ route, navigation }) => {
                   borderRadius: 5,
                   alignItems: 'center',
                   justifyContent: 'center',
-                  backgroundColor: 'rgba(61, 222, 21, 0.5)',
+                  backgroundColor: '#84e2d3',
                   width: '100%',
                   paddingHorizontal: 15,
                 }}

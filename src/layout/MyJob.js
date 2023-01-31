@@ -40,7 +40,6 @@ const MyJob = ({ userInfo, status, jobId, navigation }) => {
 
   const [postDetail, setPostDetail] = useState('');
   useEffect(() => {
-    console.log('jobId41: ', jobId);
     firestore()
       .collection('posts')
       .onSnapshot((snapshot) => {
@@ -52,7 +51,6 @@ const MyJob = ({ userInfo, status, jobId, navigation }) => {
           });
         });
         const [postDetail] = posts.filter((post) => post.id === jobId);
-        console.log('postDetail: ', postDetail);
         setPostDetail(postDetail);
       });
   }, [jobId]);

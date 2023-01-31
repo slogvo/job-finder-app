@@ -6,9 +6,7 @@ import Candidate from '../layout/Candidate';
 
 const ReceivingDetailScreen = ({ route, navigation }) => {
   const candidates = route?.params?.recruitmentDetail;
-  // console.log('candidates: ', candidates);
   const { userId } = candidates;
-  console.log('userId: ', userId);
   return (
     <View
       style={{

@@ -32,7 +32,6 @@ const MyJobsScreen = ({ navigation }) => {
           });
         });
         setUserInfo(user[0]);
-        console.log('user[0]: ', user[0]);
       });
   }, [userAuth]);
 
@@ -50,7 +49,6 @@ const MyJobsScreen = ({ navigation }) => {
             status,
           });
         });
-        console.log('recruitment: ', recruitment);
         setRecruitmentDetail(recruitment);
       });
   }, [userInfo]);

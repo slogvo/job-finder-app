@@ -7,10 +7,7 @@ import Toast from 'react-native-toast-message';
 
 const CandidateDetail = ({ route, navigation }) => {
   const { itemId, recruitmentId, userInfo } = route.params;
-  console.log('recruitmentId: ', recruitmentId);
-  console.log('itemId: ', itemId);
   const [recruitmentDetail, setRecruitmentDetail] = useState();
-  console.log('userInfo: ', userInfo);
   const [candidate, setCandidate] = useState('');
   const showToast = () => {
     Toast.show({

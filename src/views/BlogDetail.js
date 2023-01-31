@@ -7,7 +7,6 @@ import firestore from '@react-native-firebase/firestore';
 
 const BlogDetail = ({ route, navigation }) => {
   const { itemId } = route.params;
-  console.log('itemId: ', itemId);
   const [blog, setBlog] = useState();
 
   useEffect(() => {

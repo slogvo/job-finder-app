@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "81602874614",
-    "project_id": "job-finder-app-c1066",
-    "storage_bucket": "job-finder-app-c1066.appspot.com"
+    "project_number": "981831217824",
+    "project_id": "job-finder-app-fb9fd",
+    "storage_bucket": "job-finder-app-fb9fd.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:81602874614:android:7efed340e9b1108a9430d7",
+        "mobilesdk_app_id": "1:981831217824:android:665a88347e68ffd156cfc5",
         "android_client_info": {
           "package_name": "com.jobfinderapp"
         }
       },
       "oauth_client": [
         {
-          "client_id": "81602874614-d0pu9hf8p3ov67g0fnt18r4k2rvrpd1k.apps.googleusercontent.com",
+          "client_id": "981831217824-mki26tkqd2ghn3rp6n732ds84nh5u843.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBUJy-RxAyrLCr0lJE1C6d5pCRlOizXBU8"
+          "current_key": "AIzaSyB7zUPZxcTjKqU_5NXB36D3rTp6h81NlI0"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "81602874614-d0pu9hf8p3ov67g0fnt18r4k2rvrpd1k.apps.googleusercontent.com",
+              "client_id": "981831217824-mki26tkqd2ghn3rp6n732ds84nh5u843.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
