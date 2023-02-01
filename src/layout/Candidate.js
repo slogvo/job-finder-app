@@ -75,7 +75,7 @@ const Candidate = ({
             </Text>
             {/* Nghề */}
             <Text style={{ fontSize: 13, marginTop: 3, fontWeight: '600', color: colors.primary }}>
-              {userInfo?.job}
+              {userInfo?.job || 'Chưa cập nhật'}
             </Text>
             {/* Email + SDT */}
             <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 5 }}>
@@ -85,7 +85,7 @@ const Candidate = ({
             <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 5 }}>
               <FontAwesome name="phone" size={15} color={'#7f879d'} />
               <Text style={{ marginLeft: 5, fontSize: 13, color: '#7f879d' }}>
-                {phoneNumber || userInfo?.phoneNumber}
+                {phoneNumber || userInfo?.phoneNumber || 'Chưa cập nhật'}
               </Text>
             </View>
           </View>

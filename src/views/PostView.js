@@ -9,13 +9,39 @@ import {
 } from 'react-native';
 import colors from '../../assets/colors/colors';
 import firestore from '@react-native-firebase/firestore';
+import auth from '@react-native-firebase/auth';
 import Entypo from 'react-native-vector-icons/Entypo';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useForm, Controller } from 'react-hook-form';
 import UploadLogo from '../component/image/UploadLogo';
 import useUploadImage from '../hooks/useUploadImage';
+import { useEffect, useState } from 'react';
 
 const PostView = ({ navigation }) => {
+  const [userAuth, setUserAuth] = useState('');
+  auth().onAuthStateChanged((user) => {
+    if (user) {
+      setUserAuth(user);
+    } else setUserAuth('Unknown');
+  });
+  const [userInfo, setUserInfo] = useState();
+
+  useEffect(() => {
+    firestore()
+      .collection('users')
+      .where('user_id', '==', `${userAuth.uid}`)
+      .onSnapshot((snapshot) => {
+        let user = [];
+        snapshot.forEach((doc) => {
+          user.push({
+            id: doc.id,
+            ...doc.data(),
+          });
+        });
+        setUserInfo(user[0]);
+      });
+  }, [userAuth]);
+
   const {
     setValue,
     handleSubmit,
@@ -25,7 +51,6 @@ const PostView = ({ navigation }) => {
   } = useForm();
 
   const { fileData, setFileData, handleFileUpload, setUrl, url } = useUploadImage();
-
   const onSubmit = async (data) => {
     firestore()
       .collection('posts')
@@ -33,6 +58,7 @@ const PostView = ({ navigation }) => {
         ...data,
         image: url,
         createdAt: firestore.FieldValue.serverTimestamp(),
+        user_id: userInfo.user_id,
       })
       .then(() => {
         reset({

@@ -207,6 +207,7 @@ const MainHome = ({ navigation }) => {
           >
             {posts?.length > 0 &&
               posts
+                .filter((item) => item.typePost === 0)
                 .sort((a, b) => {
                   if (a.createdAt >= b.createdAt) return 1;
                   return -1;
