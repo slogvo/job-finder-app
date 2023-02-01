@@ -107,6 +107,38 @@ const ReceivingCV = ({
             >
               {title}
             </Text>
+            <Text
+              numberOfLines={1}
+              style={{
+                marginTop: 5,
+                fontSize: 14,
+                color: colors.text,
+                fontWeight: '500',
+              }}
+            >
+              {career}
+            </Text>
+            <View
+              style={{
+                flexDirection: 'row',
+                marginTop: 5,
+                alignItems: 'flex-start',
+              }}
+            >
+              <Text
+                style={{
+                  fontSize: 14,
+                  color: colors.darkGray,
+                  fontWeight: '500',
+                  marginRight: 15,
+                }}
+              >
+                Ứng tuyển: {recruitmentDetail ? recruitmentDetail.length : '0'}
+              </Text>
+              <Text style={{ color: colors.redColor, fontWeight: '500' }} numberOfLines={1}>
+                {wage}
+              </Text>
+            </View>
           </View>
         </View>
         {/* <AntDesign name="heart" size={20} color={colors.redColor} /> */}
@@ -127,38 +159,6 @@ const ReceivingCV = ({
         >
           <Text style={{ color: '#fff' }}>Chi tiết</Text>
         </TouchableOpacity>
-      </View>
-      <Text
-        numberOfLines={1}
-        style={{
-          marginTop: 5,
-          fontSize: 14,
-          color: colors.text,
-          fontWeight: '500',
-        }}
-      >
-        {career}
-      </Text>
-      <View
-        style={{
-          flexDirection: 'row',
-          marginTop: 5,
-          alignItems: 'flex-start',
-        }}
-      >
-        <Text
-          style={{
-            fontSize: 14,
-            color: colors.darkGray,
-            fontWeight: '500',
-            marginRight: 15,
-          }}
-        >
-          Ứng tuyển: {recruitmentDetail ? recruitmentDetail.length : '0'}
-        </Text>
-        <Text style={{ color: colors.redColor, fontWeight: '500' }} numberOfLines={1}>
-          {wage}
-        </Text>
       </View>
     </View>
   );
