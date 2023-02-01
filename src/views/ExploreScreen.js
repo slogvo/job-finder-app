@@ -37,6 +37,7 @@ const ExploreScreen = ({ route, navigation }) => {
         const handbooks = posts.filter((post) => post.type === 'handbooks');
         setNews(news);
         setHandbooks(handbooks);
+        console.log('handbooks: ', handbooks);
       });
   }, []);
 

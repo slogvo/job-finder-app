@@ -23,7 +23,6 @@ const BannerCarousel = ({ navigation }) => {
           });
         });
         setImageList(posts);
-        console.log('posts: ', posts);
       });
   }, []);
 

@@ -92,7 +92,6 @@ const JobDetail = ({ route, navigation }) => {
         '-' +
         currentdate.getFullYear(),
     });
-    console.log('feedbacksClone: ', feedbacksClone);
     firestore()
       .collection('posts')
       .doc(itemId)
