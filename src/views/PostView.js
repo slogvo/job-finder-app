@@ -16,8 +16,10 @@ import { useForm, Controller } from 'react-hook-form';
 import UploadLogo from '../component/image/UploadLogo';
 import useUploadImage from '../hooks/useUploadImage';
 import { useEffect, useState } from 'react';
+import { RadioButton } from 'react-native-paper';
 
 const PostView = ({ navigation }) => {
+  const [checked, setChecked] = useState('');
   const [userAuth, setUserAuth] = useState('');
   auth().onAuthStateChanged((user) => {
     if (user) {
@@ -52,6 +54,7 @@ const PostView = ({ navigation }) => {
 
   const { fileData, setFileData, handleFileUpload, setUrl, url } = useUploadImage();
   const onSubmit = async (data) => {
+    console.log('data: ', data);
     firestore()
       .collection('posts')
       .add({
@@ -59,6 +62,7 @@ const PostView = ({ navigation }) => {
         image: url,
         createdAt: firestore.FieldValue.serverTimestamp(),
         user_id: userInfo.user_id,
+        wage: data.wage || 'Thương lượng',
       })
       .then(() => {
         reset({
@@ -144,7 +148,7 @@ const PostView = ({ navigation }) => {
             marginTop: 25,
           }}
         >
-          <Text style={{ color: colors.secondary, fontWeight: '600', lineHeight: 23 }}>
+          <Text style={{ color: colors.text, fontWeight: '600', lineHeight: 21 }}>
             Đăng đầy đủ chi tiết các thông tin để ứng cử viên có thể nắm rõ đầy đủ các thông tin về
             công ty của bạn!
           </Text>
@@ -232,31 +236,85 @@ const PostView = ({ navigation }) => {
                 {'   '}
                 Mức lương
               </Text>
-              <Controller
-                control={control}
-                rules={{
-                  required: true,
+              <View
+                style={{
+                  marginLeft: -8,
+                  marginTop: 10,
+                  flexDirection: 'row',
+                  alignItems: 'center',
                 }}
-                render={({ field: { onChange, onBlur, value } }) => (
-                  <TextInput
-                    style={{
-                      marginTop: 8,
-                      borderWidth: 1,
-                      width: '100%',
-                      borderRadius: 5,
-                      height: 50,
-                      borderColor: colors.border,
-                      fontWeight: '400',
-                      paddingLeft: 15,
-                    }}
-                    placeholder="Chọn ngành nghề"
-                    onBlur={onBlur}
-                    onChangeText={onChange}
-                    value={value}
-                  />
-                )}
-                name="wage"
-              />
+              >
+                <RadioButton
+                  color={colors.primary}
+                  uncheckedColor={colors.border}
+                  value="Thương lượng"
+                  status={checked === 'Thương lượng' ? 'checked' : 'unchecked'}
+                  onPress={() => setChecked('Thương lượng')}
+                />
+                <Text style={{ marginRight: 20 }}>Thương lượng</Text>
+
+                <RadioButton
+                  color={colors.primary}
+                  uncheckedColor={colors.border}
+                  value="Nam"
+                  status={checked === 'Nhập mức lương' ? 'checked' : 'unchecked'}
+                  onPress={() => setChecked('Nhập mức lương')}
+                />
+                <Text style={{ marginRight: 20 }}>Nhập mức lương</Text>
+              </View>
+              {checked === 'Nhập mức lương' ? (
+                <Controller
+                  control={control}
+                  rules={{
+                    required: true,
+                  }}
+                  render={({ field: { onChange, onBlur, value } }) => (
+                    <TextInput
+                      style={{
+                        marginTop: 8,
+                        borderWidth: 1,
+                        width: '100%',
+                        borderRadius: 5,
+                        height: 50,
+                        // borderColor: colors.secondary,
+                        fontWeight: '400',
+                        paddingLeft: 15,
+                      }}
+                      placeholder="Nhập mức lương"
+                      onBlur={onBlur}
+                      onChangeText={onChange}
+                      value={value}
+                    />
+                  )}
+                  name="wage"
+                />
+              ) : (
+                <Controller
+                  control={control}
+                  rules={{
+                    required: false,
+                  }}
+                  render={({ field: { onChange, onBlur, value } }) => (
+                    <TextInput
+                      style={{
+                        display: 'none',
+                        marginTop: 8,
+                        borderWidth: 1,
+                        width: '100%',
+                        borderRadius: 5,
+                        height: 50,
+                        fontWeight: '400',
+                        paddingLeft: 15,
+                      }}
+                      placeholder="Thương lượng"
+                      onBlur={onBlur}
+                      onChangeText={onChange}
+                      value={'Thương lượng'}
+                    />
+                  )}
+                  name="wage"
+                />
+              )}
             </View>
             {/* Vị trí hiện tại */}
             <View

@@ -25,15 +25,15 @@ const UploadLogo = ({ fileData, handleFileUpload }) => {
         {!fileData?.uri ? (
           <Image
             source={require('../../../assets/images/form/image-gallery.png')}
-            style={{ height: 50, width: 50, resizeMode: 'contain' }}
+            style={{ height: 80, width: 80, resizeMode: 'contain' }}
           />
         ) : (
           <View style={{ alignItems: 'center', justifyContent: 'center' }}>
             <Image
               source={{ uri: fileData?.uri }}
-              style={{ height: 50, width: 50, resizeMode: 'contain' }}
+              style={{ height: 80, width: 80, resizeMode: 'cover' }}
             />
-            <Text style={{ color: colors.text2, fontSize: 12 }}>{fileData?.name}</Text>
+            {/* <Text style={{ color: colors.text2, fontSize: 12 }}>{fileData?.name}</Text> */}
           </View>
         )}
       </View>
