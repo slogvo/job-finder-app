@@ -18,12 +18,22 @@ import useUploadImage from '../hooks/useUploadImage';
 import { useEffect, useState } from 'react';
 import { RadioButton } from 'react-native-paper';
 import SelectDropdown from 'react-native-select-dropdown';
+import Toast from 'react-native-toast-message';
 
 const PostView = ({ navigation }) => {
   const typeJobs = ['Full-time', 'Part-time'];
   const [typeJob, setTypeJob] = useState('');
   const [checked, setChecked] = useState('');
   const [userAuth, setUserAuth] = useState('');
+  const showToast = () => {
+    Toast.show({
+      type: 'success',
+      text1: 'Thêm thành công!',
+      text2: 'Bài tuyển dụng của bạn đã được thêm!',
+      topOffset: 0,
+      visibilityTime: 2500,
+    });
+  };
   auth().onAuthStateChanged((user) => {
     if (user) {
       setUserAuth(user);
@@ -57,7 +67,6 @@ const PostView = ({ navigation }) => {
 
   const { fileData, setFileData, handleFileUpload, setUrl, url } = useUploadImage();
   const onSubmit = async (data) => {
-    console.log('data: ', data);
     firestore()
       .collection('posts')
       .add({
@@ -69,6 +78,7 @@ const PostView = ({ navigation }) => {
         type_job: typeJob || 'Full-time',
       })
       .then(() => {
+        showToast();
         reset({
           title: '',
           wage: '',
@@ -81,7 +91,6 @@ const PostView = ({ navigation }) => {
         });
         setUrl(null);
         setFileData(null);
-        console.log('Posts added!');
       })
       .catch((err) => console.log(err));
   };
@@ -657,6 +666,7 @@ const PostView = ({ navigation }) => {
         </View>
         <View style={{ marginBottom: 80 }} />
       </ScrollView>
+      <Toast />
     </View>
   );
 };

@@ -91,7 +91,7 @@ const Candidate = ({
           </View>
         </View>
         <View>
-          <TouchableOpacity
+          {/* <TouchableOpacity
             style={{
               width: 50,
               height: 38,
@@ -102,10 +102,10 @@ const Candidate = ({
             }}
           >
             <FontAwesome name="trash-o" size={20} color={colors.redColor} />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
           <TouchableOpacity
             style={{
-              marginTop: 'auto',
+              // marginTop: 'auto',
               width: 60,
               height: 38,
               borderRadius: 5,
