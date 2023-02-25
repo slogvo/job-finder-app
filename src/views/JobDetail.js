@@ -328,7 +328,7 @@ const JobDetail = ({ route, navigation }) => {
                   color: colors.text2,
                 }}
               >
-                {job?.type_job === 'fruqq8kDn2IEb4cV7hcb' ? 'Part-time' : 'Full-time'}
+                {job?.type_job}
               </Text>
             </View>
           </View>
