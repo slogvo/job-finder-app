@@ -4,54 +4,7 @@ import colors from '../../assets/colors/colors';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
-const listCategories = [
-  {
-    id: 1,
-    name: 'Full-time',
-  },
-  {
-    id: 2,
-    name: 'Part-time',
-  },
-  {
-    id: 3,
-    name: 'Thực tập',
-  },
-  {
-    id: 4,
-    name: 'Thiết kế đồ họa',
-  },
-  {
-    id: 5,
-    name: 'Tài chính',
-  },
-  {
-    id: 6,
-    name: 'Nhân sự',
-  },
-  {
-    id: 7,
-    name: 'IT',
-  },
-  {
-    id: 8,
-    name: 'Marketing',
-  },
-  {
-    id: 9,
-    name: 'Khác',
-  },
-];
-
-const GoBackFilter = ({
-  value,
-  onChangeText,
-  navigation,
-  onChangeTab = () => {},
-  onChange,
-  currentType,
-}) => {
-  const [filter, setFilter] = useState(false);
+const GoBackFilter = ({ value, onChangeText, navigation }) => {
   return (
     <View style={{ flex: 1, backgroundColor: '#fff', paddingHorizontal: 25 }}>
       <View
@@ -147,53 +100,6 @@ const GoBackFilter = ({
           )}
         </TouchableOpacity> */}
       </View>
-
-      {/* advanced filter */}
-      {/* <View
-        style={{
-          flexDirection: 'row',
-          marginTop: 10,
-          paddingBottom: 10,
-          alignItems: 'center',
-          borderBottomWidth: 0.6,
-          borderBottomColor: '#e2e2e2',
-          justifyContent: 'space-between',
-        }}
-      >
-        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-          {listCategories?.length > 0 &&
-            filter === true &&
-            listCategories.map((item) => {
-              return (
-                <TouchableOpacity
-                  key={item.id}
-                  onPress={() => {
-                    onChangeTab(item.name);
-                    console.log('item.name: ', item?.name);
-                  }}
-                  style={{
-                    paddingHorizontal: 10,
-                    height: 40,
-                    backgroundColor: currentType == item.id ? colors.primary : colors.lightGray,
-                    borderRadius: 6,
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    marginRight: 10,
-                  }}
-                >
-                  <Text
-                    style={{
-                      fontFamily: 'Inter-Medium',
-                      color: currentType == item.id ? 'white' : colors.text,
-                    }}
-                  >
-                    {item.name}
-                  </Text>
-                </TouchableOpacity>
-              );
-            })}
-        </ScrollView>
-      </View> */}
     </View>
   );
 };
