@@ -245,7 +245,7 @@ const CandidateDetail = ({ route, navigation }) => {
                   fontWeight: '400',
                 }}
               >
-                {userInfo?.dateOfBirth}
+                {userInfo?.dateOfBirth || 'Chưa cập nhật'}
               </Text>
             </View>
           </View>
@@ -279,7 +279,7 @@ const CandidateDetail = ({ route, navigation }) => {
                 fontWeight: '400',
               }}
             >
-              {userInfo?.gender}
+              {userInfo?.gender || 'Chưa cập nhật'}
             </Text>
           </View>
           {/* Vị trí hiện tại */}
@@ -313,7 +313,7 @@ const CandidateDetail = ({ route, navigation }) => {
                 width: 250,
               }}
             >
-              {userInfo?.job_position}
+              {userInfo?.job_position || 'Chưa cập nhật'}
             </Text>
           </View>
           {/* Kinh nghiệm */}
