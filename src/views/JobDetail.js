@@ -300,7 +300,7 @@ const JobDetail = ({ route, navigation }) => {
                 color: '#14213d',
               }}
             >
-              {job?.wage}
+              {job?.wage || 'Thương lượng'}
             </Text>
             <View
               style={{

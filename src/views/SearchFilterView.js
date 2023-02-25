@@ -22,11 +22,11 @@ const listCategories = [
   },
   {
     id: 3,
-    name: 'Thực tập',
+    name: 'Thực phẩm',
   },
   {
     id: 4,
-    name: 'Thiết kế đồ họa',
+    name: 'Bán hàng',
   },
   {
     id: 5,
