@@ -17,8 +17,11 @@ import UploadLogo from '../component/image/UploadLogo';
 import useUploadImage from '../hooks/useUploadImage';
 import { useEffect, useState } from 'react';
 import { RadioButton } from 'react-native-paper';
+import SelectDropdown from 'react-native-select-dropdown';
 
 const PostView = ({ navigation }) => {
+  const typeJobs = ['Full-time', 'Part-time'];
+  const [typeJob, setTypeJob] = useState('');
   const [checked, setChecked] = useState('');
   const [userAuth, setUserAuth] = useState('');
   auth().onAuthStateChanged((user) => {
@@ -63,6 +66,7 @@ const PostView = ({ navigation }) => {
         createdAt: firestore.FieldValue.serverTimestamp(),
         user_id: userInfo.user_id,
         wage: data.wage || 'Thương lượng',
+        type_job: typeJob || 'Full-time',
       })
       .then(() => {
         reset({
@@ -338,7 +342,7 @@ const PostView = ({ navigation }) => {
                 {'  '}
                 Loại việc làm
               </Text>
-              <Controller
+              {/* <Controller
                 control={control}
                 rules={{
                   required: true,
@@ -362,7 +366,28 @@ const PostView = ({ navigation }) => {
                   />
                 )}
                 name="type_job"
-              />
+              /> */}
+              <View style={{ width: '100%', marginTop: 10 }}>
+                <SelectDropdown
+                  data={typeJobs}
+                  rowTextStyle={{ textAlign: 'left', fontSize: 14 }}
+                  buttonTextStyle={{ textAlign: 'left', fontSize: 14 }}
+                  buttonStyle={{
+                    borderRadius: 5,
+                    width: '100%',
+                  }}
+                  onSelect={(selectedItem, index) => {
+                    console.log(selectedItem, index);
+                    setTypeJob(selectedItem);
+                  }}
+                  buttonTextAfterSelection={(selectedItem, index) => {
+                    return selectedItem;
+                  }}
+                  rowTextForSelection={(item, index) => {
+                    return item;
+                  }}
+                />
+              </View>
             </View>
             {/* Ngành nghề */}
             <View

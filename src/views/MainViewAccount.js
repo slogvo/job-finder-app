@@ -184,7 +184,7 @@ const MainViewAccount = ({ navigation }) => {
               >
                 Hồ sơ cá nhân
               </Text>
-              <Ionicons name="settings-sharp" size={24} color={colors.text} />
+              <Text>{/* <Ionicons name="settings-sharp" size={24} color={colors.text} /> */}</Text>
             </View>
           </View>
           <View style={{ marginTop: 15, paddingHorizontal: 25 }}>
