@@ -26,6 +26,7 @@
     "formik": "^2.2.9",
     "link": "^1.5.1",
     "lodash": "^4.17.21",
+    "or": "^0.2.0",
     "react": "18.1.0",
     "react-hook-form": "^7.41.3",
     "react-native": "^0.70.4",
